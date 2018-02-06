@@ -18,15 +18,19 @@
 					    v-model="username">
 					    <i slot="prefix" class="iconfont icon-1"></i>
 				  	</el-input>
+				</div>
 
+				<div class="input-box">
 					<el-input
 					    placeholder="请输入密码"
 					    v-model="password">
 					    <i slot="prefix" class="iconfont icon-password"></i>
 				  	</el-input>
-
-				  	<el-button type="primary">提交</el-button>
 				</div>
+				
+				<div class="input-box">
+			  		<el-button type="primary" @click="checkOutMsg">提交</el-button>
+			  	</div>
 			</div>
 		</div>
     </div>
@@ -41,11 +45,12 @@
 }
 .login-box{
 	position: absolute;
-	width: 50%;
+	width: 700px;
 	height: 400px;
 	background: #fff;
 	top: 50%;
-	left: 25%;
+	left: 50%;
+	margin-left: -350px;
 	margin-top: -200px;
 	box-shadow: 0px 0px 10px #999;
 	-moz-box-shadow: 0px 0px 10px #999;
@@ -76,8 +81,9 @@
 .list li{
 	color: #fff;
 	font-size: 16px;
-	padding-left: 50px;
+	padding-left: 20px;
 	line-height: 250%;
+	overflow: hidden;
 }
 .list li i{
 	padding: 0 10px;
@@ -86,6 +92,7 @@
 	float: right;
 	width: 60%;
 	height: 400px;
+	padding-top: 90px;
 }
 .icon-1{
 	line-height: 40px;
@@ -98,11 +105,13 @@
 }
 .input-box{
 	width: 60%;
-	margin: 80px 0 0 10%; 
+	margin: 30px 0 0 10%;
 }
 </style>
 
 <script>
+import LoginController from '../../controller/login'
+
 export default {
     name: 'Login',
     data () {
@@ -110,6 +119,13 @@ export default {
         	username: '',
         	password: '',
         }
+    },
+    methods:{
+    	checkOutMsg: function(){
+    		if(LoginController.doCheckOutMsg(this)){
+    			LoginController.doLogin(this);
+    		}
+    	}
     }
 }
 </script>
