@@ -33,8 +33,6 @@ let AppRouter = new Router({
  * @JD [权限验证]
  */
 AppRouter.beforeEach((to, from, next) => {
-	console.log(to);
-	console.log(from);
 	if (to.matched.some(record => record.meta.auth)) {
 		if (!auth.checkIsAuth()) {
 			next({
