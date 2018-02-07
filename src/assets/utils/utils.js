@@ -1,5 +1,5 @@
 //定向获取url参数
-function GetQueryString(name) {
+function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null)
@@ -8,7 +8,7 @@ function GetQueryString(name) {
 };
 
 //邮箱地址正则表达式判断
-function MatchEmail(string) {
+function matchEmail(string) {
     var reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
     return reg.test(string);
 }
@@ -23,7 +23,7 @@ function message(_this, msg, type) {
 }
 
 export {
-    GetQueryString,
-    MatchEmail,
+    getQueryString,
+    matchEmail,
     message
 }

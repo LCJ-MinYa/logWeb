@@ -29,12 +29,33 @@
 				</div>
 				
 				<div class="input-box">
-			  		<el-button type="primary" @click="checkOutMsg">提交</el-button>
+			  		<el-button type="primary" @click="checkOutMsg">登录</el-button>
 			  	</div>
 			</div>
 		</div>
     </div>
 </template>
+
+<script>
+import LoginController from '../../controller/login'
+
+export default {
+    name: 'Login',
+    data () {
+        return {
+        	email: '',
+        	password: '',
+        }
+    },
+    methods:{
+    	checkOutMsg: function(){
+    		if(LoginController.doCheckOutMsg(this)){
+    			LoginController.doLogin(this);
+    		}
+    	}
+    }
+}
+</script>
 
 <style lang="css" scoped>
 .login-page{
@@ -108,24 +129,3 @@
 	margin: 30px 0 0 10%;
 }
 </style>
-
-<script>
-import LoginController from '../../controller/login'
-
-export default {
-    name: 'Login',
-    data () {
-        return {
-        	email: '',
-        	password: '',
-        }
-    },
-    methods:{
-    	checkOutMsg: function(){
-    		if(LoginController.doCheckOutMsg(this)){
-    			LoginController.doLogin(this);
-    		}
-    	}
-    }
-}
-</script>

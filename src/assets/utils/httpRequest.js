@@ -14,7 +14,14 @@ import encryp from './sha1'
  * options.error:请求失败回调函数
  * @return {[object]} [JSON Object]
  */
-export default function httpRequest(options) {
+export default function httpRequest(options, _this) {
+	const loading = _this.$loading({
+		lock: true,
+		text: '加载中',
+		spinner: 'el-icon-loading',
+		background: 'rgba(0, 0, 0, 0.7)'
+	});
+
 	var xhr = null;
 	options = options || null;
 	if (!options) {
@@ -27,7 +34,6 @@ export default function httpRequest(options) {
 	options.data.uid = getCookie('uid');
 	options.data.timestamp = new Date().getTime();
 	options.data.accessToken = encryp.sha1(options.data.uid + options.data.timestamp).substring(3, 10);
-	console.log(options.data);
 
 	options.url = config.API + options.url || null;
 	options.success = options.success || function() {};
@@ -64,17 +70,20 @@ export default function httpRequest(options) {
 	}
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
-			if (xhr.status == 200) {
-				var resultData = xhr.responseText;
-				try {
-					resultData = JSON.parse(resultData);
-				} catch (e) {
-					resultData = resultData;
+			setTimeout(() => {
+				loading.close();
+				if (xhr.status == 200) {
+					var resultData = xhr.responseText;
+					try {
+						resultData = JSON.parse(resultData);
+					} catch (e) {
+						resultData = resultData;
+					}
+					options.success(resultData);
+				} else {
+					options.error(xhr.status);
 				}
-				options.success(resultData);
-			} else {
-				options.error(xhr.status);
-			}
+			}, 1500);
 		}
 	};
 }
