@@ -15,7 +15,7 @@
 				<div class="input-box">
 					<el-input
 					    placeholder="请输入账号"
-					    v-model="username">
+					    v-model="email">
 					    <i slot="prefix" class="iconfont icon-1"></i>
 				  	</el-input>
 				</div>
@@ -116,7 +116,7 @@ export default {
     name: 'Login',
     data () {
         return {
-        	username: '',
+        	email: '',
         	password: '',
         }
     },

@@ -6,8 +6,8 @@ import Api from '../api/apiPath'
 
 export default {
 	doCheckOutMsg(_this) {
-		if (!_this.username) {
-			message(_this, '账号信息不能为空!', 'warning');
+		if (!_this.email) {
+			message(_this, '邮箱地址不能为空!', 'warning');
 			return false;
 		}
 		if (!_this.password) {
@@ -18,10 +18,10 @@ export default {
 	},
 	doLogin(_this) {
 		httpRequest({
-			method: 'GET',
+			method: 'POST',
 			url: Api.LOGIN,
 			data: {
-				username: _this.username,
+				email: _this.email,
 				password: _this.password
 			},
 			success: (data) => {

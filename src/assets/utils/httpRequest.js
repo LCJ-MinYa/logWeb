@@ -1,4 +1,8 @@
 import config from '../../config/appConfig'
+import {
+	getCookie
+} from './cookie'
+import encryp from './sha1'
 
 /**
  * [ajax 封装ajax]
@@ -19,6 +23,12 @@ export default function httpRequest(options) {
 	}
 	options.method = options.method || "GET";
 	options.data = options.data || {};
+
+	options.data.uid = getCookie('uid');
+	options.data.timestamp = new Date().getTime();
+	options.data.accessToken = encryp.sha1(options.data.uid + options.data.timestamp).substring(3, 10);
+	console.log(options.data);
+
 	options.url = config.API + options.url || null;
 	options.success = options.success || function() {};
 	options.error = options.error || function() {};
