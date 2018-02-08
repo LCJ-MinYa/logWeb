@@ -22,6 +22,7 @@
 
 				<div class="input-box">
 					<el-input
+						type="password"
 					    placeholder="请输入密码"
 					    v-model="password">
 					    <i slot="prefix" class="iconfont icon-password"></i>
