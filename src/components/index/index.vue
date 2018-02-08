@@ -2,11 +2,11 @@
     <div class="login-page">
     	<div class="login-box">
     		<ul class="module-box">
+    			<li>旅行</li>
+    			<li>影集</li>
+    			<li>约定</li>
     			<li>密码</li>
-    			<li>记录</li>
     			<li>账单</li>
-    			<li></li>
-    			<li></li>
     			<li>设置</li>
     		</ul>
     	</div>
@@ -82,7 +82,10 @@ export default {
 	margin-right: 0px;
 }
 .module-box li:hover{
-	background: #666;
+	background: #333;
 	color: #eacb20;
+	transform: translate3d(0,-2px,0);
+	-webkit-transform: translate3d(0,-2px,0);
+	transition: all .3s ease;
 }
 </style>
