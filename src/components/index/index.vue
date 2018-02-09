@@ -87,5 +87,6 @@ export default {
 	transform: translate3d(0,-2px,0);
 	-webkit-transform: translate3d(0,-2px,0);
 	transition: all .3s ease;
+	-webkit-transition: all .3s ease;
 }
 </style>
