@@ -5,7 +5,7 @@
     			<li>旅行</li>
     			<li>影集</li>
     			<li>约定</li>
-    			<li>密码</li>
+    			<li @click="goPassword">密码</li>
     			<li>账单</li>
     			<li>设置</li>
     		</ul>
@@ -19,6 +19,13 @@ export default {
     data () {
         return {
         }
+    },
+    methods:{
+    	goPassword(){
+			this.$router.push({
+				path: '/password'
+			});
+    	}
     }
 }
 </script>

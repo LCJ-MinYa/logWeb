@@ -5,6 +5,7 @@ Vue.use(Router)
 
 const Index = resolve => require(['../components/index/index'], resolve)
 const Login = resolve => require(['../components/login/login'], resolve)
+const Password = resolve => require(['../components/password/password'], resolve)
 
 let AppRouter = new Router({
 	mode: 'history',
@@ -17,6 +18,12 @@ let AppRouter = new Router({
 	}, {
 		path: '/login',
 		component: Login
+	}, {
+		path: '/password',
+		component: Password,
+		meta: {
+			auth: true
+		}
 	}, {
 		path: '/*',
 		redirect: '/index',
