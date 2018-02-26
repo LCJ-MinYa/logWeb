@@ -2,10 +2,12 @@
 	<el-row class="panel">
 		<!--header-->
 		<base-header :titleIcon="titleIcon" :titleText="titleText" :titleActionIcon="titleActionIcon"></base-header>
-
-		<el-col :span="24" class="panel-center">
+		
+		<!--content-->
+		<el-col class="panel-center">
 		    <base-left-Menu :leftMenuArray="leftMenuArray"></base-left-Menu>
 		    <section class="panel-c-c">
+				<creat-password></creat-password>
 		    </section>
 		</el-col>
 
@@ -15,6 +17,7 @@
 <script>
 import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
+import creatPassword from './creatPassword'
 
 export default {
   	name: 'Password',
@@ -34,7 +37,8 @@ export default {
   	},
   	components:{
   		'baseHeader': baseHeader,
-  		'baseLeftMenu': baseLeftMenu
+  		'baseLeftMenu': baseLeftMenu,
+  		'creatPassword': creatPassword
   	},
   	methods:{
   		menuIndex(index){
@@ -55,7 +59,7 @@ export default {
 
 /*左侧导航栏*/
 .panel-center {
-	width: 230px;
+	width: 100%;
 	background: #324057;
 	position: absolute;
 	top: 60px;
