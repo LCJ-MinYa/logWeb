@@ -4,12 +4,7 @@
 		<base-header :titleIcon="titleIcon" :titleText="titleText" :titleActionIcon="titleActionIcon"></base-header>
 
 		<el-col :span="24" class="panel-center">
-			<aside>
-			    <el-menu @select="menuIndex" class="el-menu-vertical-demo" background-color="#324057" active-text-color="#eacb20" text-color="#c0ccda" default-active="1">
-			    	<el-menu-item index="1"><i class="iconfont icon-liebiao"></i>密码列表</el-menu-item>
-			      	<el-menu-item index="2"><i class="iconfont icon-plus-creat"></i>新建密码</el-menu-item>
-			    </el-menu>
-		    </aside>
+		    <base-left-Menu :leftMenuArray="leftMenuArray"></base-left-Menu>
 		    <section class="panel-c-c">
 		    </section>
 		</el-col>
@@ -19,6 +14,7 @@
 
 <script>
 import baseHeader from '../common/baseHeader'
+import baseLeftMenu from '../common/baseLeftMenu'
 
 export default {
   	name: 'Password',
@@ -26,11 +22,19 @@ export default {
     	return {
     		titleIcon: 'icon-mimajiesuo01',
     		titleText: '密码管理',
-    		titleActionIcon: 'icon-1'
+    		titleActionIcon: 'icon-1',
+    		leftMenuArray:[{
+    			icon: 'icon-liebiao',
+    			text: '密码列表'
+    		},{
+    			icon: 'icon-plus-creat',
+    			text: '新建密码'
+    		}]
     	}
   	},
   	components:{
   		'baseHeader': baseHeader,
+  		'baseLeftMenu': baseLeftMenu
   	},
   	methods:{
   		menuIndex(index){
@@ -49,7 +53,6 @@ export default {
 	width: 100%;
 }
 
-
 /*左侧导航栏*/
 .panel-center {
 	width: 230px;
@@ -58,15 +61,6 @@ export default {
 	top: 60px;
 	bottom: 0px;
 	overflow: hidden;
-}
-.el-menu-vertical-demo{
-	border-right: solid 0px;
-}
-.el-menu-item.is-active{
-	background: #27394E!important;
-}
-.el-menu-vertical-demo .iconfont{
-	padding-right: 5px;
 }
 
 /*内容*/
