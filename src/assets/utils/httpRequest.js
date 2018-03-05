@@ -3,6 +3,9 @@ import {
 	getCookie
 } from './cookie'
 import encryp from './sha1'
+import {
+	message
+} from './utils'
 
 /**
  * [ajax 封装ajax]
@@ -12,12 +15,15 @@ import encryp from './sha1'
  * options.data:请求参数
  * options.success:请求成功回调函数
  * options.error:请求失败回调函数
+ * _this: vue实例化对象
+ * loadingText: 自定义加载文本
+ * customError: 自定义请求服务器成功，但是登录失败，参数不正确，不合法等错误情况（不传默认弹窗提示错误）
  * @return {[object]} [JSON Object]
  */
-export default function httpRequest(options, _this) {
+export default function httpRequest(options, _this, loadingText, customError) {
 	const loading = _this.$loading({
 		lock: true,
-		text: '加载中',
+		text: loadingText || '加载中',
 		spinner: 'el-icon-loading',
 		background: 'rgba(0, 0, 0, 0.7)'
 	});
@@ -79,8 +85,17 @@ export default function httpRequest(options, _this) {
 					} catch (e) {
 						resultData = resultData;
 					}
-					options.success(resultData);
+					if (resultData.errno == 0) {
+						options.success(resultData);
+					} else {
+						if (customError) {
+							customError(resultData);
+						} else {
+							message(_this, resultData.errmsg, 'error');
+						}
+					}
 				} else {
+					message(_this, '请求服务器错误，错误代码为: ' + xhr.status, 'error');
 					options.error(xhr.status);
 				}
 			}, 1500);

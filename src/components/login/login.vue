@@ -1,5 +1,5 @@
 <template>
-    <div class="login-page">
+    <div class="login-page" @keyup.enter="checkOutMsg">
 		<div class="login-box">
 			<div class="left-box">
 				<i class="iconfont icon-mimajiesuo01"></i>

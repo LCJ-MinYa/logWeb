@@ -37,18 +37,11 @@ export default {
 				password: _this.password
 			},
 			success: (result) => {
-				if (result.errno == 0) {
-					auth.setAuthUid(result.data.uid);
-					_this.$router.push({
-						path: '/index'
-					});
-				} else {
-					message(_this, result.errmsg, 'error');
-				}
-			},
-			error: (error) => {
-				message(_this, error, 'error');
+				auth.setAuthUid(result.data.uid);
+				_this.$router.push({
+					path: '/index'
+				});
 			}
-		}, _this)
+		}, _this, '登陆中')
 	}
 }
