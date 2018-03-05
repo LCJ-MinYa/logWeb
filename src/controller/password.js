@@ -1,19 +1,18 @@
 import {
-	message
-} from '../assets/utils/utils'
-import {
+	message,
 	matchEmail
 } from '../assets/utils/utils'
 import httpRequest from '../assets/utils/httpRequest'
+import auth from '../assets/js/auth'
 import api from '../api/apiPath'
 
 export default {
 	doCheckOutPasswordMsg(_this) {
-		if (!_this.name) {
+		if (!_this.title) {
 			message(_this, '密码名称不能为空!', 'warning');
 			return false;
 		}
-		if (_this.name.length > 10) {
+		if (_this.title.length > 10) {
 			message(_this, '密码名称不能超过10个字符!', 'warning');
 			return false;
 		}
@@ -29,8 +28,12 @@ export default {
 			message(_this, '登陆密码不能为空!', 'warning');
 			return false;
 		}
-		if (_this.type == '' || _this.type == undefined || _this.type == null) {
+		if (_this.type == '') {
 			message(_this, '请选择密码分类!', 'warning');
+			return false;
+		}
+		if (_this.notes.length > 100) {
+			message(_this, '备注信息不能超过100个字符!', 'warning');
 			return false;
 		}
 		return true;
@@ -40,14 +43,17 @@ export default {
 			method: 'POST',
 			url: api.CREAT_PASSWORD,
 			data: {
-				email: _this.email,
-				password: _this.password
+				title: _this.title,
+				url: _this.urlProtocol + _this.url + _this.urlDomain,
+				userName: _this.userName,
+				password: _this.password,
+				type: _this.type,
+				importance: _this.importance,
+				notes: _this.notes,
+				uid: auth.getAuthUid()
 			},
 			success: (result) => {
-				auth.setAuthUid(result.data.uid);
-				_this.$router.push({
-					path: '/index'
-				});
+				console.log(result);
 			}
 		}, _this)
 	}

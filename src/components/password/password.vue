@@ -51,7 +51,7 @@ export default {
 <style lang="css" scoped>
 /*单页全局*/
 .panel {
-	position: absolute;
+	position: fixed;
 	top: 0px;
 	bottom: 0px;
 	width: 100%;

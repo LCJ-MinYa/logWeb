@@ -3,7 +3,7 @@
 		<strong class="online-player">新建密码</strong>
 		<el-form label-width="100px">
 			<el-form-item label="密码名称" label-width="100px">
-				<el-input type="text" v-model="name" auto-complete="off"></el-input>
+				<el-input type="text" v-model="title" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="产品网址" label-width="100px">
 				<el-input type="text" v-model="url" auto-complete="off">
@@ -46,11 +46,11 @@
 			    </el-radio-group>
 			</el-form-item>
 			<el-form-item label="备注" label-width="100px">
-				<el-input type="textarea" auto-complete="off"></el-input>
+				<el-input type="textarea" v-model="notes" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button>重置</el-button>
-			    <el-button type="primary">立即创建</el-button>
+			    <el-button type="primary" @click="doCheckOutPasswordMsg">立即创建</el-button>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -63,30 +63,31 @@ export default {
   	name: 'creatPassword',
   	data() {
 	    return {
-	    	name: '',
+	    	title: '',
 	    	url: '',
 	    	urlProtocol: 'http://',
 	    	urlDomain: '.com',
 	    	userName: '',
 	    	password: '',
 	      	options: [{
-	        	value: 0,
+	        	value: 1,
 	        	label: '服务器'
 	      	}, {
-	        	value: 1,
+	        	value: 2,
 	        	label: '数据库'
 	      	}, {
-	        	value: 2,
+	        	value: 3,
 	        	label: '生活'
 	      	}, {
-	        	value: 3,
+	        	value: 4,
 	        	label: '网站'
 	      	}, {
-	        	value: 4,
+	        	value: 5,
 	        	label: '其他'
 	      	}],
 	      	type: '',
 	      	importance: '普通',
+	      	notes: ''
 	    }
   	},
   	methods:{

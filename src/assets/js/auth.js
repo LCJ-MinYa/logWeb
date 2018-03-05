@@ -9,6 +9,10 @@ export default {
 			expires: 24
 		})
 	},
+	getAuthUid() {
+		let uid = getCookie('uid');
+		return uid;
+	},
 	checkIsAuth() {
 		let uid = getCookie('uid');
 		if (uid && uid != 'undefined') {
