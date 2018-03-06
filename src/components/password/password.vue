@@ -5,9 +5,10 @@
 		
 		<!--content-->
 		<el-col class="panel-center">
-		    <base-left-Menu :leftMenuArray="leftMenuArray"></base-left-Menu>
+		    <base-left-Menu :leftMenuArray="leftMenuArray" @menuIndex="menuIndex"></base-left-Menu>
 		    <section class="panel-c-c">
-				<creat-password></creat-password>
+		    	<div v-show="showMenuIndex == '密码列表'">123</div>
+				<creat-password v-show="showMenuIndex == '新建密码'"></creat-password>
 		    </section>
 		</el-col>
 
@@ -32,7 +33,8 @@ export default {
     		},{
     			icon: 'icon-plus-creat',
     			text: '新建密码'
-    		}]
+    		}],
+    		showMenuIndex: '密码列表'
     	}
   	},
   	components:{
@@ -42,7 +44,7 @@ export default {
   	},
   	methods:{
   		menuIndex(index){
-  			console.log(index);
+  			this.showMenuIndex = index;
   		}
   	}
 }

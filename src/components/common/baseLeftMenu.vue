@@ -17,7 +17,7 @@ export default {
   	},
   	methods:{
   		menuIndex(index){
-  			console.log(index);
+            this.$emit('menuIndex', index);
   		}
   	}
 }
