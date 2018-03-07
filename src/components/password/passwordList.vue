@@ -59,7 +59,6 @@ export default {
     },
   	methods:{
   		handleClick(tab){
-            console.log(this.activeType);
             switch(tab.name){
                 case "1":
                     this.isNeedToRequest('social');

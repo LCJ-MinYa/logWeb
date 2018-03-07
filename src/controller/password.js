@@ -68,6 +68,13 @@ export default {
 					type: _this.activeType
 				},
 				success: (result) => {
+					result.data.map(function(item) {
+						if (item.importance == "重要" || item.importance == "绝密") {
+							item.showImportantPassword = false;
+						} else {
+							item.showImportantPassword = true;
+						}
+					})
 					resolve(result.data);
 				}
 			}, _this, '加载中...', (error) => {
