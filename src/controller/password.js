@@ -57,5 +57,22 @@ export default {
 				message(_this, result.errmsg, 'success');
 			}
 		}, _this)
+	},
+	getPasswordListData(_this) {
+		return new Promise((resolve, reject) => {
+			httpRequest({
+				method: 'POST',
+				url: api.PASSWORD_LIST,
+				data: {
+					uid: auth.getAuthUid(),
+					type: _this.activeType
+				},
+				success: (result) => {
+					resolve(result.data);
+				}
+			}, _this, '加载中...', (error) => {
+				reject(error);
+			})
+		})
 	}
 }

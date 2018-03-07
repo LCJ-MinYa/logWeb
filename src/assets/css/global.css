@@ -4,5 +4,5 @@ html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,
 
 /*全局设置table单行显示省略号*/
 .el-table div.cell{
-	white-space: nowrap!important;
+	/*white-space: nowrap!important;*/
 }

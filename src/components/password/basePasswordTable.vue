@@ -18,50 +18,17 @@
 <script>
 export default {
   	name: 'basePasswordTable',
+    props: ["tableData"],
   	data () {
 	    return {
-			tableData: [{
-            	title: '云订货SVN',
-            	url: 'https://192.168.8.234/svn/MobileProject/OnlineOrderH5',
-            	userName: 'lcjun',
-            	password: 'lcjun',
-            	importance: '普通',
-            	notes: '云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目'
-          	},{
-            	title: '云订货SVN',
-            	url: 'https://192.168.8.234',
-            	userName: 'lcjun',
-            	password: 'lcjun',
-            	importance: '普通',
-            	notes: '云订货SVN项目地'
-          	},{
-            	title: '云订货SVN',
-            	url: 'https://192.168.8.234/svn/MobileProject/OnlineOrderH5',
-            	userName: 'lcjun',
-            	password: 'lcjun',
-            	importance: '普通',
-            	notes: '云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目云订货SVN项目地址，财贸子公司项目'
-          	}]
+
 	    }
   	},
   	mounted(){
-  		this.updateListDom();
+
   	},
   	methods:{
-  		updateListDom(){
-	  		this.$nextTick(()=>{
-	  			for (let i = 0; i < $(".el-table__row .cell").length; i++) {
-	  				console.log(i, $(".el-table__row .cell")[i]);
-	  				if(7 <= i <=13){
-		  				continue;
-		  			}
-		  			if(this.offsetWidth < this.scrollWidth){
-		  				console.log(this);
-		  				$(this).css('font-weight', 'bold');
-		  			}
-	  			}
-	  		})
-  		}
+  		
   	}
 }
 </script>

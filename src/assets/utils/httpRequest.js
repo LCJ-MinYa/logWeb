@@ -76,29 +76,27 @@ export default function httpRequest(options, _this, loadingText, customError) {
 	}
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
-			setTimeout(() => {
-				loading.close();
-				if (xhr.status == 200) {
-					var resultData = xhr.responseText;
-					try {
-						resultData = JSON.parse(resultData);
-					} catch (e) {
-						resultData = resultData;
-					}
-					if (resultData.errno == 0) {
-						options.success(resultData);
-					} else {
-						if (customError) {
-							customError(resultData);
-						} else {
-							message(_this, resultData.errmsg, 'error');
-						}
-					}
-				} else {
-					message(_this, '请求服务器错误，错误代码为: ' + xhr.status, 'error');
-					options.error(xhr.status);
+			loading.close();
+			if (xhr.status == 200) {
+				var resultData = xhr.responseText;
+				try {
+					resultData = JSON.parse(resultData);
+				} catch (e) {
+					resultData = resultData;
 				}
-			}, 1500);
+				if (resultData.errno == 0) {
+					options.success(resultData);
+				} else {
+					if (customError) {
+						customError(resultData);
+					} else {
+						message(_this, resultData.errmsg, 'error');
+					}
+				}
+			} else {
+				message(_this, '请求服务器错误，错误代码为: ' + xhr.status, 'error');
+				options.error(xhr.status);
+			}
 		}
 	};
 }
