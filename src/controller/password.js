@@ -53,7 +53,8 @@ export default {
 				uid: auth.getAuthUid()
 			},
 			success: (result) => {
-				console.log(result);
+				_this.resetForm('passwordForm');
+				message(_this, result.errmsg, 'success');
 			}
 		}, _this)
 	}

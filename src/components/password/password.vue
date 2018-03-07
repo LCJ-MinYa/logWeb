@@ -7,7 +7,7 @@
 		<el-col class="panel-center">
 		    <base-left-Menu :leftMenuArray="leftMenuArray" @menuIndex="menuIndex"></base-left-Menu>
 		    <section class="panel-c-c">
-		    	<div v-show="showMenuIndex == '密码列表'">123</div>
+		    	<password-list v-show="showMenuIndex == '密码列表'"></password-list>
 				<creat-password v-show="showMenuIndex == '新建密码'"></creat-password>
 		    </section>
 		</el-col>
@@ -19,6 +19,7 @@
 import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import creatPassword from './creatPassword'
+import passwordList from './passwordList'
 
 export default {
   	name: 'Password',
@@ -40,7 +41,8 @@ export default {
   	components:{
   		'baseHeader': baseHeader,
   		'baseLeftMenu': baseLeftMenu,
-  		'creatPassword': creatPassword
+  		'creatPassword': creatPassword,
+  		'passwordList': passwordList
   	},
   	methods:{
   		menuIndex(index){

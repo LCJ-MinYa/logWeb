@@ -20,7 +20,7 @@
       					<el-option
 							v-for="item in urlDomainOptions"
 					      	:key="item.value"
-					      	:label="item.value"
+					      	:label="item.label"
 					      	:value="item.value"	
       					>
       					</el-option>
@@ -75,35 +75,41 @@ export default {
 	    		value: 'https://'
 	    	}],
 	    	urlDomainOptions: [{
-	    		value: '.com'
+	    		value: '.com',
+	    		label: '.com'
 	    	},{
-	    		value: '.cn'
+	    		value: '.cn',
+	    		label: '.cn'
 	    	},{
-	    		value: '.net'
+	    		value: '.net',
+	    		label: '.net'
 	    	},{
-	    		value: '.org'
+	    		value: '.org',
+	    		label: '.org'
 	    	},{
-	    		value: '.com.cn'
+	    		value: '.com.cn',
+	    		label: '.com.cn'
 	    	},{
-	    		value: '.tv'
+	    		value: '.tv',
+	    		label: '.tv'
+	    	},{
+	    		value: '',
+	    		label: '无后缀'
 	    	}],
 	    	typeOptions: [{
 	        	value: 1,
-	        	label: '服务器'
+	        	label: '社交'
 	      	}, {
 	        	value: 2,
-	        	label: '数据库'
+	        	label: '购物'
 	      	}, {
 	        	value: 3,
 	        	label: '生活'
 	      	}, {
 	        	value: 4,
-	        	label: '社交'
+	        	label: '工作'
 	      	}, {
 	        	value: 5,
-	        	label: '购物'
-	      	}, {
-	        	value: 6,
 	        	label: '其他'
 	      	}],
 	    	passwordForm:{
@@ -127,7 +133,7 @@ export default {
   		},
   		resetForm(formName){
   			this.passwordForm.urlProtocol = this.urlProtocolOptions[0].value;
-  			this.passwordForm.urlDomain = this.urlDomainOptions[0].value;
+  			this.passwordForm.urlDomain = this.urlDomainOptions[0].label;
   			this.$refs[formName].resetFields();
   		}
   	}
