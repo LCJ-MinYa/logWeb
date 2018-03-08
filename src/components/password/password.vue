@@ -5,10 +5,10 @@
 		
 		<!--content-->
 		<el-col class="panel-center">
-		    <base-left-Menu :leftMenuArray="leftMenuArray" @menuIndex="menuIndex"></base-left-Menu>
+		    <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
 		    <section class="panel-c-c">
 		    	<password-list v-show="showMenuIndex == '密码列表'"></password-list>
-				<creat-password v-show="showMenuIndex == '新建密码'"></creat-password>
+				<creat-password @menuIndex="menuIndex" v-show="showMenuIndex == '新建密码'"></creat-password>
 		    </section>
 		</el-col>
 
@@ -20,6 +20,7 @@ import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import creatPassword from './creatPassword'
 import passwordList from './passwordList'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   	name: 'Password',
@@ -35,6 +36,7 @@ export default {
     			icon: 'icon-plus-creat',
     			text: '新建密码'
     		}],
+    		activeMenu: '密码列表',
     		showMenuIndex: '密码列表'
     	}
   	},
@@ -44,10 +46,22 @@ export default {
   		'creatPassword': creatPassword,
   		'passwordList': passwordList
   	},
+  	mounted(){
+  		console.log(this.$store.state);
+  	},
+  	watch: {
+  		showMenuIndex: function(){
+  			if(this.showMenuIndex == "新建密码"){
+  				this.activeMenu = "新建密码";
+  			}else{
+  				this.activeMenu = "密码列表";
+  			}
+  		}
+  	},
   	methods:{
   		menuIndex(index){
   			this.showMenuIndex = index;
-  		}
+  		},
   	}
 }
 </script>

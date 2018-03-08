@@ -1,6 +1,6 @@
 <template>
 	<aside class="left-content">
-	    <el-menu @select="menuIndex" class="el-menu-vertical-demo" background-color="#324057" active-text-color="#eacb20" text-color="#c0ccda" :default-active="leftMenuArray[0].text">
+	    <el-menu @select="menuIndex" class="el-menu-vertical-demo" background-color="#324057" active-text-color="#eacb20" text-color="#c0ccda" :default-active="activeMenu" :active="activeMenu">
 	    	<el-menu-item v-for="(item, index) in leftMenuArray" :key="index" :index="item.text"><i class="iconfont" :class="item.icon"></i>{{item.text}}</el-menu-item>
 	    </el-menu>
     </aside>
@@ -9,7 +9,7 @@
 <script>
 export default {
   	name: 'baseLeftMenu',
-   	props: ["leftMenuArray"],
+   	props: ["leftMenuArray", "activeMenu"],
   	data () {
     	return {
 

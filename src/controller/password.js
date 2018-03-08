@@ -53,6 +53,7 @@ export default {
 				uid: auth.getAuthUid()
 			},
 			success: (result) => {
+				_this.$emit('menuIndex', '密码列表');
 				_this.resetForm('passwordForm');
 				message(_this, result.errmsg, 'success');
 			}
