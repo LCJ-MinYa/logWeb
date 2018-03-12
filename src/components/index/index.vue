@@ -35,7 +35,8 @@ export default {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background: url(../../assets/img/login_bg.jpg) no-repeat 50% 50%;	
+	background: url(../../assets/img/login_bg.jpg) no-repeat 50% 50%;
+	background-size: cover;
 }
 .login-box{
 	position: absolute;
