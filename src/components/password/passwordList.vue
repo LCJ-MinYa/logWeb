@@ -21,39 +21,23 @@
 <script>
 import basePasswordTable from './basePasswordTable'
 import passwordController from '../../controller/password'
+import { mapGetters } from 'vuex'
 
 export default {
   	name: 'passwordList',
   	data () {
     	return {
     		activeType: '1',
-            tableData: {
-                social: {
-                    isRequest: false,
-                    data: []
-                },
-                shopping:{
-                    isRequest: false,
-                    data: [] 
-                },
-                life: {
-                    isRequest: false,
-                    data: []                    
-                },
-                work: {
-                    isRequest: false,
-                    data: []                    
-                },
-                other: {
-                    isRequest: false,
-                    data: []                    
-                }
-            }
     	}
   	},
   	components:{
   		'basePasswordTable': basePasswordTable,
   	},
+    computed: {
+        ...mapGetters({
+            tableData: 'passwordList',
+        })
+    },
     mounted(){
         this.getPasswordList();
     },
@@ -85,29 +69,9 @@ export default {
         getPasswordList(){
             passwordController.getPasswordListData(this)
             .then((result)=>{
-                switch(this.activeType){
-                    case "1":
-                        this.dealRequestResult('social', result);
-                        break;
-                    case "2":
-                        this.dealRequestResult('shopping', result);
-                        break;
-                    case "3":
-                        this.dealRequestResult('life', result);
-                        break;
-                    case "4":
-                        this.dealRequestResult('work', result);
-                        break;
-                    case "5":
-                        this.dealRequestResult('other', result);
-                        break;
-                }
+                this.$store.dispatch('AddToPasswordList', result);
             })    
         },
-        dealRequestResult(name, result){
-            this.tableData[name].isRequest = true;
-            this.tableData[name].data = result;
-        }
   	}
 }
 </script>

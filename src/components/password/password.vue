@@ -46,9 +46,6 @@ export default {
   		'creatPassword': creatPassword,
   		'passwordList': passwordList
   	},
-  	mounted(){
-  		console.log(this.$store.state);
-  	},
   	watch: {
   		showMenuIndex: function(){
   			if(this.showMenuIndex == "新建密码"){

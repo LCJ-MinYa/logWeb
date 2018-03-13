@@ -76,7 +76,8 @@ export default {
 							item.showImportantPassword = true;
 						}
 					})
-					resolve(result.data);
+					result.type = _this.activeType;
+					resolve(result);
 				}
 			}, _this, '加载中...', (error) => {
 				reject(error);

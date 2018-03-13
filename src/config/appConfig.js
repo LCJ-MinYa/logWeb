@@ -1,3 +1,3 @@
 export default {
-	API: 'https://api.ziyiu.com/life',
+	API: process.env.NODE_ENV == 'production' ? 'https://api.ziyiu.com/life' : 'http://127.0.0.1:8084/life',
 }
