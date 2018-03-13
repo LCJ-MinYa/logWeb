@@ -31,8 +31,10 @@ const mutations = {
 	[ADD_TO_PASSWORD](state, passwordList) {
 		switch (passwordList.type) {
 			case "1":
-				state.
-				this.$store.dispatch('AddToPasswordList', result);
+				state.passwordList.social = {
+					isRequest: true,
+					data: passwordList.data
+				}
 				break;
 			case "2":
 				this.dealRequestResult('shopping', result);
@@ -47,7 +49,6 @@ const mutations = {
 				this.dealRequestResult('other', result);
 				break;
 		}
-		console.log(state, passwordList);
 	}
 }
 
