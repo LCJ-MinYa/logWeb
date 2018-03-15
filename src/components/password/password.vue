@@ -7,11 +7,10 @@
 		<el-col class="panel-center">
 		    <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
 		    <section class="panel-c-c">
-		    	<password-list v-show="showMenuIndex == '密码列表'"></password-list>
+		    	<password-list ref="passwordList" v-show="showMenuIndex == '密码列表'"></password-list>
 				<creat-password @menuIndex="menuIndex" v-show="showMenuIndex == '新建密码'"></creat-password>
-		    </section>
+            </section>
 		</el-col>
-
 	</el-row>
 </template>
 
@@ -56,9 +55,18 @@ export default {
   		}
   	},
   	methods:{
-  		menuIndex(index){
-            console.log(index);
+  		menuIndex(index, passwordData){
   			this.showMenuIndex = index;
+            if(passwordData){
+                this.$store.dispatch("UpdateToPasswordType", passwordData.type);
+                if(this.$store.state.password.passwordList[passwordData.type].isRequest){
+                    //该密码类型请求过数据,直接push
+                    this.$store.dispatch("AddToPasswordList", passwordData);
+                }else{
+                    //该密码类型未请求过数据,调用子组件方法请求数据，不需要push
+                    this.$refs['passwordList'].getPasswordList();
+                }
+            }
   		},
   	}
 }

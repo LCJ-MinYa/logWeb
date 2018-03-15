@@ -27,7 +27,7 @@ const state = {
 			data: []
 		}
 	},
-	activeType: "1"
+	activeType: "social"
 }
 
 const mutations = {
@@ -48,38 +48,13 @@ const mutations = {
  * @param {[type]} passwordListData [需要添加的密码数据，可能是多个数组形式，也可能是单个object形式]
  */
 function addToPassword(state, passwordListData) {
-	switch (passwordListData.type) {
-		case "1":
-			dealPasswordList(state, 'social', passwordListData);
-			break;
-		case "2":
-			dealPasswordList(state, 'shopping', passwordListData);
-			break;
-		case "3":
-			dealPasswordList(state, 'life', passwordListData);
-			break;
-		case "4":
-			dealPasswordList(state, 'work', passwordListData);
-			break;
-		case "5":
-			dealPasswordList(state, 'other', passwordListData);
-			break;
-	}
-}
-
-/**
- * [dealPasswordList 添加密码数据]
- * @param  {[type]} state            [vuex中state状态]
- * @param  {[type]} name             [密码类型名称]
- * @param  {[type]} passwordListData [需要添加的密码数据，可能是多个数组形式，也可能是单个object形式]
- */
-function dealPasswordList(state, name, passwordListData) {
+	let typeName = passwordListData.type;
 	AddShowImportantPassword(passwordListData);
-	state.passwordList[name].isRequest = true;
+	state.passwordList[typeName].isRequest = true;
 	if (passwordListData.hasOwnProperty('data')) {
-		state.passwordList[name].data = state.passwordList[name].data.concat(passwordListData.data);
+		state.passwordList[typeName].data = state.passwordList[typeName].data.concat(passwordListData.data);
 	} else {
-		state.passwordList[name].data.push(passwordListData);
+		state.passwordList[typeName].data.push(passwordListData);
 	}
 }
 

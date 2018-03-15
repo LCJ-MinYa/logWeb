@@ -97,19 +97,19 @@ export default {
 	    		label: '无后缀'
 	    	}],
 	    	typeOptions: [{
-	        	value: '1',
+	        	value: 'social',
 	        	label: '社交'
 	      	}, {
-	        	value: '2',
+	        	value: 'shopping',
 	        	label: '购物'
 	      	}, {
-	        	value: '3',
+	        	value: 'life',
 	        	label: '生活'
 	      	}, {
-	        	value: '4',
+	        	value: 'work',
 	        	label: '工作'
 	      	}, {
-	        	value: '5',
+	        	value: 'other',
 	        	label: '其他'
 	      	}],
 	    	passwordForm:{
@@ -132,7 +132,7 @@ export default {
             }
 			passwordController.doCreatPassword(this)
 			.then((passwordData)=>{
-				this.$emit('menuIndex', '密码列表');
+				this.$emit('menuIndex', '密码列表', passwordData);
 				this.resetForm('passwordForm');
 			})
   		},
