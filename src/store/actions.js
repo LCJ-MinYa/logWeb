@@ -4,8 +4,8 @@ import {
 
 const AddToPasswordList = ({
     commit
-}, passwordList, type) => {
-    commit(ADD_TO_PASSWORD, passwordList, type);
+}, passwordListData) => {
+    commit(ADD_TO_PASSWORD, passwordListData);
 }
 
 export default {

@@ -28,28 +28,30 @@ const state = {
 }
 
 const mutations = {
-	[ADD_TO_PASSWORD](state, passwordList) {
-		switch (passwordList.type) {
+	[ADD_TO_PASSWORD](state, passwordListData) {
+		switch (passwordListData.type) {
 			case "1":
-				state.passwordList.social = {
-					isRequest: true,
-					data: passwordList.data
-				}
+				dealPasswordList(state, 'social', passwordListData);
 				break;
 			case "2":
-				this.dealRequestResult('shopping', result);
+				dealPasswordList(state, 'shopping', passwordListData);
 				break;
 			case "3":
-				this.dealRequestResult('life', result);
+				dealPasswordList(state, 'life', passwordListData);
 				break;
 			case "4":
-				this.dealRequestResult('work', result);
+				dealPasswordList(state, 'work', passwordListData);
 				break;
 			case "5":
-				this.dealRequestResult('other', result);
+				dealPasswordList(state, 'other', passwordListData);
 				break;
 		}
 	}
+}
+
+function dealPasswordList(state, name, passwordListData) {
+	state.passwordList[name].isRequest = true;
+	state.passwordList[name].data = passwordListData.data;
 }
 
 export default {

@@ -70,7 +70,7 @@ export default {
             passwordController.getPasswordListData(this)
             .then((result)=>{
                 this.$store.dispatch('AddToPasswordList', result);
-            })    
+            }) 
         },
   	}
 }
