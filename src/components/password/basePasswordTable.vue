@@ -1,5 +1,5 @@
 <template>
-	<el-table :data="tableData" slot="empty" style="width: 100%">
+	<el-table ref="table" :data="tableData" slot="empty" style="width: 100%">
       	<el-table-column prop="title" label="名称" width="150"></el-table-column>
       	<el-table-column prop="userName" label="账号" width="150"></el-table-column>
       	<el-table-column prop="password" label="密码" width="120">
@@ -15,8 +15,8 @@
       	<el-table-column prop="notes" label="备注"></el-table-column>
 		<el-table-column fixed="right" label="操作" width="150">
       		<template slot-scope="scope">
-				<el-button size="mini">编辑</el-button>
-      			<el-button size="mini" type="danger">删除</el-button>
+				<el-button size="mini" @click="handleDel(scope.$index, scope.row)">编辑</el-button>
+      			<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       		</template>
 		</el-table-column>
     </el-table>
@@ -37,6 +37,12 @@ export default {
   	methods:{
   		showImportantPassword(data){
             data.showImportantPassword = !data.showImportantPassword;
+        },
+        handleDel(index, row){
+
+        },
+        handleDelete(index, row){
+
         }
   	}
 }

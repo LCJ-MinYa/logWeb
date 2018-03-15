@@ -97,19 +97,19 @@ export default {
 	    		label: '无后缀'
 	    	}],
 	    	typeOptions: [{
-	        	value: 1,
+	        	value: '1',
 	        	label: '社交'
 	      	}, {
-	        	value: 2,
+	        	value: '2',
 	        	label: '购物'
 	      	}, {
-	        	value: 3,
+	        	value: '3',
 	        	label: '生活'
 	      	}, {
-	        	value: 4,
+	        	value: '4',
 	        	label: '工作'
 	      	}, {
-	        	value: 5,
+	        	value: '5',
 	        	label: '其他'
 	      	}],
 	    	passwordForm:{
@@ -127,9 +127,14 @@ export default {
   	},
   	methods:{
   		doCheckOutPasswordMsg(){
-  			if(passwordController.doCheckOutPasswordMsg(this)){
-  				passwordController.doCreatPassword(this);
-  			}
+            if(!passwordController.doCheckOutPasswordMsg(this)){
+                return;
+            }
+			passwordController.doCreatPassword(this)
+			.then((passwordData)=>{
+				this.$emit('menuIndex', '密码列表');
+				this.resetForm('passwordForm');
+			})
   		},
   		resetForm(formName){
   			this.passwordForm.urlProtocol = this.urlProtocolOptions[0].value;

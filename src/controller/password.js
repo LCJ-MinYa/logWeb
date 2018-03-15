@@ -38,11 +38,9 @@ export default {
 		}
 		return true;
 	},
-	doCreatPassword(_this) {
-		httpRequest({
-			method: 'POST',
-			url: api.CREAT_PASSWORD,
-			data: {
+	doCreatPassword(_this, data) {
+		return new Promise((resolve, reject) => {
+			let passwordData = {
 				title: _this.passwordForm.title,
 				url: _this.passwordForm.urlProtocol + _this.passwordForm.url + _this.passwordForm.urlDomain,
 				userName: _this.passwordForm.userName,
@@ -51,13 +49,18 @@ export default {
 				importance: _this.passwordForm.importance,
 				notes: _this.passwordForm.notes,
 				uid: auth.getAuthUid()
-			},
-			success: (result) => {
-				_this.$emit('menuIndex', '密码列表');
-				_this.resetForm('passwordForm');
-				message(_this, result.errmsg, 'success');
 			}
-		}, _this)
+			httpRequest({
+				method: 'POST',
+				url: api.CREAT_PASSWORD,
+				data: passwordData,
+				success: (result) => {
+					passwordData._id = result.data._id;
+					message(_this, result.errmsg, 'success');
+					resolve(passwordData);
+				}
+			}, _this, '提交中...');
+		})
 	},
 	getPasswordListData(_this) {
 		return new Promise((resolve, reject) => {
@@ -69,19 +72,10 @@ export default {
 					type: _this.activeType
 				},
 				success: (result) => {
-					result.data.map(function(item) {
-						if (item.importance == "重要" || item.importance == "绝密") {
-							item.showImportantPassword = false;
-						} else {
-							item.showImportantPassword = true;
-						}
-					})
 					result.type = _this.activeType;
 					resolve(result);
 				}
-			}, _this, '加载中...', (error) => {
-				reject(error);
-			})
+			}, _this);
 		})
 	}
 }

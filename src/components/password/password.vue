@@ -2,7 +2,7 @@
 	<el-row class="panel">
 		<!--header-->
 		<base-header :titleIcon="titleIcon" :titleText="titleText" :titleActionIcon="titleActionIcon"></base-header>
-		
+
 		<!--content-->
 		<el-col class="panel-center">
 		    <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
@@ -57,6 +57,7 @@ export default {
   	},
   	methods:{
   		menuIndex(index){
+            console.log(index);
   			this.showMenuIndex = index;
   		},
   	}
