@@ -30,7 +30,7 @@ export default {
     right: 0;
     bottom: 0;
     background-color: #fff;
-    width: 30%;
+    width: 400px;
     height:100%;
     box-shadow: -3px 2px 9px rgba(0, 0, 0, 0.4);
     z-index: 999;
