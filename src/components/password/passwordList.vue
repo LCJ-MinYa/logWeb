@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="password-list-box">
     	<el-tabs :value="activeType" type="card" @tab-click="handleClick">
             <el-tab-pane v-for="(item, index) in tableArray" :label="item.label" :key="index" :name="item.name">
                 <base-password-table :tableData="tableData[item.name].data" @handleEdit="handleEdit" @handleDelete="handleDelete"></base-password-table>
             </el-tab-pane>
       	</el-tabs>
-        <rightDrawer :showRightDrawer="showRightDrawer"></rightDrawer>
+        <rightDrawer :showRightDrawer="showRightDrawer" @closeRightDrawer="closeRightDrawer"></rightDrawer>
     </div>
 </template>
 
@@ -76,16 +76,16 @@ export default {
         },
         handleDelete(){
 
+        },
+        closeRightDrawer(){
+            this.showRightDrawer = false;
         }
   	}
 }
 </script>
 
 <style lang="css" scoped>
-.online-player{
-	width: 100%;
-    float: left;
-    color: rgb(71, 86, 105);
-    margin: 10px 0 20px 10px;
+.password-list-box{
+    overflow: hidden;
 }
 </style>

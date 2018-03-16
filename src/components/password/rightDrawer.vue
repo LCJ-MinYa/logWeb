@@ -1,6 +1,8 @@
 <template>
     <transition name="slide-fade">
-        <div class="right-drawer-box" v-show="showRightDrawer"></div>
+        <div class="right-drawer-box" v-show="showRightDrawer">
+            <el-button type="primary" @click="closeRightDrawer">关闭</el-button>
+        </div>
     </transition>
 </template>
 
@@ -12,15 +14,21 @@ export default {
         return {
 
         }
+    },
+    methods: {
+        closeRightDrawer(){
+            this.$emit('closeRightDrawer');
+        }
     }
 }
 </script>
 
 <style lang="css" scoped>
 .right-drawer-box{
-    position: absolute;
-    top: 0;
+    position: fixed;
+    top: 60px;
     right: 0;
+    bottom: 0;
     background-color: #fff;
     width: 30%;
     height:100%;
@@ -28,13 +36,13 @@ export default {
     z-index: 999;
 }
 .slide-fade-enter-active {
-  transition: all .3s ease;
+  transition: all .5s ease;
 }
 .slide-fade-leave-active {
-  transition: all .3s ease;
+  transition: all .5s ease;
 }
 .slide-fade-enter, .slide-fade-leave-active {
-  transform: translate3d(200px,0,0);
+  transform: translate3d(80%,0,0);
   opacity: 0;
 }
 </style>
