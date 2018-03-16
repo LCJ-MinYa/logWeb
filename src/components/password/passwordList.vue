@@ -1,37 +1,50 @@
 <template>
-	<el-tabs :value="activeType" type="card" @tab-click="handleClick">
-	    <el-tab-pane label="社交" name="social">
-	    	<base-password-table :tableData="tableData.social.data"></base-password-table>
-	    </el-tab-pane>
-	    <el-tab-pane label="购物" name="shopping">
-            <base-password-table :tableData="tableData.shopping.data"></base-password-table>
-        </el-tab-pane>
-	    <el-tab-pane label="生活" name="life">
-            <base-password-table :tableData="tableData.life.data"></base-password-table>
-        </el-tab-pane>
-	    <el-tab-pane label="工作" name="work">
-            <base-password-table :tableData="tableData.work.data"></base-password-table>
-        </el-tab-pane>
-	    <el-tab-pane label="其他" name="other">
-            <base-password-table :tableData="tableData.other.data"></base-password-table>
-        </el-tab-pane>
-  	</el-tabs>
+    <div>
+    	<el-tabs :value="activeType" type="card" @tab-click="handleClick">
+            <el-tab-pane v-for="(item, index) in tableArray" :label="item.label" :key="index" :name="item.name">
+                <base-password-table :tableData="tableData[item.name].data" @handleEdit="handleEdit" @handleDelete="handleDelete"></base-password-table>
+            </el-tab-pane>
+      	</el-tabs>
+        <rightDrawer :showRightDrawer="showRightDrawer"></rightDrawer>
+    </div>
 </template>
 
 <script>
 import basePasswordTable from './basePasswordTable'
 import passwordController from '../../controller/password'
+import rightDrawer from './rightDrawer'
 import { mapGetters } from 'vuex'
 
 export default {
   	name: 'passwordList',
   	data () {
     	return {
-
+            showRightDrawer: false,
+            tableArray: [{
+                label: '社交',
+                name: 'social',
+            },{
+                label: '购物',
+                name: 'shopping',
+                data: []
+            },{
+                label: '生活',
+                name: 'life',
+                data: []
+            },{
+                label: '工作',
+                name: 'work',
+                data: []
+            },{
+                label: '其他',
+                name: 'other',
+                data: []
+            }]
     	}
   	},
   	components:{
   		'basePasswordTable': basePasswordTable,
+        'rightDrawer': rightDrawer
   	},
     computed: {
         ...mapGetters({
@@ -57,6 +70,12 @@ export default {
             .then((result)=>{
                 this.$store.dispatch('AddToPasswordList', result);
             })
+        },
+        handleEdit(){
+            this.showRightDrawer = true;
+        },
+        handleDelete(){
+
         }
   	}
 }

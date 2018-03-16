@@ -11,6 +11,7 @@
 				<creat-password @menuIndex="menuIndex" v-show="showMenuIndex == '新建密码'"></creat-password>
             </section>
 		</el-col>
+
 	</el-row>
 </template>
 
@@ -19,7 +20,6 @@ import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import creatPassword from './creatPassword'
 import passwordList from './passwordList'
-import { mapGetters, mapActions } from 'vuex'
 
 export default {
   	name: 'Password',

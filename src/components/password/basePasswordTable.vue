@@ -15,7 +15,7 @@
       	<el-table-column prop="notes" label="备注"></el-table-column>
 		<el-table-column fixed="right" label="操作" width="150">
       		<template slot-scope="scope">
-				<el-button size="mini" @click="handleDel(scope.$index, scope.row)">编辑</el-button>
+				<el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
       			<el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
       		</template>
 		</el-table-column>
@@ -38,11 +38,11 @@ export default {
   		showImportantPassword(data){
             data.showImportantPassword = !data.showImportantPassword;
         },
-        handleDel(index, row){
-
+        handleEdit(index, row){
+            this.$emit('handleEdit');
         },
         handleDelete(index, row){
-
+            this.$emit('handleDelete');
         }
   	}
 }
