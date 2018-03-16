@@ -36,7 +36,7 @@ export default {
     			text: '新建密码'
     		}],
     		activeMenu: '密码列表',
-    		showMenuIndex: '密码列表'
+    		showMenuIndex: '密码列表',
     	}
   	},
   	components:{

@@ -1,7 +1,8 @@
 import {
     ADD_TO_PASSWORD,
     UPDATE_TO_PASSWORD,
-    UPDATE_TO_PASSWORD_TYPE
+    UPDATE_TO_PASSWORD_TYPE,
+    EDIT_TO_PASSWORD
 } from './types'
 
 const AddToPasswordList = ({
@@ -22,8 +23,15 @@ const UpdateToPasswordType = ({
     commit(UPDATE_TO_PASSWORD_TYPE, type);
 }
 
+const EditToPasswordData = ({
+    commit
+}, passwordData) => {
+    commit(EDIT_TO_PASSWORD, passwordData);
+}
+
 export default {
     AddToPasswordList,
     UpdateToPasswordList,
-    UpdateToPasswordType
+    UpdateToPasswordType,
+    EditToPasswordData
 }

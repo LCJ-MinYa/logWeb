@@ -5,7 +5,7 @@
                 <base-password-table :tableData="tableData[item.name].data" @handleEdit="handleEdit" @handleDelete="handleDelete"></base-password-table>
             </el-tab-pane>
       	</el-tabs>
-        <rightDrawer :showRightDrawer="showRightDrawer" @closeRightDrawer="closeRightDrawer"></rightDrawer>
+        <right-drawer :showRightDrawer="showRightDrawer" @closeRightDrawer="closeRightDrawer"></right-drawer>
     </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
                 label: '其他',
                 name: 'other',
                 data: []
-            }]
+            }],
     	}
   	},
   	components:{
@@ -71,7 +71,7 @@ export default {
                 this.$store.dispatch('AddToPasswordList', result);
             })
         },
-        handleEdit(){
+        handleEdit(index, row){
             this.showRightDrawer = true;
         },
         handleDelete(){

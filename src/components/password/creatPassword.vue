@@ -1,7 +1,7 @@
 <template>
 	<div @keyup.enter="doCheckOutPasswordMsg">
-		<strong class="online-player">新建密码</strong>
-		<el-form ref="passwordForm" :model="passwordForm" label-width="100px">
+		<strong class="online-player" v-text="isEditPassword ? '编辑密码' : '新建密码'"></strong>
+		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
 			<el-form-item label="密码名称" label-width="100px" prop="title">
 				<el-input type="text" v-model="passwordForm.title" auto-complete="off"></el-input>
 			</el-form-item>
@@ -12,7 +12,7 @@
 							v-for="item in urlProtocolOptions"
 					      	:key="item.value"
 					      	:label="item.value"
-					      	:value="item.value"	
+					      	:value="item.value"
       					>
       					</el-option>
     				</el-select>
@@ -21,7 +21,7 @@
 							v-for="item in urlDomainOptions"
 					      	:key="item.value"
 					      	:label="item.label"
-					      	:value="item.value"	
+					      	:value="item.value"
       					>
       					</el-option>
     				</el-select>
@@ -55,7 +55,8 @@
 				<el-input type="textarea" v-model="passwordForm.notes" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="resetForm('passwordForm')">重置</el-button>
+				<el-button type="primary" @click="closeRightDrawer" v-if="isEditPassword">关闭</el-button>
+				<el-button @click="resetForm('passwordForm')" v-else>重置</el-button>
 			    <el-button type="primary" @click="doCheckOutPasswordMsg">立即创建</el-button>
 			</el-form-item>
 		</el-form>
@@ -64,9 +65,11 @@
 
 <script>
 import passwordController from '../../controller/password'
+import { mapGetters } from 'vuex'
 
 export default {
   	name: 'creatPassword',
+  	props: ['isEditPassword'],
   	data() {
 	    return {
 	    	urlProtocolOptions: [{
@@ -125,6 +128,24 @@ export default {
 	    	},
 	    }
   	},
+    computed: {
+        ...mapGetters({
+            editPasswordData: 'editPasswordData',
+        })
+    },
+    watch:{
+        editPasswordData: function(editData){
+            if(!this.isEditPassword){
+                return;
+            }
+            this.passwordForm.title = editData.data.title;
+            this.passwordForm.userName = editData.data.userName;
+            this.passwordForm.password = editData.data.password;
+            this.passwordForm.type = editData.data.type;
+            this.passwordForm.importance = editData.data.importance;
+            this.passwordForm.notes = editData.data.notes;
+        }
+    },
   	methods:{
   		doCheckOutPasswordMsg(){
             if(!passwordController.doCheckOutPasswordMsg(this)){
@@ -140,6 +161,10 @@ export default {
   			this.passwordForm.urlProtocol = this.urlProtocolOptions[0].value;
   			this.passwordForm.urlDomain = this.urlDomainOptions[0].label;
   			this.$refs[formName].resetFields();
+  		},
+  		closeRightDrawer(){
+             console.log(this.editPasswordData);
+  			this.$emit('closeRightDrawer');
   		}
   	}
 }
@@ -152,10 +177,13 @@ export default {
 	width: 100%;
     float: left;
     color: rgb(71, 86, 105);
-    margin: 10px 0 20px 10px;
+    margin: 20px 0 20px 20px;
 }
-.el-form{
+.more-width{
 	width: 600px;
+}
+.less-width{
+	width: 450px;
 }
 .el-select-width{
 	width: 100px;

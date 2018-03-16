@@ -1,7 +1,8 @@
 import {
 	ADD_TO_PASSWORD,
 	UPDATE_TO_PASSWORD,
-	UPDATE_TO_PASSWORD_TYPE
+	UPDATE_TO_PASSWORD_TYPE,
+	EDIT_TO_PASSWORD
 } from '../types'
 
 const state = {
@@ -27,7 +28,11 @@ const state = {
 			data: []
 		}
 	},
-	activeType: "social"
+	activeType: "social",
+	editPasswordData: {
+		index: 0,
+		data: {}
+	}
 }
 
 const mutations = {
@@ -39,6 +44,9 @@ const mutations = {
 	},
 	[UPDATE_TO_PASSWORD_TYPE](state, type) {
 		state.activeType = type;
+	},
+	[EDIT_TO_PASSWORD](state, passwordData) {
+		state.editPasswordData = passwordData;
 	}
 }
 

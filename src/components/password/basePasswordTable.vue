@@ -39,6 +39,11 @@ export default {
             data.showImportantPassword = !data.showImportantPassword;
         },
         handleEdit(index, row){
+            let data = {
+                index: index,
+                data: row
+            }
+            this.$store.dispatch('EditToPasswordData', data);
             this.$emit('handleEdit');
         },
         handleDelete(index, row){

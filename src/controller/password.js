@@ -12,8 +12,8 @@ export default {
 			message(_this, '密码名称不能为空!', 'warning');
 			return false;
 		}
-		if (_this.passwordForm.title.length > 10) {
-			message(_this, '密码名称不能超过10个字符!', 'warning');
+		if (_this.passwordForm.title.length > 15) {
+			message(_this, '密码名称不能超过15个字符!', 'warning');
 			return false;
 		}
 		if (!_this.passwordForm.url) {
