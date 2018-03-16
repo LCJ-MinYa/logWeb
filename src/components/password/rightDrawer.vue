@@ -55,7 +55,7 @@ export default {
     background-color: #fff;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 500px;
+    width: 450px;
     height:100%;
     box-shadow: -3px 2px 9px rgba(0, 0, 0, 0.4);
     z-index: 999;

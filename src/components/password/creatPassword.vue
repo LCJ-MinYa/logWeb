@@ -1,5 +1,5 @@
 <template>
-	<div @keyup.enter="doCheckOutPasswordMsg">
+	<div @keyup.enter="doCheckOutPasswordMsg" class="creat-password-wrap">
 		<strong class="online-player" v-text="isEditPassword ? '编辑密码' : '新建密码'"></strong>
 		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
 			<el-form-item label="密码名称" label-width="100px" prop="title">
@@ -163,7 +163,6 @@ export default {
   			this.$refs[formName].resetFields();
   		},
   		closeRightDrawer(){
-             console.log(this.editPasswordData);
   			this.$emit('closeRightDrawer');
   		}
   	}
@@ -173,6 +172,9 @@ export default {
 
 
 <style lang="css" scoped>
+.creat-password-wrap{
+    margin-bottom: 80px;
+}
 .online-player{
 	width: 100%;
     float: left;
@@ -183,7 +185,7 @@ export default {
 	width: 600px;
 }
 .less-width{
-	width: 450px;
+	width: 400px;
 }
 .el-select-width{
 	width: 100px;
