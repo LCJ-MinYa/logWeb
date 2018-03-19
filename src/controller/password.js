@@ -75,7 +75,6 @@ export default {
 				url: api.UPDATE_PASSWORD,
 				data: passwordData,
 				success: (result) => {
-					passwordData._id = result.data._id;
 					message(_this, result.errmsg, 'success');
 					resolve(passwordData);
 				}

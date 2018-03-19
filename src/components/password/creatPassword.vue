@@ -66,7 +66,7 @@
 
 <script>
 import passwordController from '../../controller/password'
-import { parseUrl } from '../../assets/utils/utils'
+import { parseUrl, message } from '../../assets/utils/utils'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -160,7 +160,7 @@ export default {
                 return;
             }
 			if(isChangePwd === true){
-                this.doChangePassword();
+                this.doCheckIsNeedChange();
             }else{
                 this.doCreatPassword();
             }
@@ -172,11 +172,47 @@ export default {
                 this.resetForm('passwordForm');
             })
         },
+        doCheckIsNeedChange(){
+            let shouldUpdate = false;
+            for (let i in this.editPasswordData.data) {
+                if (i == '_id' || i == 'showImportantPassword' || i == 'timestamp' || i == 'uid') {
+                    continue;
+                }
+                if(i == 'url'){
+                    let url = this.passwordForm.urlProtocol + this.passwordForm.url + this.passwordForm.urlDomain;
+                    if(this.editPasswordData.data[i] !== url){
+                        shouldUpdate = true;
+                    }
+                }else if (this.editPasswordData.data[i] !== this.passwordForm[i]) {
+                    shouldUpdate = true;
+                }
+            }
+            if(shouldUpdate){
+                this.doChangePassword();
+            }else{
+                message(this, '密码信息相同,不需要修改!', 'warning');
+            }
+        },
         doChangePassword(){
             passwordController.doChangePassword(this)
             .then((passwordData)=>{
-                // this.$emit('menuIndex', '密码列表', passwordData);
-                // this.resetForm('passwordForm');
+                //如果类型改变，首先删除旧类型内的该条数据
+                if(passwordData.type != this.editPasswordData.data.type){
+                    this.$store.dispatch("DeleteOldPassword", passwordData);
+                }
+                setTimeout(()=>{
+                    //更改tab导航
+                    this.$store.dispatch("UpdateToPasswordType", passwordData.type);
+                    if(this.$store.state.password.passwordList[passwordData.type].isRequest){
+                        //该密码类型请求过数据,直接update
+                        this.$store.dispatch("UpdateToPassword", passwordData);
+                    }else{
+                        //该密码类型未请求过数据,调用祖先组件方法请求数据，不需要update
+                        this.$parent.$parent.getPasswordList();
+                    }
+                    this.closeRightDrawer();
+                    this.resetForm('passwordForm');
+                }, 10);
             })
         },
   		resetForm(formName){
