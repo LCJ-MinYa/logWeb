@@ -51,7 +51,7 @@ export default {
         handleDelete(index, row){
             passwordController.deletePassword(this, row._id)
             .then((result)=>{
-
+                this.$store.dispatch('DeleteToPassword', row);
             })
         }
   	}

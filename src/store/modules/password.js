@@ -3,7 +3,8 @@ import {
 	UPDATE_TO_PASSWORD,
 	UPDATE_TO_PASSWORD_TYPE,
 	EDIT_TO_PASSWORD,
-	DELETE_OLD_PASSWORD
+	DELETE_OLD_PASSWORD,
+	DELETE_TO_PASSWORD
 } from '../types'
 
 const state = {
@@ -58,6 +59,16 @@ const mutations = {
 	},
 	[EDIT_TO_PASSWORD](state, passwordData) {
 		state.editPasswordData = passwordData;
+	},
+	[DELETE_TO_PASSWORD](state, passwordData) {
+		let typeName = passwordData.type;
+		let data = state.passwordList[typeName].data;
+		for (let i = 0; i < data.length; i++) {
+			if (data[i]._id == passwordData._id) {
+				data.splice(i, 1);
+				break;
+			}
+		}
 	}
 }
 

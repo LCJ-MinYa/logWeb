@@ -3,7 +3,8 @@ import {
     UPDATE_TO_PASSWORD,
     UPDATE_TO_PASSWORD_TYPE,
     EDIT_TO_PASSWORD,
-    DELETE_OLD_PASSWORD
+    DELETE_OLD_PASSWORD,
+    DELETE_TO_PASSWORD
 } from './types'
 
 const AddToPasswordList = ({
@@ -30,6 +31,12 @@ const EditToPasswordData = ({
     commit(EDIT_TO_PASSWORD, passwordData);
 }
 
+const DeleteToPassword = ({
+    commit
+}, passwordData) => {
+    commit(DELETE_TO_PASSWORD, passwordData);
+}
+
 const DeleteOldPassword = ({
     commit
 }, passwordData) => {
@@ -41,5 +48,6 @@ export default {
     UpdateToPassword,
     UpdateToPasswordType,
     EditToPasswordData,
-    DeleteOldPassword
+    DeleteOldPassword,
+    DeleteToPassword
 }
