@@ -22,8 +22,31 @@ function message(_this, msg, type) {
     });
 }
 
+/**
+ * [parseUrl 解析url各项参数]
+ * @param  {[string]} url [url链接]
+ * @return {[object]}     [urlProtocol url urlDomain]
+ */
+function parseUrl(url) {
+    let urlObj = {};
+    urlObj.urlProtocol = url.split('://')[0] + '://';
+    if (url.split('.')[1]) {
+        urlObj.urlDomain = '.' + url.split('.')[1];
+    } else {
+        urlObj.urlDomain = '';
+    }
+    let splitUrlProtocol = url.split(urlObj.urlProtocol)[1];
+    if (urlObj.urlDomain) {
+        urlObj.url = splitUrlProtocol.split(urlObj.urlDomain)[0];
+    } else {
+        urlObj.url = splitUrlProtocol;
+    }
+    return urlObj;
+}
+
 export {
     getQueryString,
     matchEmail,
-    message
+    message,
+    parseUrl
 }

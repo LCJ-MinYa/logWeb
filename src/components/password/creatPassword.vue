@@ -55,9 +55,10 @@
 				<el-input type="textarea" v-model="passwordForm.notes" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="closeRightDrawer" v-if="isEditPassword">关闭</el-button>
+				<el-button @click="closeRightDrawer" v-if="isEditPassword">关闭</el-button>
 				<el-button @click="resetForm('passwordForm')" v-else>重置</el-button>
-			    <el-button type="primary" @click="doCheckOutPasswordMsg">立即创建</el-button>
+			    <el-button type="primary" @click="doCheckOutPasswordMsg(true)" v-if="isEditPassword">修改密码</el-button>
+                <el-button type="primary" @click="doCheckOutPasswordMsg" v-else>立即创建</el-button>
 			</el-form-item>
 		</el-form>
 	</div>
@@ -65,6 +66,7 @@
 
 <script>
 import passwordController from '../../controller/password'
+import { parseUrl } from '../../assets/utils/utils'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -124,7 +126,8 @@ export default {
 		    	password: '',
 		      	type: '',
 		      	importance: '普通',
-		      	notes: ''
+		      	notes: '',
+                _id: ''
 	    	},
 	    }
   	},
@@ -138,25 +141,44 @@ export default {
             if(!this.isEditPassword){
                 return;
             }
+            this.passwordForm._id = editData.data._id;
             this.passwordForm.title = editData.data.title;
             this.passwordForm.userName = editData.data.userName;
             this.passwordForm.password = editData.data.password;
             this.passwordForm.type = editData.data.type;
             this.passwordForm.importance = editData.data.importance;
             this.passwordForm.notes = editData.data.notes;
+            let urlObj = parseUrl(editData.data.url);
+            this.passwordForm.urlProtocol = urlObj.urlProtocol;
+            this.passwordForm.url = urlObj.url;
+            this.passwordForm.urlDomain = urlObj.urlDomain;
         }
     },
   	methods:{
-  		doCheckOutPasswordMsg(){
+  		doCheckOutPasswordMsg(isChangePwd){
             if(!passwordController.doCheckOutPasswordMsg(this)){
                 return;
             }
-			passwordController.doCreatPassword(this)
-			.then((passwordData)=>{
-				this.$emit('menuIndex', '密码列表', passwordData);
-				this.resetForm('passwordForm');
-			})
+			if(isChangePwd === true){
+                this.doChangePassword();
+            }else{
+                this.doCreatPassword();
+            }
   		},
+        doCreatPassword(){
+            passwordController.doCreatPassword(this)
+            .then((passwordData)=>{
+                this.$emit('menuIndex', '密码列表', passwordData);
+                this.resetForm('passwordForm');
+            })
+        },
+        doChangePassword(){
+            passwordController.doChangePassword(this)
+            .then((passwordData)=>{
+                // this.$emit('menuIndex', '密码列表', passwordData);
+                // this.resetForm('passwordForm');
+            })
+        },
   		resetForm(formName){
   			this.passwordForm.urlProtocol = this.urlProtocolOptions[0].value;
   			this.passwordForm.urlDomain = this.urlDomainOptions[0].label;

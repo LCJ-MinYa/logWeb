@@ -38,18 +38,22 @@ export default {
 		}
 		return true;
 	},
-	doCreatPassword(_this, data) {
+	packPasswordData(_this) {
+		let passwordData = {
+			title: _this.passwordForm.title,
+			url: _this.passwordForm.urlProtocol + _this.passwordForm.url + _this.passwordForm.urlDomain,
+			userName: _this.passwordForm.userName,
+			password: _this.passwordForm.password,
+			type: _this.passwordForm.type,
+			importance: _this.passwordForm.importance,
+			notes: _this.passwordForm.notes,
+			uid: auth.getAuthUid()
+		}
+		return passwordData;
+	},
+	doCreatPassword(_this) {
 		return new Promise((resolve, reject) => {
-			let passwordData = {
-				title: _this.passwordForm.title,
-				url: _this.passwordForm.urlProtocol + _this.passwordForm.url + _this.passwordForm.urlDomain,
-				userName: _this.passwordForm.userName,
-				password: _this.passwordForm.password,
-				type: _this.passwordForm.type,
-				importance: _this.passwordForm.importance,
-				notes: _this.passwordForm.notes,
-				uid: auth.getAuthUid()
-			}
+			let passwordData = this.packPasswordData(_this);
 			httpRequest({
 				method: 'POST',
 				url: api.CREAT_PASSWORD,
@@ -60,6 +64,22 @@ export default {
 					resolve(passwordData);
 				}
 			}, _this, '提交中...');
+		})
+	},
+	doChangePassword(_this) {
+		return new Promise((resolve, reject) => {
+			let passwordData = this.packPasswordData(_this);
+			passwordData._id = _this.passwordForm._id;
+			httpRequest({
+				method: 'POST',
+				url: api.UPDATE_PASSWORD,
+				data: passwordData,
+				success: (result) => {
+					passwordData._id = result.data._id;
+					message(_this, result.errmsg, 'success');
+					resolve(passwordData);
+				}
+			}, _this, '修改中...');
 		})
 	},
 	getPasswordListData(_this) {
