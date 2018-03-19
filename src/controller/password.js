@@ -96,5 +96,21 @@ export default {
 				}
 			}, _this);
 		})
+	},
+	deletePassword(_this, id) {
+		return new Promise((resolve, reject) => {
+			httpRequest({
+				method: 'POST',
+				url: api.DELETE_PASSWORD,
+				data: {
+					uid: auth.getAuthUid(),
+					_id: id
+				},
+				success: (result) => {
+					message(_this, result.errmsg, 'success');
+					resolve(result);
+				}
+			}, _this);
+		})
 	}
 }

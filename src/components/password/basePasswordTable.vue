@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import passwordController from '../../controller/password'
+
 export default {
   	name: 'basePasswordTable',
     props: ["tableData"],
@@ -47,7 +49,10 @@ export default {
             this.$emit('handleEdit');
         },
         handleDelete(index, row){
-            this.$emit('handleDelete');
+            passwordController.deletePassword(this, row._id)
+            .then((result)=>{
+
+            })
         }
   	}
 }

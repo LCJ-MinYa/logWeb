@@ -12,3 +12,6 @@ export const EDIT_TO_PASSWORD = 'EDIT_TO_PASSWORD'
 
 //当密码类型改变时，先删除之前所在类型的密码数据（纯粹是为了兼容element-ui表格刷新的bug）
 export const DELETE_OLD_PASSWORD = 'DELETE_OLD_PASSWORD';
+
+//删除某一条密码信息
+export const DELETE_TO_PASSWORD = 'DELETE_TO_PASSWORD';

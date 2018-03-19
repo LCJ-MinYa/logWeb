@@ -74,8 +74,8 @@ export default {
         handleEdit(index, row){
             this.showRightDrawer = true;
         },
-        handleDelete(){
-
+        handleDelete(index, row){
+            
         },
         closeRightDrawer(){
             this.showRightDrawer = false;
