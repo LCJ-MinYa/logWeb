@@ -49,9 +49,16 @@ export default {
             this.$emit('handleEdit');
         },
         handleDelete(index, row){
-            passwordController.deletePassword(this, row._id)
-            .then((result)=>{
-                this.$store.dispatch('DeleteToPassword', row);
+            //确认提示
+            this.$confirm('此操作将永久删除该条密码信息, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                passwordController.deletePassword(this, row._id)
+                .then((result)=>{
+                    this.$store.dispatch('DeleteToPassword', row);
+                })
             })
         }
   	}
