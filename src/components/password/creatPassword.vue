@@ -1,5 +1,5 @@
 <template>
-	<div @keyup.enter="doCheckOutPasswordMsg" class="creat-password-wrap">
+	<div class="creat-password-wrap">
 		<strong class="online-player" v-text="isEditPassword ? '编辑密码' : '新建密码'"></strong>
 		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
 			<el-form-item label="密码名称" label-width="100px" prop="title">
