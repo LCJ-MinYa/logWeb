@@ -11,10 +11,7 @@ let AppRouter = new Router({
 	mode: 'history',
 	routes: [{
 		path: '/index',
-		component: Index,
-		meta: {
-			auth: true
-		}
+		component: Index
 	}, {
 		path: '/login',
 		component: Login
@@ -27,10 +24,7 @@ let AppRouter = new Router({
 	}, {
 		path: '/*',
 		redirect: '/index',
-		component: Index,
-		meta: {
-			auth: true
-		}
+		component: Index
 	}]
 })
 
@@ -52,16 +46,7 @@ AppRouter.beforeEach((to, from, next) => {
 			next()
 		}
 	} else {
-		if (auth.checkIsAuth()) {
-			next({
-				path: '/index',
-				query: {
-					redirect: to.fullPath
-				}
-			})
-		} else {
-			next()
-		}
+		next()
 	}
 })
 
