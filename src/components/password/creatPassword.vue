@@ -148,7 +148,7 @@ export default {
             this.passwordForm.type = editData.data.type;
             this.passwordForm.importance = editData.data.importance;
             this.passwordForm.notes = editData.data.notes;
-            let urlObj = parseUrl(editData.data.url);
+            let urlObj = parseUrl(editData.data.url, this.urlDomainOptions);
             this.passwordForm.urlProtocol = urlObj.urlProtocol;
             this.passwordForm.url = urlObj.url;
             this.passwordForm.urlDomain = urlObj.urlDomain;

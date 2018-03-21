@@ -27,14 +27,24 @@ function message(_this, msg, type) {
  * @param  {[string]} url [url链接]
  * @return {[object]}     [urlProtocol url urlDomain]
  */
-function parseUrl(url) {
+function parseUrl(url, urlDomainOptions) {
     let urlObj = {};
+    //获取http部分
     urlObj.urlProtocol = url.split('://')[0] + '://';
-    if (url.split('.')[1]) {
-        urlObj.urlDomain = '.' + url.split('.')[1];
-    } else {
-        urlObj.urlDomain = '';
+    //获取.com部分
+    for (let i = 0; i < urlDomainOptions.length; i++) {
+        if (urlDomainOptions[i].value !== "") {
+            if (url.indexOf(urlDomainOptions[i].value) <= -1) {
+                continue;
+            }
+            if (url.split(urlDomainOptions[i].value)[1]) {
+                urlObj.urlDomain = '';
+            } else {
+                urlObj.urlDomain = urlDomainOptions[i].value;
+            }
+        }
     }
+    //获取url中间部分
     let splitUrlProtocol = url.split(urlObj.urlProtocol)[1];
     if (urlObj.urlDomain) {
         urlObj.url = splitUrlProtocol.split(urlObj.urlDomain)[0];

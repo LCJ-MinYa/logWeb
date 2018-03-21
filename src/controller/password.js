@@ -20,6 +20,21 @@ export default {
 			message(_this, '产品网址不能为空!', 'warning');
 			return false;
 		}
+		if ((_this.passwordForm.url).indexOf("://") > -1) {
+			message(_this, '产品网址已有http或https前缀!', 'warning');
+			return false;
+		}
+		if (_this.passwordForm.urlDomain !== "") {
+			for (let i = 0; i < _this.urlDomainOptions.length; i++) {
+				if (_this.urlDomainOptions[i].value === "") {
+					continue;
+				}
+				if (_this.passwordForm.url.indexOf(_this.urlDomainOptions[i].value) > -1) {
+					message(_this, '产品网址已有顶级域名' + _this.urlDomainOptions[i].value + '后缀!', 'warning');
+					return false;
+				}
+			}
+		}
 		if (!_this.passwordForm.userName) {
 			message(_this, '登陆账号不能为空!', 'warning');
 			return false;
