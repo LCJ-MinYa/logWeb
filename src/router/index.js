@@ -46,7 +46,16 @@ AppRouter.beforeEach((to, from, next) => {
 			next()
 		}
 	} else {
-		next()
+		if (auth.checkIsAuth() && to.path == '/login') {
+			next({
+				path: '/index',
+				query: {
+					redirect: to.fullPath
+				}
+			})
+		} else {
+			next()
+		}
 	}
 })
 

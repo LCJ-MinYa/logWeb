@@ -28,7 +28,7 @@
 					    <i slot="prefix" class="iconfont icon-password"></i>
 				  	</el-input>
 				</div>
-				
+
 				<div class="input-box">
 			  		<el-button type="primary" @click="checkOutMsg">登录</el-button>
 			  	</div>
