@@ -1,5 +1,5 @@
 <template>
-    <div class="login-page" @keyup.enter="checkOutMsg">
+	<div class="global-page" @keyup.enter="checkOutMsg">
 		<div class="login-box">
 			<div class="left-box">
 				<i class="iconfont icon-mimajiesuo01"></i>
@@ -34,7 +34,7 @@
 			  	</div>
 			</div>
 		</div>
-    </div>
+	</div>
 </template>
 
 <script>
@@ -59,13 +59,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.login-page{
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: url(../../assets/img/login_bg.jpg) no-repeat 50% 50%;
-	background-size: cover;
-}
 .login-box{
 	position: absolute;
 	width: 700px;

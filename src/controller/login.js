@@ -39,12 +39,12 @@ export default {
 			success: (result) => {
 				auth.setAuthUid(result.data.uid);
 				if (_this.$route.query.redirect) {
-					_this.$router.push({
-						path: _this.$route.query.redirect
+					_this.$router.replace({
+						path: _this.$route.query.redirect,
 					});
 				} else {
-					_this.$router.push({
-						path: '/index'
+					_this.$router.replace({
+						path: '/index',
 					});
 				}
 			}

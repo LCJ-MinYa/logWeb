@@ -1,15 +1,15 @@
 <template>
-    <div class="login-page">
-    	<div class="login-box">
-    		<ul class="module-box">
-    			<li>旅行</li>
-    			<li>影集</li>
-    			<li>约定</li>
-    			<li @click="goPassword">密码</li>
-    			<li>账单</li>
-    			<li>设置</li>
-    		</ul>
-    	</div>
+	<div class="global-page">
+		<div class="login-box">
+			<ul class="module-box">
+				<li>导航</li>
+				<li>影集</li>
+				<li>旅行</li>
+				<li @click="goPassword">密码</li>
+				<li>账单</li>
+				<li>设置</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     methods:{
     	goPassword(){
 			this.$router.push({
-				path: '/password'
+				path: '/password',
 			});
     	}
     }
@@ -31,13 +31,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.login-page{
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	background: url(../../assets/img/login_bg.jpg) no-repeat 50% 50%;
-	background-size: cover;
-}
 .login-box{
 	position: absolute;
 	width: 680px;

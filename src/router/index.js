@@ -10,7 +10,11 @@ const Password = resolve => require(['../components/password/password'], resolve
 let AppRouter = new Router({
 	mode: 'history',
 	routes: [{
+		path: '/',
+		component: Index
+	}, {
 		path: '/index',
+		redirect: '/',
 		component: Index
 	}, {
 		path: '/login',
@@ -23,7 +27,7 @@ let AppRouter = new Router({
 		}
 	}, {
 		path: '/*',
-		redirect: '/index',
+		redirect: '/',
 		component: Index
 	}]
 })
@@ -39,7 +43,7 @@ AppRouter.beforeEach((to, from, next) => {
 			next({
 				path: '/login',
 				query: {
-					redirect: to.fullPath
+					redirect: to.fullPath,
 				}
 			})
 		} else {
@@ -48,9 +52,10 @@ AppRouter.beforeEach((to, from, next) => {
 	} else {
 		if (auth.checkIsAuth() && to.path == '/login') {
 			next({
-				path: '/index',
+				replace: true,
+				path: '/',
 				query: {
-					redirect: to.fullPath
+					redirect: to.fullPath,
 				}
 			})
 		} else {
