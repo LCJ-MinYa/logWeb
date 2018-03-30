@@ -7,7 +7,7 @@
 		</el-col>
 		<el-col :span="4" v-if="titleActionIcon">
 			<div class="tip-logout">
-				<i class="iconfont" :class="titleActionIcon"></i>
+				<i class="iconfont title-action-icon" :class="titleActionIcon"></i>
 			</div>
 		</el-col>
 	</el-col>
@@ -44,7 +44,7 @@ export default {
 	margin: 0 20px;
 	cursor: pointer;
 }
-.icon-1{
-	font-size: 26px;
+.title-action-icon{
+	font-size: 24px;
 }
 </style>

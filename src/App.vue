@@ -16,7 +16,6 @@ export default {
     },
     watch: {
         '$route' (to, from) {
-            console.log(to, from);
             const toDepth = to.path;
             const fromDepth = from.path;
             this.transitionName = this.judgeUrlDepth(fromDepth) <= this.judgeUrlDepth(toDepth)  ? 'go-page' : 'back-page';

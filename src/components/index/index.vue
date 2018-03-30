@@ -2,10 +2,10 @@
 	<div class="global-page">
 		<div class="login-box">
 			<ul class="module-box">
-				<li>导航</li>
+				<li @click="goPage('/nav')">导航</li>
 				<li>影集</li>
 				<li>旅行</li>
-				<li @click="goPassword">密码</li>
+				<li @click="goPage('/password')">密码</li>
 				<li>账单</li>
 				<li>设置</li>
 			</ul>
@@ -21,9 +21,9 @@ export default {
         }
     },
     methods:{
-    	goPassword(){
+    	goPage(name){
 			this.$router.push({
-				path: '/password',
+				path: name,
 			});
     	}
     }
