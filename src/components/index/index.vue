@@ -2,7 +2,7 @@
 	<div class="global-page">
 		<div class="login-box">
 			<ul class="module-box">
-				<li @click="goPage('/nav')">导航</li>
+				<li @click="goPage('/search')">导航</li>
 				<li>影集</li>
 				<li>旅行</li>
 				<li @click="goPage('/password')">密码</li>

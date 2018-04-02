@@ -6,7 +6,7 @@ Vue.use(Router)
 const Index = resolve => require(['../components/index/index'], resolve)
 const Login = resolve => require(['../components/login/login'], resolve)
 const Password = resolve => require(['../components/password/password'], resolve)
-const Nav = resolve => require(['../components/nav/nav'], resolve)
+const Search = resolve => require(['../components/search/search'], resolve)
 
 let AppRouter = new Router({
 	mode: 'history',
@@ -27,8 +27,8 @@ let AppRouter = new Router({
 			auth: true
 		}
 	}, {
-		path: '/nav',
-		component: Nav,
+		path: '/search',
+		component: Search,
 	}, {
 		path: '/*',
 		redirect: '/',

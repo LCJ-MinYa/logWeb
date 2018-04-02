@@ -13,3 +13,11 @@ html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,
 .el-table div.cell{
 	/*white-space: nowrap!important;*/
 }
+
+/*搜索导航页面*/
+.search-input input.el-input__inner{
+    height: 50px!important;
+}
+.search-input i.el-icon-search{
+    font-size: 18px;
+}
