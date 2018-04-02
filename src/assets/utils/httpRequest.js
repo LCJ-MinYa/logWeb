@@ -41,7 +41,10 @@ export default function httpRequest(options, _this, loadingText, customError) {
 	options.data.timestamp = new Date().getTime();
 	options.data.accessToken = encryp.sha1(options.data.uid + options.data.timestamp).substring(3, 10);
 
-	options.url = config.API + options.url || null;
+	if (options.url.indexOf('http://') === -1 && options.url.indexOf('https://') === -1) {
+		options.url = config.API + options.url || null;
+	}
+
 	options.success = options.success || function() {};
 	options.error = options.error || function() {};
 	if (!options.url) {

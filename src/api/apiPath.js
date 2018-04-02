@@ -1,7 +1,12 @@
 export default {
     LOGIN: '/login',
-    CREAT_PASSWORD: '/creatPassword',
-    PASSWORD_LIST: '/passwordList',
-    UPDATE_PASSWORD: '/updatePassword',
-    DELETE_PASSWORD: '/deletePassword',
+
+    /*密码API*/
+    CREAT_PASSWORD: '/password/creatPassword',
+    PASSWORD_LIST: '/password/passwordList',
+    UPDATE_PASSWORD: '/password/updatePassword',
+    DELETE_PASSWORD: '/password/deletePassword',
+
+    /*搜索API*/
+    SEARCH_SUGGESTION: 'http://suggestion.baidu.com/su'
 }

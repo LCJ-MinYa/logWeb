@@ -17,7 +17,23 @@ html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,
 /*搜索导航页面*/
 .search-input input.el-input__inner{
     height: 50px!important;
+    border: 1px double #eacb20;
+    border-right: 0;
+    border-left: 0;
+    background: rgba(20, 20, 20, 0.6);
+    color: #eacb20;
+    font-size: 14px;
+}
+.search-input .el-input-group__append{
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px double #eacb20;
 }
 .search-input i.el-icon-search{
     font-size: 18px;
+    color: #eacb20;
+}
+.search-input .el-input-group__prepend{
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px double #eacb20;
+    color: #eacb20;
 }

@@ -1,22 +1,43 @@
 <template>
     <div class="search-box">
-        <el-input v-model="searchContent" class="search-input" size="large" clearable>
+        <el-autocomplete
+            :fetch-suggestions="querySearchAsync"
+            v-model="searchContent"
+            class="search-input"
+            size="large"
+            autofocus="autofocus"
+            clearable
+            @select="handleSelect"
+        >
             <el-select v-model="searchSource" slot="prepend" placeholder="请选择">
                 <el-option label="百度" value="baidu"></el-option>
                 <el-option label="谷歌" value="google"></el-option>
             </el-select>
             <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
+        </el-autocomplete>
     </div>
 </template>
 
 <script>
+import SearchController from '../../controller/search'
+
 export default {
     name: 'search',
     data () {
         return {
             searchContent: '',
             searchSource: 'baidu'
+        }
+    },
+    methods:{
+        querySearchAsync(queryString, cb){
+            SearchController.getSearchSuggestion(this, queryString)
+            .then((result)=>{
+                cb([{'value': 'acc'}]);
+            })
+        },
+        handleSelect(item){
+            console.log(item);
         }
     }
 }
@@ -36,6 +57,7 @@ export default {
     width: 100px;
 }
 .search-input{
+    width: 100%;
     height: 50px;
 }
 </style>
