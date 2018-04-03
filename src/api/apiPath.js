@@ -8,5 +8,5 @@ export default {
     DELETE_PASSWORD: '/password/deletePassword',
 
     /*搜索API*/
-    SEARCH_SUGGESTION: 'http://suggestion.baidu.com/su'
+    SEARCH_SUGGESTION: '/search/searchSuggestion',
 }

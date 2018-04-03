@@ -31,9 +31,13 @@ export default {
     },
     methods:{
         querySearchAsync(queryString, cb){
+            if(!queryString){
+                cb([]);
+                return;
+            }
             SearchController.getSearchSuggestion(this, queryString)
             .then((result)=>{
-                cb([{'value': 'acc'}]);
+                cb(result);
             })
         },
         handleSelect(item){

@@ -12,8 +12,7 @@ export default {
                     wd: queryString
                 },
                 success: (result) => {
-                    console.log(result);
-                    resolve(result);
+                    resolve(result.data);
                 }
             }, _this, '修改中...');
         })
