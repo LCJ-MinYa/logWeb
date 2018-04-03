@@ -48,6 +48,6 @@ export default {
 					});
 				}
 			}
-		}, _this, '登陆中')
+		}, _this, '登陆中...')
 	}
 }

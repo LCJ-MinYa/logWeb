@@ -5,9 +5,8 @@
             v-model="searchContent"
             class="search-input"
             size="large"
-            autofocus="autofocus"
-            clearable
             @select="handleSelect"
+            clearable
         >
             <el-select v-model="searchSource" slot="prepend" placeholder="请选择">
                 <el-option label="百度" value="baidu"></el-option>

@@ -21,12 +21,14 @@ import {
  * @return {[object]} [JSON Object]
  */
 export default function httpRequest(options, _this, loadingText, customError) {
-	const loading = _this.$loading({
-		lock: true,
-		text: loadingText || '加载中',
-		spinner: 'el-icon-loading',
-		background: 'rgba(0, 0, 0, 0.7)'
-	});
+	if (!options.notShowLoading) {
+		const loading = _this.$loading({
+			lock: true,
+			text: loadingText || '加载中',
+			spinner: 'el-icon-loading',
+			background: 'rgba(0, 0, 0, 0.7)'
+		});
+	}
 
 	var xhr = null;
 	options = options || null;
@@ -79,7 +81,9 @@ export default function httpRequest(options, _this, loadingText, customError) {
 	}
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
-			loading.close();
+			if (!options.notShowLoading) {
+				loading.close();
+			}
 			if (xhr.status == 200) {
 				var resultData = xhr.responseText;
 				try {

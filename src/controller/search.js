@@ -11,6 +11,7 @@ export default {
                 data: {
                     wd: queryString
                 },
+                notShowLoading: true,
                 success: (result) => {
                     resolve(result.data);
                 }
