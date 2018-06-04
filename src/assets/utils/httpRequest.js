@@ -21,8 +21,9 @@ import {
  * @return {[object]} [JSON Object]
  */
 export default function httpRequest(options, _this, loadingText, customError) {
+	let loading;
 	if (!options.notShowLoading) {
-		const loading = _this.$loading({
+		loading = _this.$loading({
 			lock: true,
 			text: loadingText || '加载中',
 			spinner: 'el-icon-loading',
