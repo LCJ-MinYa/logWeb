@@ -7,6 +7,7 @@ const Index = resolve => require(['../components/index/index'], resolve)
 const Login = resolve => require(['../components/login/login'], resolve)
 const Password = resolve => require(['../components/password/password'], resolve)
 const Search = resolve => require(['../components/search/search'], resolve)
+const Task = resolve => require(['../components/task/task'], resolve)
 
 let AppRouter = new Router({
 	mode: 'history',
@@ -29,6 +30,12 @@ let AppRouter = new Router({
 	}, {
 		path: '/search',
 		component: Search,
+	}, {
+		path: '/task',
+		component: Task,
+		meta: {
+			auth: true
+		}
 	}, {
 		path: '/*',
 		redirect: '/',

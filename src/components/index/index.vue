@@ -6,7 +6,7 @@
 				<li>影集</li>
 				<li>旅行</li>
 				<li @click="goPage('/password')">密码</li>
-				<li>账单</li>
+				<li @click="goPage('/task')">任务</li>
 				<li>设置</li>
 			</ul>
 		</div>
