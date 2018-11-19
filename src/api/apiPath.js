@@ -9,4 +9,7 @@ export default {
 
     /*搜索API*/
     SEARCH_SUGGESTION: '/search/searchSuggestion',
+
+    /*任务API*/
+    TASK_LIST: '/task/taskList',
 }
