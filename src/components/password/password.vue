@@ -7,8 +7,8 @@
 		<el-col class="panel-center">
 		    <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
 		    <section class="panel-c-c">
-		    	<password-list ref="passwordList" v-show="showMenuIndex == '密码列表'"></password-list>
-				<creat-password @menuIndex="menuIndex" v-show="showMenuIndex == '新建密码'"></creat-password>
+		    	<password-list ref="passwordList" v-show="activeMenu == '密码列表'"></password-list>
+				<creat-password @menuIndex="menuIndex" v-show="activeMenu == '新建密码'"></creat-password>
             </section>
 		</el-col>
 
@@ -36,7 +36,6 @@ export default {
     			text: '新建密码'
     		}],
     		activeMenu: '密码列表',
-    		showMenuIndex: '密码列表',
     	}
   	},
   	components:{
@@ -45,18 +44,9 @@ export default {
   		'creatPassword': creatPassword,
   		'passwordList': passwordList
   	},
-  	watch: {
-  		showMenuIndex: function(){
-  			if(this.showMenuIndex == "新建密码"){
-  				this.activeMenu = "新建密码";
-  			}else{
-  				this.activeMenu = "密码列表";
-  			}
-  		}
-  	},
   	methods:{
   		menuIndex(index, passwordData){
-  			this.showMenuIndex = index;
+  			this.activeMenu = index;
             if(passwordData){
                 this.$store.dispatch("UpdateToPasswordType", passwordData.type);
                 if(this.$store.state.password.passwordList[passwordData.type].isRequest){
@@ -72,34 +62,4 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-/*单页全局*/
-.panel {
-	position: fixed;
-	top: 0px;
-	bottom: 0px;
-	width: 100%;
-}
-
-/*左侧导航栏*/
-.panel-center {
-	width: 100%;
-	background: #324057;
-	position: absolute;
-	top: 60px;
-	bottom: 0px;
-	overflow: hidden;
-}
-
-/*内容*/
-.panel-c-c {
-	background: #fff;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-	bottom: 0px;
-	left: 230px;
-	overflow-y: scroll;
-	padding: 20px;
-}
-</style>
+<style lang="css" scoped src="../../assets/css/modulePage.css"></style>

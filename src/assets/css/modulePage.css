@@ -1,1 +1,31 @@
-modulePage.css
+@charset 'utf-8';
+
+/*单页全局*/
+.panel {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+/*左侧导航栏*/
+.panel-center {
+    width: 100%;
+    background: #324057;
+    position: absolute;
+    top: 60px;
+    bottom: 0px;
+    overflow: hidden;
+}
+
+/*内容*/
+.panel-c-c {
+    background: #fff;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    left: 230px;
+    overflow-y: scroll;
+    padding: 20px;
+}

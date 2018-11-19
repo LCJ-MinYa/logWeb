@@ -35,9 +35,9 @@ export default {
 	background: #1f2d3d;
 	color: #eacb20;
 }
-.icon-mimajiesuo01{
-	font-size: 25px;
-	padding: 0 5px 0 20px;
+.panel-top i.iconfont{
+    font-size: 25px;
+    padding: 0 5px 0 20px;
 }
 .tip-logout {
 	float: right;
