@@ -7,7 +7,7 @@
         <el-col class="panel-center">
             <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
             <section class="panel-c-c">
-                <task-list v-show="activeMenu == '任务列表'"></task-list>
+                <task-list v-show="activeMenu == '任务列表'" @menuIndex="menuIndex" :taskListData="taskListData"></task-list>
             </section>
         </el-col>
 
@@ -18,6 +18,7 @@
 import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import taskList from './taskList'
+import taskController from '../../controller/task'
 
 export default {
     name: 'task',
@@ -34,6 +35,7 @@ export default {
                 text: '新建任务'
             }],
             activeMenu: '任务列表',
+            taskListData: []
         }
     },
     components:{
@@ -41,10 +43,24 @@ export default {
         'baseLeftMenu': baseLeftMenu,
         'taskList': taskList
     },
+    mounted(){
+        this.getTaskList();
+    },
     methods:{
-        menuIndex(index, passwordData){
+        menuIndex(index){
             this.activeMenu = index;
         },
+        getTaskList(){
+            taskController.getTaskListData(this).then(result=>{
+                console.log(result);
+                let array = [{
+                    text: '近期任务',
+                    icon: 'icon-yuandian'
+                }]
+                this.taskListData = array;
+                this.leftMenuArray = this.leftMenuArray.concat(array);
+            })
+        }
     }
 }
 </script>
