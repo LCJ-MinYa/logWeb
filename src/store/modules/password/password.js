@@ -5,7 +5,10 @@ import {
 	EDIT_TO_PASSWORD,
 	DELETE_OLD_PASSWORD,
 	DELETE_TO_PASSWORD
-} from '../types'
+} from './passwordTypes'
+
+import passwordActions from './passwordActions'
+import passwordGetters from './passwordGetters'
 
 const state = {
 	passwordList: {
@@ -139,7 +142,11 @@ function judgeImportance(item) {
 	}
 }
 
-export default {
-	state,
-	mutations
+const password = {
+	state: state,
+	mutations: mutations,
+	actions: passwordActions,
+	getters: passwordGetters
 }
+
+export default password;
