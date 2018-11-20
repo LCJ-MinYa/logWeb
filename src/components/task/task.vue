@@ -5,7 +5,7 @@
 
         <!--content-->
         <el-col class="panel-center">
-            <base-left-Menu :leftMenuArray="leftMenuArray" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
+            <base-left-Menu :leftMenuArray="taskListData" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
             <section class="panel-c-c">
                 <task-list v-show="activeMenu == '任务列表'" @menuIndex="menuIndex" :taskListData="taskListData"></task-list>
             </section>
@@ -19,6 +19,7 @@ import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import taskList from './taskList'
 import taskController from '../../controller/task'
+import { mapGetters } from 'vuex'
 
 export default {
     name: 'task',
@@ -27,15 +28,7 @@ export default {
             titleIcon: 'icon-iconfonttask1',
             titleText: '任务管理',
             titleActionIcon: 'icon-1',
-            leftMenuArray:[{
-                icon: 'icon-liebiao',
-                text: '任务列表'
-            },{
-                icon: 'icon-plus-creat',
-                text: '新建任务'
-            }],
             activeMenu: '任务列表',
-            taskListData: []
         }
     },
     components:{
@@ -46,6 +39,11 @@ export default {
     mounted(){
         this.getTaskList();
     },
+    computed: {
+        ...mapGetters({
+            taskListData: 'taskList',
+        })
+    },
     methods:{
         menuIndex(index){
             this.activeMenu = index;
@@ -53,12 +51,7 @@ export default {
         getTaskList(){
             taskController.getTaskListData(this).then(result=>{
                 console.log(result);
-                let array = [{
-                    text: '近期任务',
-                    icon: 'icon-yuandian'
-                }]
-                this.taskListData = array;
-                this.leftMenuArray = this.leftMenuArray.concat(array);
+                this.$store.dispatch('UpdateTaskList', result);
             })
         }
     }

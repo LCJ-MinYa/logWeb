@@ -16,7 +16,7 @@ export default {
                     uid: auth.getAuthUid()
                 },
                 success: (result) => {
-                    resolve(result);
+                    resolve(result.data);
                 }
             }, _this);
         })

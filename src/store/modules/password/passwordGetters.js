@@ -1,6 +1,5 @@
 const passwordGetters = {
     passwordList(state) {
-        console.log(state);
         return state.passwordList;
     },
     activeType(state) {

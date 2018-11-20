@@ -3,6 +3,7 @@
         <el-row :gutter="20">
             <el-col :span="6" v-for="(item, index) in taskListData" :key="index">
                 <div
+                    v-if="item._id"
                     class="list-box"
                     @click="goTaskListDetail(item.text)"
                 >{{item.text}}</div>
