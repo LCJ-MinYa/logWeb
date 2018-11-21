@@ -94,6 +94,14 @@ export default function httpRequest(options, _this, loadingText, customError) {
 				}
 				if (resultData.errno == 0) {
 					options.success(resultData);
+				} else if (resultData.errno == 203) {
+					message(_this, resultData.errmsg, 'error');
+					_this.$router.replace({
+						path: '/login',
+						query: {
+							redirect: _this.$route.fullPath,
+						}
+					});
 				} else {
 					if (customError) {
 						customError(resultData);
