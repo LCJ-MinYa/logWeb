@@ -2,8 +2,16 @@
     <el-main>
         <el-row :gutter="20">
             <el-col :span="6" v-for="(item, index) in taskListData" :key="index">
+                <el-tooltip effect="dark" placement="bottom" open-delay="300" v-if="item.details && item._id">
+                    <div slot="content">{{item.details}}</div>
+                    <div
+                        v-if="item._id"
+                        class="list-box"
+                        @click="goTaskListDetail(item.text)"
+                    >{{item.text}}</div>
+                </el-tooltip>
                 <div
-                    v-if="item._id"
+                    v-if="item._id && !item.details"
                     class="list-box"
                     @click="goTaskListDetail(item.text)"
                 >{{item.text}}</div>
@@ -66,7 +74,7 @@ export default {
     border-radius: 5px;
     height: 120px;
     line-height: 120px;
-    color: #324057;
+    color: #777;
     text-align: center;
     font-weight: bold;
     border: 1px solid #e1e1e1;
