@@ -8,6 +8,7 @@
             <base-left-Menu :leftMenuArray="taskListData" :activeMenu="activeMenu" @menuIndex="menuIndex"></base-left-Menu>
             <section class="panel-c-c">
                 <task-list v-show="activeMenu == '任务列表'" @menuIndex="menuIndex" :taskListData="taskListData"></task-list>
+                <task-item v-show="activeMenu != '任务列表' && activeMenu != '新建任务'" @menuIndex="menuIndex"></task-item>
             </section>
         </el-col>
 
@@ -18,6 +19,7 @@
 import baseHeader from '../common/baseHeader'
 import baseLeftMenu from '../common/baseLeftMenu'
 import taskList from './taskList'
+import taskItem from './taskItem'
 import taskController from '../../controller/task'
 import { mapGetters } from 'vuex'
 
@@ -34,7 +36,8 @@ export default {
     components:{
         'baseHeader': baseHeader,
         'baseLeftMenu': baseLeftMenu,
-        'taskList': taskList
+        'taskList': taskList,
+        'taskItem': taskItem
     },
     mounted(){
         this.getTaskList();

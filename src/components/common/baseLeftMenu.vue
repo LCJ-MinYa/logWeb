@@ -26,6 +26,11 @@ export default {
 <style lang="css" scoped>
 .left-content{
     width: 230px;
+    overflow-y: scroll;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
 }
 .el-menu-vertical-demo{
 	border-right: solid 0px;

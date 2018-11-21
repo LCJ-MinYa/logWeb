@@ -10,6 +10,21 @@ const state = {
         icon: 'icon-plus-creat',
         text: '新建任务'
     }],
+    taskItem: {
+        uncomplete: {
+            isRequest: false,
+            data: []
+        },
+        complete: {
+            isRequest: false,
+            data: []
+        }
+    },
+    activeTaskItem: "uncomplete",
+    editTaskItemData: {
+        index: 0,
+        data: {}
+    }
 }
 
 const mutations = {
