@@ -33,7 +33,20 @@ export default {
     },
     methods:{
         doAddTaskList(){
-            console.log(12);
+            this.$prompt('请输入项目名称', '项目名称', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                inputPattern: /\S/,
+                inputErrorMessage: '项目名称不能为空'
+            }).then(({ value }) => {
+                taskController.doAddTaskListData(this, value).then(data =>{
+                    let addTaskListArray = [{
+                        text: value,
+                        _id: data._id
+                    }]
+                    this.$store.dispatch('UpdateTaskList', addTaskListArray);
+                })
+            }).catch((err) => {});
         },
         goTaskListDetail(text){
             this.$emit('menuIndex', text);

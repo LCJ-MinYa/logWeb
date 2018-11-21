@@ -20,5 +20,21 @@ export default {
                 }
             }, _this);
         })
+    },
+    doAddTaskListData(_this, value) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.ADD_TASK_LIST,
+                data: {
+                    uid: auth.getAuthUid(),
+                    text: value
+                },
+                success: (result) => {
+                    message(_this, result.errmsg, 'success');
+                    resolve(result.data);
+                }
+            }, _this);
+        })
     }
 }

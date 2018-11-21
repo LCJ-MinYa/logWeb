@@ -12,4 +12,5 @@ export default {
 
     /*任务API*/
     TASK_LIST: '/task/taskList',
+    ADD_TASK_LIST: '/task/addTaskList',
 }
