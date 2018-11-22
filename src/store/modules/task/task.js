@@ -4,23 +4,28 @@ import taskGetters from './taskGetters';
 
 const state = {
     taskList: [{
+        _id: 'default',
         icon: 'icon-liebiao',
         text: '任务列表'
     }, {
+        _id: 'default',
         icon: 'icon-plus-creat',
         text: '新建任务'
     }],
     taskItem: {
-        uncomplete: {
-            isRequest: false,
-            data: []
-        },
-        complete: {
-            isRequest: false,
-            data: []
+        default: {
+            uncomplete: {
+                isRequest: false,
+                data: []
+            },
+            complete: {
+                isRequest: false,
+                data: []
+            }
         }
     },
-    activeTaskItem: "uncomplete",
+    activeTaskListType: 'default',
+    activeTaskItemType: "uncomplete",
     editTaskItemData: {
         index: 0,
         data: {}
@@ -28,11 +33,26 @@ const state = {
 }
 
 const mutations = {
-    [TYPES.UPDATE_TASK_LIST](state, taskListData) {
+    [TYPES.ADD_TASK_LIST](state, taskListData) {
         for (let i = 0; i < taskListData.length; i++) {
-            taskListData[i].icon = 'icon-yuandian';
+            state.taskItem[taskListData[i]._id] = {
+                uncomplete: {
+                    isRequest: false,
+                    data: []
+                },
+                complete: {
+                    isRequest: false,
+                    data: []
+                }
+            }
+            if (!taskListData[i].icon) {
+                taskListData[i].icon = 'icon-yuandian';
+            }
         }
         state.taskList = state.taskList.concat(taskListData);
+    },
+    [TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE](state, type) {
+        state.activeTaskListType = type;
     }
 }
 

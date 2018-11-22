@@ -7,8 +7,11 @@ const taskGetters = {
     taskItem(state) {
         return state.taskItem;
     },
-    activeTaskItem(state) {
-        return state.activeTaskItem;
+    activeTaskListType(state) {
+        return state.activeTaskListType;
+    },
+    activeTaskItemType(state) {
+        return state.activeTaskItemType;
     },
     editTaskItemData(state) {
         return state.editTaskItemData;

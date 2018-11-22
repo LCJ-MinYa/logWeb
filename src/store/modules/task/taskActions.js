@@ -1,11 +1,16 @@
 import * as TYPES from './taskTypes';
 
 const taskActions = {
-    UpdateTaskList({
+    AddTaskList({
         commit
     }, taskListData) {
-        commit(TYPES.UPDATE_TASK_LIST, taskListData);
+        commit(TYPES.ADD_TASK_LIST, taskListData);
     },
+    UpdateActiveTaskListType({
+        commit
+    }, type) {
+        commit(TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE, type);
+    }
 }
 
 export default taskActions;

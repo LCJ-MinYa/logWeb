@@ -1,8 +1,8 @@
 <template>
     <div class="password-list-box">
-        <el-tabs :value="activeTaskItem" type="card" @tab-click="handleClick">
+        <el-tabs :value="activeTaskItemType" type="card" @tab-click="handleClick">
             <el-tab-pane v-for="(item, index) in tableArray" :label="item.label" :key="index" :name="item.name">
-                <base-task-item-table :tableData="tableData[item.name].data" @handleEdit="handleEdit"></base-task-item-table>
+                <base-task-item-table :tableData="tableData[activeTaskListType][item.name].data" @handleEdit="handleEdit"></base-task-item-table>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -37,7 +37,8 @@ export default {
     computed: {
         ...mapGetters({
             tableData: 'taskItem',
-            activeTaskItem: 'activeTaskItem'
+            activeTaskItemType: 'activeTaskItemType',
+            activeTaskListType: 'activeTaskListType',
         })
     },
     methods:{

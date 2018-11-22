@@ -2,18 +2,18 @@
     <el-main>
         <el-row :gutter="20">
             <el-col :span="6" v-for="(item, index) in taskListData" :key="index">
-                <el-tooltip effect="dark" placement="bottom" open-delay="300" v-if="item.details && item._id">
+                <el-tooltip effect="dark" placement="bottom" :open-delay="openDelay" v-if="item.details && item._id != 'default'">
                     <div slot="content">{{item.details}}</div>
                     <div
-                        v-if="item._id"
+                        v-if="item._id != 'default'"
                         class="list-box"
-                        @click="goTaskListDetail(item.text)"
+                        @click="goTaskListDetail(item)"
                     >{{item.text}}</div>
                 </el-tooltip>
                 <div
-                    v-if="item._id && !item.details"
+                    v-if="item._id != 'default' && !item.details"
                     class="list-box"
-                    @click="goTaskListDetail(item.text)"
+                    @click="goTaskListDetail(item)"
                 >{{item.text}}</div>
             </el-col>
             <el-col :span="6">
@@ -36,7 +36,7 @@ export default {
     props: ["taskListData"],
     data () {
         return {
-
+            openDelay: 300
         }
     },
     methods:{
@@ -52,12 +52,13 @@ export default {
                         text: value,
                         _id: data._id
                     }]
-                    this.$store.dispatch('UpdateTaskList', addTaskListArray);
+                    this.$store.dispatch('AddTaskList', addTaskListArray);
                 })
             }).catch((err) => {});
         },
-        goTaskListDetail(text){
-            this.$emit('menuIndex', text);
+        goTaskListDetail(item){
+            this.$store.dispatch('UpdateActiveTaskListType', item._id);
+            this.$emit('menuIndex', item.text);
         }
     },
 }

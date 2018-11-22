@@ -50,11 +50,17 @@ export default {
     methods:{
         menuIndex(index){
             this.activeMenu = index;
+            for (let i = 0; i < this.taskListData.length; i++) {
+                if(this.taskListData[i].text == index){
+                    this.$store.dispatch('UpdateActiveTaskListType', this.taskListData[i]._id);
+                    return;
+                }
+            }
         },
         getTaskList(){
             taskController.getTaskListData(this).then(result=>{
                 console.log(result);
-                this.$store.dispatch('UpdateTaskList', result);
+                this.$store.dispatch('AddTaskList', result);
             })
         }
     }
