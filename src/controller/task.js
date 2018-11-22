@@ -12,9 +12,7 @@ export default {
             httpRequest({
                 method: 'POST',
                 url: api.TASK_LIST,
-                data: {
-                    uid: auth.getAuthUid()
-                },
+                data: {},
                 success: (result) => {
                     resolve(result.data);
                 }
@@ -27,7 +25,6 @@ export default {
                 method: 'POST',
                 url: api.ADD_TASK_LIST,
                 data: {
-                    uid: auth.getAuthUid(),
                     text: value
                 },
                 success: (result) => {
@@ -35,6 +32,48 @@ export default {
                     resolve(result.data);
                 }
             }, _this);
+        })
+    },
+    doCheckOutTaskMsg(_this) {
+        if (!_this.taskForm.title) {
+            message(_this, '任务名称不能为空!', 'warning');
+            return false;
+        }
+        if (!_this.taskForm.type) {
+            message(_this, '所属项目不能为空!', 'warning');
+            return false;
+        }
+        return true;
+    },
+    packTaskItemData(_this) {
+        const {
+            taskForm
+        } = _this;
+        let taskItemData = {
+            title: taskForm.title,
+            date: taskForm.date,
+            time: taskForm.time,
+            tag: taskForm.tag,
+            isComplete: taskForm.isComplete,
+            type: taskForm.type,
+            importance: taskForm.importance,
+            notes: taskForm.notes
+        }
+        return taskItemData;
+    },
+    doCreatTaskItemData(_this) {
+        return new Promise((resolve, reject) => {
+            let taskItemData = this.packTaskItemData(_this);
+            httpRequest({
+                method: 'POST',
+                url: api.CREAT_TASK_ITEM,
+                data: taskItemData,
+                success: (result) => {
+                    taskItemData._id = result.data._id;
+                    message(_this, result.errmsg, 'success');
+                    resolve(taskItemData);
+                }
+            }, _this, '提交中...');
         })
     }
 }

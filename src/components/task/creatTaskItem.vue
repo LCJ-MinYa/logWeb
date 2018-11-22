@@ -69,15 +69,15 @@
 			<el-form-item>
 				<el-button @click="closeRightDrawer" v-if="isEditTask">关闭</el-button>
 				<el-button @click="resetForm('taskForm')" v-else>重置</el-button>
-			    <el-button type="primary" v-if="isEditTask">修改任务</el-button>
-                <el-button type="primary" v-else>立即创建</el-button>
+			    <el-button type="primary" @click="doCreatTaskItem(true)" v-if="isEditTask">修改任务</el-button>
+                <el-button type="primary" @click="doCreatTaskItem" v-else>立即创建</el-button>
 			</el-form-item>
 		</el-form>
 	</div>
 </template>
 
 <script>
-import passwordController from '../../controller/password'
+import taskController from '../../controller/task'
 import { parseUrl, message } from '../../assets/utils/utils'
 import { mapGetters } from 'vuex'
 
@@ -117,6 +117,18 @@ export default {
         })
     },
   	methods:{
+        doCreatTaskItem(isModify){
+            if(!taskController.doCheckOutTaskMsg(this)){
+                return;
+            }
+            if(isModify){
+
+            }else{
+                taskController.doCreatTaskItemData(this).then(result => {
+                    console.log(result);
+                })
+            }
+        },
   		resetForm(formName){
             this.taskForm.date = '';
             this.taskForm.time = '';

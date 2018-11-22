@@ -61,8 +61,7 @@ export default {
 			password: _this.passwordForm.password,
 			type: _this.passwordForm.type,
 			importance: _this.passwordForm.importance,
-			notes: _this.passwordForm.notes,
-			uid: auth.getAuthUid()
+			notes: _this.passwordForm.notes
 		}
 		return passwordData;
 	},
@@ -102,7 +101,6 @@ export default {
 				method: 'POST',
 				url: api.PASSWORD_LIST,
 				data: {
-					uid: auth.getAuthUid(),
 					type: _this.activeType
 				},
 				success: (result) => {
@@ -118,7 +116,6 @@ export default {
 				method: 'POST',
 				url: api.DELETE_PASSWORD,
 				data: {
-					uid: auth.getAuthUid(),
 					_id: id
 				},
 				success: (result) => {
