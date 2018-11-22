@@ -1,7 +1,7 @@
 <template>
     <div class="password-list-box">
         <el-tabs :value="activeTaskItemType" type="card" @tab-click="handleClick">
-            <el-tab-pane v-for="(item, index) in tableArray" :label="item.label" :key="index" :name="item.name">
+            <el-tab-pane v-for="(item, index) in tableData[activeTaskListType]" :label="item.label" :key="index" :name="item.name">
                 <base-task-item-table :tableData="tableData[activeTaskListType][item.name].data" @handleEdit="handleEdit"></base-task-item-table>
             </el-tab-pane>
         </el-tabs>
@@ -17,15 +17,7 @@ export default {
     name: 'taskItem',
     data () {
         return {
-            tableArray: [{
-                label: '未完成',
-                name: 'uncomplete',
-                data: []
-            },{
-                label: '已完成',
-                name: 'complete',
-                data: []
-            }]
+
         }
     },
     components:{

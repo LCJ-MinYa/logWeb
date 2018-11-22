@@ -1,42 +1,33 @@
 <template>
 	<div class="creat-password-wrap">
-		<strong class="online-player" v-text="isEditPassword ? '编辑密码' : '新建密码'"></strong>
-		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
-			<el-form-item label="密码名称" label-width="100px" prop="title">
-				<el-input type="text" v-model="passwordForm.title" auto-complete="off"></el-input>
+		<strong class="online-player" v-text="isEditPassword ? '编辑任务' : '新建任务'"></strong>
+		<el-form ref="taskForm" :model="taskForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
+			<!-- 任务名称 -->
+            <el-form-item label="任务名称" label-width="100px" prop="title">
+				<el-input type="text" v-model="taskForm.title" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="产品网址" label-width="100px" prop="url">
-				<el-input type="text" v-model="passwordForm.url" auto-complete="off">
-					<el-select v-model="passwordForm.urlProtocol" slot="prepend" placeholder="请选择" class="el-select-width">
-      					<el-option
-							v-for="item in urlProtocolOptions"
-					      	:key="item.value"
-					      	:label="item.value"
-					      	:value="item.value"
-      					>
-      					</el-option>
-    				</el-select>
-					<el-select v-model="passwordForm.urlDomain" slot="append" placeholder="请选择" class="el-select-width">
-      					<el-option
-							v-for="item in urlDomainOptions"
-					      	:key="item.value"
-					      	:label="item.label"
-					      	:value="item.value"
-      					>
-      					</el-option>
-    				</el-select>
-				</el-input>
-			</el-form-item>
+
+            <!-- 任务截止时间 -->
+            <el-form-item label="截止时间">
+                <el-col :span="11">
+                    <el-date-picker type="date" placeholder="选择日期" id="taskFormDate" v-model="taskForm.date" style="width: 100%;"></el-date-picker>
+                </el-col>
+                <el-col class="line" :span="2">-</el-col>
+                <el-col :span="11">
+                    <el-time-picker type="fixed-time" placeholder="选择时间" id="taskFormTime" v-model="taskForm.time" style="width: 100%;"></el-time-picker>
+                </el-col>
+            </el-form-item>
+
 			<el-form-item label="登录账号" label-width="100px" prop="userName">
-				<el-input type="text" v-model="passwordForm.userName" auto-complete="off"></el-input>
+				<el-input type="text" v-model="taskForm.userName" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="登录密码" label-width="100px" prop="password">
-				<el-input type="password" v-model="passwordForm.password" auto-complete="off"></el-input>
+				<el-input type="password" v-model="taskForm.password" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item label="分类" label-width="100px" prop="type">
-				<el-select v-model="passwordForm.type" placeholder="请选择">
+				<el-select v-model="taskForm.type" placeholder="请选择">
 				    <el-option
-				    	v-for="item in typeOptions"
+				    	v-for="item in []"
 				      	:key="item.value"
 				      	:label="item.label"
 				      	:value="item.value">
@@ -45,18 +36,18 @@
 			</el-form-item>
 
 			<el-form-item label="重要性" prop="importance">
-			    <el-radio-group v-model="passwordForm.importance">
+			    <el-radio-group v-model="taskForm.importance">
 			      	<el-radio label="普通"></el-radio>
 			     	<el-radio label="重要"></el-radio>
 			     	<el-radio label="绝密"></el-radio>
 			    </el-radio-group>
 			</el-form-item>
 			<el-form-item label="备注" label-width="100px" prop="notes">
-				<el-input type="textarea" v-model="passwordForm.notes" auto-complete="off"></el-input>
+				<el-input type="textarea" v-model="taskForm.notes" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item>
 				<el-button @click="closeRightDrawer" v-if="isEditPassword">关闭</el-button>
-				<el-button @click="resetForm('passwordForm')" v-else>重置</el-button>
+				<el-button @click="resetForm('taskForm')" v-else>重置</el-button>
 			    <el-button type="primary" @click="doCheckOutPasswordMsg(true)" v-if="isEditPassword">修改密码</el-button>
                 <el-button type="primary" @click="doCheckOutPasswordMsg" v-else>立即创建</el-button>
 			</el-form-item>
@@ -74,54 +65,10 @@ export default {
   	props: ['isEditPassword'],
   	data() {
 	    return {
-	    	urlProtocolOptions: [{
-	    		value: 'http://'
-	    	},{
-	    		value: 'https://'
-	    	}],
-	    	urlDomainOptions: [{
-	    		value: '.com',
-	    		label: '.com'
-	    	},{
-	    		value: '.cn',
-	    		label: '.cn'
-	    	},{
-	    		value: '.net',
-	    		label: '.net'
-	    	},{
-	    		value: '.org',
-	    		label: '.org'
-	    	},{
-	    		value: '.com.cn',
-	    		label: '.com.cn'
-	    	},{
-	    		value: '.tv',
-	    		label: '.tv'
-	    	},{
-	    		value: '',
-	    		label: '无后缀'
-	    	}],
-	    	typeOptions: [{
-	        	value: 'social',
-	        	label: '社交'
-	      	}, {
-	        	value: 'shopping',
-	        	label: '购物'
-	      	}, {
-	        	value: 'life',
-	        	label: '生活'
-	      	}, {
-	        	value: 'work',
-	        	label: '工作'
-	      	}, {
-	        	value: 'other',
-	        	label: '其他'
-	      	}],
-	    	passwordForm:{
+	    	taskForm:{
 				title: '',
-		    	url: '',
-		    	urlProtocol: 'http://',
-		    	urlDomain: '.com',
+                date: '',
+                time: '',
 		    	userName: '',
 		    	password: '',
 		      	type: '',
@@ -141,17 +88,17 @@ export default {
             if(!this.isEditPassword){
                 return;
             }
-            this.passwordForm._id = editData.data._id;
-            this.passwordForm.title = editData.data.title;
-            this.passwordForm.userName = editData.data.userName;
-            this.passwordForm.password = editData.data.password;
-            this.passwordForm.type = editData.data.type;
-            this.passwordForm.importance = editData.data.importance;
-            this.passwordForm.notes = editData.data.notes;
+            this.taskForm._id = editData.data._id;
+            this.taskForm.title = editData.data.title;
+            this.taskForm.userName = editData.data.userName;
+            this.taskForm.password = editData.data.password;
+            this.taskForm.type = editData.data.type;
+            this.taskForm.importance = editData.data.importance;
+            this.taskForm.notes = editData.data.notes;
             let urlObj = parseUrl(editData.data.url, this.urlDomainOptions);
-            this.passwordForm.urlProtocol = urlObj.urlProtocol;
-            this.passwordForm.url = urlObj.url;
-            this.passwordForm.urlDomain = urlObj.urlDomain;
+            this.taskForm.urlProtocol = urlObj.urlProtocol;
+            this.taskForm.url = urlObj.url;
+            this.taskForm.urlDomain = urlObj.urlDomain;
         }
     },
   	methods:{
@@ -169,7 +116,7 @@ export default {
             passwordController.doCreatPassword(this)
             .then((passwordData)=>{
                 this.$emit('menuIndex', '密码列表', passwordData);
-                this.resetForm('passwordForm');
+                this.resetForm('taskForm');
             })
         },
         doCheckIsNeedChange(){
@@ -179,11 +126,11 @@ export default {
                     continue;
                 }
                 if(i == 'url'){
-                    let url = this.passwordForm.urlProtocol + this.passwordForm.url + this.passwordForm.urlDomain;
+                    let url = this.taskForm.urlProtocol + this.taskForm.url + this.taskForm.urlDomain;
                     if(this.editPasswordData.data[i] !== url){
                         shouldUpdate = true;
                     }
-                }else if (this.editPasswordData.data[i] !== this.passwordForm[i]) {
+                }else if (this.editPasswordData.data[i] !== this.taskForm[i]) {
                     shouldUpdate = true;
                 }
             }
@@ -211,13 +158,13 @@ export default {
                         this.$parent.$parent.getPasswordList();
                     }
                     this.closeRightDrawer();
-                    this.resetForm('passwordForm');
+                    this.resetForm('taskForm');
                 }, 10);
             })
         },
   		resetForm(formName){
-  			this.passwordForm.urlProtocol = this.urlProtocolOptions[0].value;
-  			this.passwordForm.urlDomain = this.urlDomainOptions[0].label;
+  			this.taskForm.urlProtocol = this.urlProtocolOptions[0].value;
+  			this.taskForm.urlDomain = this.urlDomainOptions[0].label;
   			this.$refs[formName].resetFields();
   		},
   		closeRightDrawer(){
@@ -247,5 +194,8 @@ export default {
 }
 .el-select-width{
 	width: 100px;
+}
+.line{
+    text-align: center;
 }
 </style>

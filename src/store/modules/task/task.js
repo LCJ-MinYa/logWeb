@@ -15,10 +15,14 @@ const state = {
     taskItem: {
         default: {
             uncomplete: {
+                name: 'uncomplete',
+                label: '未完成',
                 isRequest: false,
                 data: []
             },
             complete: {
+                name: 'complete',
+                label: '已完成',
                 isRequest: false,
                 data: []
             }
@@ -37,10 +41,14 @@ const mutations = {
         for (let i = 0; i < taskListData.length; i++) {
             state.taskItem[taskListData[i]._id] = {
                 uncomplete: {
+                    name: 'uncomplete',
+                    label: '未完成',
                     isRequest: false,
                     data: []
                 },
                 complete: {
+                    name: 'complete',
+                    label: '已完成',
                     isRequest: false,
                     data: []
                 }
