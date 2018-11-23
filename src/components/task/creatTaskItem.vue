@@ -23,15 +23,7 @@
             <!-- 任务标签 -->
             <el-form-item label="任务标签">
                 <el-checkbox-group v-model="taskForm.tag">
-                    <el-checkbox label="个人" name="tag"></el-checkbox>
-                    <el-checkbox label="公司" name="tag"></el-checkbox>
-                    <el-checkbox label="前端" name="tag"></el-checkbox>
-                    <el-checkbox label="后端" name="tag"></el-checkbox>
-                    <el-checkbox label="React Native" name="tag"></el-checkbox>
-                    <el-checkbox label="Node" name="tag"></el-checkbox>
-                    <el-checkbox label="Vue" name="tag"></el-checkbox>
-                    <el-checkbox label="iOS" name="tag"></el-checkbox>
-                    <el-checkbox label="Android" name="tag"></el-checkbox>
+                    <el-checkbox v-for="item in tagArray" :key="item._id" :label="item._id">{{item.name}}</el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
 
@@ -86,6 +78,34 @@ export default {
   	props: ['isEditTask'],
   	data() {
 	    return {
+            tagArray: [{
+                name: '个人',
+                _id: 0,
+            }, {
+                name: '公司',
+                _id: 1,
+            }, {
+                name: '前端',
+                _id: 2,
+            }, {
+                name: '后端',
+                _id: 3,
+            }, {
+                name: 'React Native',
+                _id: 4,
+            }, {
+                name: 'Node',
+                _id: 5,
+            }, {
+                name: 'Vue',
+                _id: 6,
+            }, {
+                name: 'iOS',
+                _id: 7,
+            }, {
+                name: 'Android',
+                _id: 8,
+            }],
 	    	taskForm:{
 				title: '',
                 date: '',
@@ -121,7 +141,7 @@ export default {
             if(!taskController.doCheckOutTaskMsg(this)){
                 return;
             }
-            if(isModify){
+            if(isModify == true){
 
             }else{
                 taskController.doCreatTaskItemData(this).then(result => {
