@@ -144,16 +144,23 @@ export default {
             if(isModify == true){
 
             }else{
-                taskController.doCreatTaskItemData(this).then(result => {
-                    console.log(result);
+                taskController.doCreatTaskItemData(this).then(taskItemData => {
+                    console.log(taskItemData);
+                    for (let i = 0; i < this.taskListData.length; i++) {
+                        if(this.taskListData[i]._id == taskItemData.type){
+                            this.$emit('menuIndex', this.taskListData[i].text, taskItemData);
+                            this.resetTaskForm();
+                            return;
+                        }
+                    }
                 })
             }
         },
-  		resetForm(formName){
+  		resetTaskForm(){
             this.taskForm.date = '';
             this.taskForm.time = '';
             this.taskForm.tag = [];
-  			this.$refs[formName].resetFields();
+  			this.$refs['taskForm'].resetFields();
   		},
   		closeRightDrawer(){
   			this.$emit('closeRightDrawer');

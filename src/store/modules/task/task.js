@@ -61,6 +61,11 @@ const mutations = {
     },
     [TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE](state, type) {
         state.activeTaskListType = type;
+    },
+    [TYPES.UPDATE_ALL_ACTIVE_TASK_TYPE](state, taskItemData) {
+        console.log(taskItemData);
+        state.activeTaskItemType = taskItemData.isComplete ? 'complete' : 'uncomplete';
+        state.activeTaskListType = taskItemData._id;
     }
 }
 

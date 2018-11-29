@@ -51,12 +51,24 @@ export default {
         })
     },
     methods:{
-        menuIndex(index){
+        menuIndex(index, taskItemData){
+            console.log(index, taskItemData);
             this.activeMenu = index;
-            for (let i = 0; i < this.taskListData.length; i++) {
-                if(this.taskListData[i].text == index){
-                    this.$store.dispatch('UpdateActiveTaskListType', this.taskListData[i]._id);
-                    return;
+            if(!taskItemData){
+                //新建任务项目成功后的切换
+                for (let i = 0; i < this.taskListData.length; i++) {
+                    if(this.taskListData[i].text == index){
+                        this.$store.dispatch('UpdateActiveTaskListType', this.taskListData[i]._id);
+                        return;
+                    }
+                }
+            }else{
+                //创建任务item成功后的切换
+                this.$store.dispatch('UpdateAllActiveTaskType', taskItemData);
+                if(this.$store.state.task.taskItem[taskItemData._id]['uncomplete'].isRequest){
+
+                }else{
+                    
                 }
             }
         },
