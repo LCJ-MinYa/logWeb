@@ -14,4 +14,5 @@ export default {
     TASK_LIST: '/task/taskList',
     ADD_TASK_LIST: '/task/addTaskList',
     CREAT_TASK_ITEM: '/task/creatTaskItem',
+    TASk_ITEM: '/task/taskItem',
 }

@@ -39,7 +39,13 @@ export default {
         },
         handleEdit(){
 
-        }
+        },
+        getTaskItem(){
+            taskController.getTaskItemData(this)
+            .then( result =>{
+                //this.$store.dispatch('AddToPasswordList', result);
+            })
+        },
     }
 }
 </script>

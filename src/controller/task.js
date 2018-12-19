@@ -10,7 +10,7 @@ export default {
     getTaskListData(_this) {
         return new Promise((resolve, reject) => {
             httpRequest({
-                method: 'POST',
+                method: 'GET',
                 url: api.TASK_LIST,
                 data: {},
                 success: (result) => {
@@ -74,6 +74,23 @@ export default {
                     resolve(taskItemData);
                 }
             }, _this, '提交中...');
+        })
+    },
+    getTaskItemData(_this){
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'GET',
+                url: api.TASk_ITEM,
+                data: {
+                    itemType: _this.activeTaskItemType,
+                    listType: _this.activeTaskListType
+                },
+                success: (result) => {
+                    console.log(result);
+                    result.type = _this.activeType;
+                    resolve(result);
+                }
+            }, _this);
         })
     }
 }

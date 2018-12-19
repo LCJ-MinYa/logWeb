@@ -9,7 +9,7 @@
             <section class="panel-c-c">
                 <task-list v-show="activeMenu == '任务列表'" @menuIndex="menuIndex" :taskListData="taskListData"></task-list>
                 <creat-task-item @menuIndex="menuIndex" v-show="activeMenu == '新建任务'"></creat-task-item>
-                <task-item v-show="activeMenu != '任务列表' && activeMenu != '新建任务'" @menuIndex="menuIndex"></task-item>
+                <task-item ref="taskItemRef" v-show="activeMenu != '任务列表' && activeMenu != '新建任务'" @menuIndex="menuIndex"></task-item>
             </section>
         </el-col>
 
@@ -48,6 +48,8 @@ export default {
     computed: {
         ...mapGetters({
             taskListData: 'taskList',
+            activeTaskItemType: 'activeTaskItemType',
+            activeTaskListType: 'activeTaskListType',
         })
     },
     methods:{
@@ -55,20 +57,24 @@ export default {
             console.log(index, taskItemData);
             this.activeMenu = index;
             if(!taskItemData){
-                //新建任务项目成功后的切换
+                //新建任务项目和点击左侧列表后的切换
                 for (let i = 0; i < this.taskListData.length; i++) {
                     if(this.taskListData[i].text == index){
                         this.$store.dispatch('UpdateActiveTaskListType', this.taskListData[i]._id);
+                        if(this.activeTaskListType != 'default' && !this.$store.state.task.taskItem[this.activeTaskListType][this.activeTaskItemType].isRequest){
+                            this.$refs['taskItemRef'].getTaskItem();
+                        }
                         return;
                     }
                 }
             }else{
                 //创建任务item成功后的切换
                 this.$store.dispatch('UpdateAllActiveTaskType', taskItemData);
-                if(this.$store.state.task.taskItem[taskItemData._id]['uncomplete'].isRequest){
-
+                if(this.$store.state.task.taskItem[this.activeTaskListType][this.activeTaskItemType].isRequest){
+                    //该任务类型请求过数据,直接push
                 }else{
-                    
+                    //该任务类型未请求过数据,调用子组件方法请求数据，不需要push
+                    this.$refs['taskItemRef'].getTaskItem();
                 }
             }
         },
