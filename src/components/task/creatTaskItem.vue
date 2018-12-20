@@ -125,7 +125,7 @@ export default {
                 },
                 type: {
                     required: true,
-                    message: '请选择活动区域',
+                    message: '请选择所属项目',
                     trigger: 'change'
                 }
             }
@@ -145,7 +145,6 @@ export default {
 
             }else{
                 taskController.doCreatTaskItemData(this).then(taskItemData => {
-                    console.log(taskItemData);
                     for (let i = 0; i < this.taskListData.length; i++) {
                         if(this.taskListData[i]._id == taskItemData.type){
                             this.$emit('menuIndex', this.taskListData[i].text, taskItemData);

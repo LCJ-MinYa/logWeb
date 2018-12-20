@@ -3,8 +3,8 @@ import * as TYPES from './taskTypes';
 const taskActions = {
     AddTaskList({
         commit
-    }, taskListData) {
-        commit(TYPES.ADD_TASK_LIST, taskListData);
+    }, taskListArrayData) {
+        commit(TYPES.ADD_TASK_LIST, taskListArrayData);
     },
     UpdateActiveTaskListType({
         commit
@@ -13,9 +13,14 @@ const taskActions = {
     },
     UpdateAllActiveTaskType({
         commit
-    }, type) {
+    }, taskItemData) {
         commit(TYPES.UPDATE_ALL_ACTIVE_TASK_TYPE, taskItemData);
-    }
+    },
+    AddTaskItem({
+        commit
+    }, taskItemArrayData) {
+        commit(TYPES.ADD_TASK_ITEM, taskItemArrayData);
+    },
 }
 
 export default taskActions;

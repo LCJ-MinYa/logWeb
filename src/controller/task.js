@@ -76,7 +76,7 @@ export default {
             }, _this, '提交中...');
         })
     },
-    getTaskItemData(_this){
+    getTaskItemData(_this) {
         return new Promise((resolve, reject) => {
             httpRequest({
                 method: 'GET',
@@ -86,9 +86,7 @@ export default {
                     listType: _this.activeTaskListType
                 },
                 success: (result) => {
-                    console.log(result);
-                    result.type = _this.activeType;
-                    resolve(result);
+                    resolve(result.data);
                 }
             }, _this);
         })

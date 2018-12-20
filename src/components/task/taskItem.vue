@@ -1,8 +1,8 @@
 <template>
     <div class="password-list-box">
         <el-tabs :value="activeTaskItemType" type="card" @tab-click="handleClick">
-            <el-tab-pane v-for="(item, index) in tableData[activeTaskListType]" :label="item.label" :key="index" :name="item.name">
-                <base-task-item-table :tableData="tableData[activeTaskListType][item.name].data" @handleEdit="handleEdit"></base-task-item-table>
+            <el-tab-pane v-for="(item, index) in taskItemData" :label="item.label" :key="index" :name="item.name">
+                <base-task-item-table :tableData="taskItemData[item.name].data" @handleEdit="handleEdit"></base-task-item-table>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -23,12 +23,9 @@ export default {
     components:{
         'baseTaskItemTable': baseTaskItemTable,
     },
-    mounted(){
-
-    },
     computed: {
         ...mapGetters({
-            tableData: 'taskItem',
+            taskItemData: 'taskItemData',
             activeTaskItemType: 'activeTaskItemType',
             activeTaskListType: 'activeTaskListType',
         })
@@ -42,8 +39,8 @@ export default {
         },
         getTaskItem(){
             taskController.getTaskItemData(this)
-            .then( result =>{
-                //this.$store.dispatch('AddToPasswordList', result);
+            .then(result =>{
+                this.$store.dispatch('AddTaskItem', result);
             })
         },
     }

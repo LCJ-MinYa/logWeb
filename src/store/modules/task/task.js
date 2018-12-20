@@ -37,9 +37,9 @@ const state = {
 }
 
 const mutations = {
-    [TYPES.ADD_TASK_LIST](state, taskListData) {
-        for (let i = 0; i < taskListData.length; i++) {
-            state.taskItem[taskListData[i]._id] = {
+    [TYPES.ADD_TASK_LIST](state, taskListArrayData) {
+        for (let i = 0; i < taskListArrayData.length; i++) {
+            state.taskItem[taskListArrayData[i]._id] = {
                 uncomplete: {
                     name: 'uncomplete',
                     label: '未完成',
@@ -53,19 +53,24 @@ const mutations = {
                     data: []
                 }
             }
-            if (!taskListData[i].icon) {
-                taskListData[i].icon = 'icon-yuandian';
+            if (!taskListArrayData[i].icon) {
+                taskListArrayData[i].icon = 'icon-yuandian';
             }
         }
-        state.taskList = state.taskList.concat(taskListData);
+        state.taskList = state.taskList.concat(taskListArrayData);
     },
     [TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE](state, type) {
         state.activeTaskListType = type;
     },
     [TYPES.UPDATE_ALL_ACTIVE_TASK_TYPE](state, taskItemData) {
-        console.log(taskItemData);
         state.activeTaskItemType = taskItemData.isComplete ? 'complete' : 'uncomplete';
-        state.activeTaskListType = taskItemData._id;
+        state.activeTaskListType = taskItemData.type;
+    },
+    [TYPES.ADD_TASK_ITEM](state, taskItemArrayData) {
+        let item = state.taskItem[state.activeTaskListType][state.activeTaskItemType];
+        item.isRequest = true;
+        item.data = taskItemArrayData;
+        state.taskItem = JSON.parse(JSON.stringify(state.taskItem));
     }
 }
 

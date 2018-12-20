@@ -64,7 +64,11 @@ export default function httpRequest(options, _this, loadingText, customError) {
 	if (typeof options.data == 'object') {
 		var query = '';
 		for (var key in options.data) {
-			query += key + '=' + options.data[key] + '&';
+			if (typeof options.data[key] == 'object') {
+				query += key + '=' + JSON.stringify(options.data[key]) + '&';
+			} else {
+				query += key + '=' + options.data[key] + '&';
+			}
 		}
 		options.data = query.replace(/&$/, '');
 	}
