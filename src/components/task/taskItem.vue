@@ -41,6 +41,7 @@ export default {
             taskController.getTaskItemData(this)
             .then(result =>{
                 this.$store.dispatch('AddTaskItem', result);
+                console.log(1);
             })
         },
     }
