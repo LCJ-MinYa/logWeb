@@ -33,7 +33,35 @@ const state = {
     editTaskItemData: {
         index: 0,
         data: {}
-    }
+    },
+    tagArray: [{
+        name: '个人',
+        _id: 0,
+    }, {
+        name: '公司',
+        _id: 1,
+    }, {
+        name: '前端',
+        _id: 2,
+    }, {
+        name: '后端',
+        _id: 3,
+    }, {
+        name: 'React Native',
+        _id: 4,
+    }, {
+        name: 'Node',
+        _id: 5,
+    }, {
+        name: 'Vue',
+        _id: 6,
+    }, {
+        name: 'iOS',
+        _id: 7,
+    }, {
+        name: 'Android',
+        _id: 8,
+    }]
 }
 
 const mutations = {
@@ -44,13 +72,15 @@ const mutations = {
                     name: 'uncomplete',
                     label: '未完成',
                     isRequest: false,
-                    data: []
+                    data: [],
+                    text: taskListArrayData[i].text + 'uncomplete',
                 },
                 complete: {
                     name: 'complete',
                     label: '已完成',
                     isRequest: false,
-                    data: []
+                    data: [],
+                    text: taskListArrayData[i].text + 'complete',
                 }
             }
             if (!taskListArrayData[i].icon) {

@@ -18,6 +18,9 @@ const taskGetters = {
     },
     editTaskItemData(state) {
         return state.editTaskItemData;
+    },
+    tagArray(state) {
+        return state.tagArray;
     }
 }
 

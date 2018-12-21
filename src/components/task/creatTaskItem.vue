@@ -46,9 +46,7 @@
             <!-- 优先级 -->
 			<el-form-item label="优先级" prop="importance">
 			    <el-radio-group v-model="taskForm.importance">
-			      	<el-radio label="普通"></el-radio>
-			     	<el-radio label="优先"></el-radio>
-			     	<el-radio label="紧急"></el-radio>
+                    <el-radio v-for="item in importanceArray" :key="item.text" :label="item.text"></el-radio>
 			    </el-radio-group>
 			</el-form-item>
 
@@ -72,40 +70,16 @@
 import taskController from '../../controller/task'
 import { parseUrl, message } from '../../assets/utils/utils'
 import { mapGetters } from 'vuex'
+import {
+    importanceArray
+} from '../../config/taskConfig';
 
 export default {
   	name: 'creatPassword',
   	props: ['isEditTask'],
   	data() {
 	    return {
-            tagArray: [{
-                name: '个人',
-                _id: 0,
-            }, {
-                name: '公司',
-                _id: 1,
-            }, {
-                name: '前端',
-                _id: 2,
-            }, {
-                name: '后端',
-                _id: 3,
-            }, {
-                name: 'React Native',
-                _id: 4,
-            }, {
-                name: 'Node',
-                _id: 5,
-            }, {
-                name: 'Vue',
-                _id: 6,
-            }, {
-                name: 'iOS',
-                _id: 7,
-            }, {
-                name: 'Android',
-                _id: 8,
-            }],
+            importanceArray: importanceArray,
 	    	taskForm:{
 				title: '',
                 date: '',
@@ -113,7 +87,7 @@ export default {
                 tag: [],
                 isComplete: false,
 		      	type: '',
-		      	importance: '普通',
+		      	importance: importanceArray[0].text,
 		      	notes: '',
                 _id: ''
 	    	},
@@ -134,6 +108,7 @@ export default {
     computed: {
         ...mapGetters({
             taskListData: 'taskList',
+            tagArray: 'tagArray'
         })
     },
   	methods:{

@@ -1,7 +1,7 @@
 <template>
     <div class="password-list-box">
         <el-tabs :value="activeTaskItemType" type="card" @tab-click="handleClick">
-            <el-tab-pane v-for="(item, index) in taskItemData" :label="item.label" :key="index" :name="item.name">
+            <el-tab-pane v-for="(item, index) in taskItemData" :label="item.label" :key="item.text" :name="item.name">
                 <base-task-item-table :tableData="taskItemData[item.name].data" @handleEdit="handleEdit"></base-task-item-table>
             </el-tab-pane>
         </el-tabs>
