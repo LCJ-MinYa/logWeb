@@ -54,7 +54,6 @@ export default {
     },
     methods:{
         menuIndex(index, taskItemData){
-            console.log(index, taskItemData);
             this.activeMenu = index;
             if(!taskItemData){
                 //新建任务项目和点击左侧列表后的切换

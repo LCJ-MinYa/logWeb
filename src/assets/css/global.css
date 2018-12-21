@@ -14,6 +14,11 @@ html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,
 	/*white-space: nowrap!important;*/
 }
 
+.el-form-item__label{
+    width: 90px;
+    color: #99a9bf!important;
+}
+
 /*搜索导航页面*/
 .search-input input.el-input__inner{
     height: 50px!important;

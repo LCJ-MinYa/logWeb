@@ -5,12 +5,24 @@
             <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
                     <el-form-item label="任务标签">
-                        <span>{{ props.row.tag }}</span>
+                        <span>{{ tagText(props.row.tag) }}</span>
+                    </el-form-item>
+                    <el-form-item label="任务描述">
+                        <span>{{ props.row.notes || '无' }}</span>
                     </el-form-item>
                 </el-form>
             </template>
         </el-table-column>
         <el-table-column prop="title" label="任务名称"></el-table-column>
+        <el-table-column
+            label="截止时间"
+            width="280"
+        >
+            <template slot-scope="scope">
+                <i class="el-icon-time"></i>
+                <span style="margin-left: 10px">{{taskTimeText(scope.row)}}</span>
+            </template>
+        </el-table-column>
         <el-table-column
             prop="importance"
             label="优先级"
@@ -20,7 +32,7 @@
             filter-placement="bottom-end"
         >
             <template slot-scope="scope">
-                <el-tag :type="importanceTagType(scope.row.importance)" disable-transitions>{{scope.row.importance}}</el-tag>
+                <el-tag :type="importanceTagType(scope.row.importance)" disable-transitions>{{scope.row.importance || '无'}}</el-tag>
             </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -76,8 +88,42 @@ export default {
                 default:
                     return 'success';
             }
+        },
+        taskTimeText(data){
+            if(data.date){
+                return data.date + ' ' + data.time;
+            }else{
+                return '无';
+            }
+        },
+        tagText(tagData){
+            let tagText = '';
+            for (let i = 0; i < tagData.length; i++) {
+                for (let j = 0; j < this.tagArray.length; j++) {
+                    if(tagData[i] == this.tagArray[j]._id){
+                        if(i == tagData.length - 1){
+                            tagText += this.tagArray[j].name;
+                        }else{
+                            tagText += this.tagArray[j].name + '，';
+                        }
+                    }
+                }
+            }
+            return tagText || '无';
         }
     }
 }
 
 </script>
+
+<style lang="css" scoped>
+.demo-table-expand {
+    font-size: 0;
+}
+.demo-table-expand .el-form-item {
+    margin-right: 60px;
+    margin-bottom: 0;
+    margin-left: 60px;
+    width: 100%;
+}
+</style>

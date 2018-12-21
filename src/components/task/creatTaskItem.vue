@@ -30,11 +30,27 @@
             <!-- 任务截止时间 -->
             <el-form-item label="截止时间">
                 <el-col :span="11">
-                    <el-date-picker type="date" placeholder="选择日期" id="taskFormDate" v-model="taskForm.date" style="width: 100%;"></el-date-picker>
+                    <el-date-picker
+                        type="date"
+                        value-format="yyyy-MM-dd"
+                        placeholder="选择日期"
+                        id="taskFormDate"
+                        v-model="taskForm.date"
+                        style="width: 100%;"
+                    >
+                    </el-date-picker>
                 </el-col>
                 <el-col class="line" :span="2">-</el-col>
                 <el-col :span="11">
-                    <el-time-picker type="fixed-time" placeholder="选择时间" id="taskFormTime" v-model="taskForm.time" style="width: 100%;"></el-time-picker>
+                    <el-time-picker
+                        type="fixed-time"
+                        value-format="HH:mm:ss"
+                        placeholder="选择时间"
+                        id="taskFormTime"
+                        v-model="taskForm.time"
+                        style="width: 100%;"
+                    >
+                    </el-time-picker>
                 </el-col>
             </el-form-item>
 
@@ -82,8 +98,8 @@ export default {
             importanceArray: importanceArray,
 	    	taskForm:{
 				title: '',
-                date: '',
-                time: '',
+                date: new Date(),
+                time: '20:00:00',
                 tag: [],
                 isComplete: false,
 		      	type: '',
