@@ -35,7 +35,7 @@
                 <el-tag :type="importanceTagType(scope.row.importance)" disable-transitions>{{scope.row.importance || '无'}}</el-tag>
             </template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" width="150">
+        <el-table-column label="操作" width="150">
             <template slot-scope="scope">
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
