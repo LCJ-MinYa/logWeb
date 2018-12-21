@@ -32,7 +32,13 @@ export default {
     },
     methods:{
         handleClick(tab){
-
+            this.$store.dispatch('UpdateActiveTaskItemType', tab.name);
+            this.isNeedToRequest(tab.name);
+        },
+        isNeedToRequest(name){
+            if(!this.taskItemData[name].isRequest){
+                this.getTaskItem();
+            }
         },
         handleEdit(){
 
@@ -41,7 +47,6 @@ export default {
             taskController.getTaskItemData(this)
             .then(result =>{
                 this.$store.dispatch('AddTaskItem', result);
-                console.log(1);
             })
         },
     }

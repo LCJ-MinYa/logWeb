@@ -57,10 +57,14 @@ const mutations = {
                 taskListArrayData[i].icon = 'icon-yuandian';
             }
         }
+        state.taskItem = JSON.parse(JSON.stringify(state.taskItem));
         state.taskList = state.taskList.concat(taskListArrayData);
     },
     [TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE](state, type) {
         state.activeTaskListType = type;
+    },
+    [TYPES.UPDATE_ACTIVE_TASK_ITEM_TYPE](state, type) {
+        state.activeTaskItemType = type;
     },
     [TYPES.UPDATE_ALL_ACTIVE_TASK_TYPE](state, taskItemData) {
         state.activeTaskItemType = taskItemData.isComplete ? 'complete' : 'uncomplete';
@@ -70,7 +74,6 @@ const mutations = {
         let item = state.taskItem[state.activeTaskListType][state.activeTaskItemType];
         item.isRequest = true;
         item.data = taskItemArrayData;
-        state.taskItem = JSON.parse(JSON.stringify(state.taskItem));
     }
 }
 

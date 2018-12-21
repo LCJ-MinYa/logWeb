@@ -10,9 +10,6 @@ const taskGetters = {
     taskItemData(state) {
         return state.taskItem[state.activeTaskListType];
     },
-    taskItemArrayData(state) {
-        return state.taskItem[state.activeTaskListType][state.activeTaskItemType].data;
-    },
     activeTaskListType(state) {
         return state.activeTaskListType;
     },

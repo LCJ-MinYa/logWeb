@@ -11,6 +11,11 @@ const taskActions = {
     }, type) {
         commit(TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE, type);
     },
+    UpdateActiveTaskItemType({
+        commit
+    }, type) {
+        commit(TYPES.UPDATE_ACTIVE_TASK_ITEM_TYPE, type);
+    },
     UpdateAllActiveTaskType({
         commit
     }, taskItemData) {

@@ -1,5 +1,5 @@
 <template>
-    <el-table ref="taskItemTable" :data="taskItemArrayData" slot="empty" style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table ref="taskItemTable" :data="tableData" slot="empty" style="width: 100%" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column prop="title" label="名称"></el-table-column>
         <el-table-column fixed="right" label="操作" width="150">
@@ -21,11 +21,6 @@ export default {
         return {
             multipleSelection: []
         }
-    },
-    computed: {
-        ...mapGetters({
-            taskItemArrayData: 'taskItemArrayData',
-        })
     },
     methods: {
         handleEdit(index, row){
