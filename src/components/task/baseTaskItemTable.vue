@@ -7,7 +7,7 @@
                     <el-form-item label="任务标签">
                         <span>{{ tagText(props.row.tag) }}</span>
                     </el-form-item>
-                    <el-form-item label="任务描述">
+                    <el-form-item label="任务描述" class="task-detail">
                         <span>{{ props.row.notes || '无' }}</span>
                     </el-form-item>
                 </el-form>
@@ -35,8 +35,9 @@
                 <el-tag :type="importanceTagType(scope.row.importance)" disable-transitions>{{scope.row.importance || '无'}}</el-tag>
             </template>
         </el-table-column>
-        <el-table-column label="操作" width="150">
+        <el-table-column label="操作" width="220">
             <template slot-scope="scope">
+                <el-button size="mini" type="success" @click="handleBegin(scope.$index, scope.row)">开始</el-button>
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
@@ -65,6 +66,9 @@ export default {
         })
     },
     methods: {
+        handleBegin(index, row){
+
+        },
         handleEdit(index, row){
             console.log(this);
         },
