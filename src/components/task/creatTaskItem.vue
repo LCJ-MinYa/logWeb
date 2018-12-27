@@ -68,7 +68,7 @@
 
             <!-- 任务描述 -->
 			<el-form-item label="任务描述" label-width="100px" prop="notes">
-				<el-input type="textarea" v-model="taskForm.notes" auto-complete="off"></el-input>
+				<el-input type="textarea" :rows="4" v-model="taskForm.notes" auto-complete="off"></el-input>
 			</el-form-item>
 
             <!-- 操作按钮 -->

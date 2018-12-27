@@ -8,7 +8,7 @@
                         <span>{{ tagText(props.row.tag) }}</span>
                     </el-form-item>
                     <el-form-item label="任务描述" class="task-detail">
-                        <span>{{ props.row.notes || '无' }}</span>
+                        <span v-html="notesText(props.row.notes) || '无'"></span>
                     </el-form-item>
                 </el-form>
             </template>
@@ -114,6 +114,10 @@ export default {
                 }
             }
             return tagText || '无';
+        },
+        notesText(notes){
+            let newNotesText = notes.replace(/\n/g, '<br/>');
+            return newNotesText;
         }
     }
 }
