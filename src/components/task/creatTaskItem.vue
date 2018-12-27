@@ -89,7 +89,6 @@ import { mapGetters } from 'vuex'
 import {
     importanceArray
 } from '../../config/taskConfig';
-import moment from 'moment';
 
 export default {
   	name: 'creatPassword',
@@ -99,8 +98,8 @@ export default {
             importanceArray: importanceArray,
 	    	taskForm:{
 				title: '',
-                date: moment().add(1, 'd').format('YYYY-MM-DD'),
-                time: '20:00:00',
+                date: '',
+                time: '',
                 tag: [],
                 isComplete: false,
 		      	type: '',

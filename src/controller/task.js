@@ -70,6 +70,10 @@ export default {
                 data: taskItemData,
                 success: (result) => {
                     taskItemData._id = result.data._id;
+                    taskItemData.beginDate = result.data.beginDate;
+                    taskItemData.endDate = result.data.endDate;
+                    taskItemData.totalTime = result.data.totalTime;
+                    taskItemData.completeDate = result.data.completeDate;
                     message(_this, result.errmsg, 'success');
                     resolve(taskItemData);
                 }

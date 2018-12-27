@@ -25,7 +25,7 @@ const taskActions = {
         commit
     }, taskItemArrayData) {
         commit(TYPES.ADD_TASK_ITEM, taskItemArrayData);
-    },
+    }
 }
 
 export default taskActions;

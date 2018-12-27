@@ -4,8 +4,19 @@
         <el-table-column type="expand">
             <template slot-scope="props">
                 <el-form label-position="left" inline class="demo-table-expand">
+                    <el-form-item label="开始时间" class="task-msg">
+                        <span v-if="props.row.beginDate.length == 0">无</span>
+                        <span v-else v-for="(item, index) in props.row.beginDate" :key="index">{{item}}</span>
+                    </el-form-item>
+                    <el-form-item label="停止时间" class="task-msg">
+                        <span v-if="props.row.endDate.length == 0">无</span>
+                        <span v-else v-for="(item, index) in props.row.endDate" :key="index">{{item}}</span>
+                    </el-form-item>
                     <el-form-item label="任务标签">
                         <span>{{ tagText(props.row.tag) }}</span>
+                    </el-form-item>
+                    <el-form-item label="完成时间">
+                        <span>{{ props.row.completeDate || '无' }}</span>
                     </el-form-item>
                     <el-form-item label="任务描述" class="task-detail">
                         <span v-html="notesText(props.row.notes) || '无'"></span>
@@ -14,6 +25,11 @@
             </template>
         </el-table-column>
         <el-table-column prop="title" label="任务名称"></el-table-column>
+        <el-table-column label="任务耗时">
+            <template slot-scope="scope">
+                <span>{{scope.row.totalTime + '小时'}}</span>
+            </template>
+        </el-table-column>
         <el-table-column
             label="截止时间"
             width="280"
@@ -128,9 +144,11 @@ export default {
     font-size: 0;
 }
 .demo-table-expand .el-form-item {
-    margin-right: 60px;
     margin-bottom: 0;
     margin-left: 60px;
-    width: 100%;
+    width: 40%;
+}
+.task-detail{
+    width: 95%!important;
 }
 </style>

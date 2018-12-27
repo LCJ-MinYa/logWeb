@@ -102,8 +102,12 @@ const mutations = {
     },
     [TYPES.ADD_TASK_ITEM](state, taskItemArrayData) {
         let item = state.taskItem[state.activeTaskListType][state.activeTaskItemType];
-        item.isRequest = true;
-        item.data = taskItemArrayData;
+        if (Array.isArray(taskItemArrayData)) {
+            item.isRequest = true;
+            item.data = item.data.concat(taskItemArrayData);
+        } else {
+            item.data.push(taskItemArrayData);
+        }
     }
 }
 

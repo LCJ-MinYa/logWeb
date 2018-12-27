@@ -20,7 +20,7 @@ html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,
     width:-moz-calc(100% - 90px);
     width:calc(100% - 90px);
 }
-.task-detail > .el-form-item__content > span{
+.task-detail > .el-form-item__content > span, .task-msg > .el-form-item__content > span{
     display: block;
 }
 .el-form-item__label{

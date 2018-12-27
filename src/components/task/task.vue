@@ -71,6 +71,7 @@ export default {
                 this.$store.dispatch('UpdateAllActiveTaskType', taskItemData);
                 if(this.$store.state.task.taskItem[this.activeTaskListType][this.activeTaskItemType].isRequest){
                     //该任务类型请求过数据,直接push
+                    this.$store.dispatch('AddTaskItem', taskItemData);
                 }else{
                     //该任务类型未请求过数据,调用子组件方法请求数据，不需要push
                     this.$refs['taskItemRef'].getTaskItem();
