@@ -10,16 +10,22 @@
 				<li>设置</li>
 			</ul>
 		</div>
+		<copyright></copyright>
 	</div>
 </template>
 
 <script>
+import copyright from '../common/copyright'
+
 export default {
     name: 'Index',
     data () {
         return {
         }
     },
+  	components:{
+  		'copyright': copyright
+  	},
     methods:{
     	goPage(name){
 			this.$router.push({
