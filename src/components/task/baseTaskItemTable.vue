@@ -53,7 +53,7 @@
         </el-table-column>
         <el-table-column label="操作" width="220">
             <template slot-scope="scope">
-                <el-button size="mini" type="success" @click="handleBegin(scope.$index, scope.row)">开始</el-button>
+                <el-button size="mini" :type="taskTypeStatus(scope.row)" @click="handleBegin(scope.$index, scope.row)">{{ taskTextStatus(scope.row) }}</el-button>
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
@@ -65,7 +65,8 @@
 import {
     importanceArray
 } from '../../config/taskConfig';
-import { mapGetters } from 'vuex'
+import taskController from '../../controller/task';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'baseTaskItemTable',
@@ -83,7 +84,16 @@ export default {
     },
     methods: {
         handleBegin(index, row){
-
+            const status = this.taskStatus(row);
+            if(status){
+                taskController.beginTask(this, row).then(result =>{
+                    this.$store.dispatch('UpdateTaskItem', result);
+                })
+            }else{
+                taskController.endTask(this, row).then(result =>{
+                    this.$store.dispatch('UpdateTaskItem', result);
+                })
+            }
         },
         handleEdit(index, row){
             console.log(this);
@@ -110,11 +120,7 @@ export default {
             }
         },
         taskTimeText(data){
-            if(data.date){
-                return data.date + ' ' + data.time;
-            }else{
-                return '无';
-            }
+            return data.date ? data.date + ' ' + data.time : '无';
         },
         tagText(tagData){
             let tagText = '';
@@ -134,6 +140,17 @@ export default {
         notesText(notes){
             let newNotesText = notes.replace(/\n/g, '<br/>');
             return newNotesText;
+        },
+        taskStatus(data){
+            return data.beginDate.length === data.endDate.length ? true : false;
+        },
+        taskTypeStatus(data){
+            const status = this.taskStatus(data);
+            return status ? 'success' : 'warning';
+        },
+        taskTextStatus(data){
+            const status = this.taskStatus(data);
+            return status ? '开始' : '停止';
         }
     }
 }

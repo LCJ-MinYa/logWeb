@@ -25,6 +25,11 @@ const taskActions = {
         commit
     }, taskItemArrayData) {
         commit(TYPES.ADD_TASK_ITEM, taskItemArrayData);
+    },
+    UpdateTaskItem({
+        commit
+    }, taskItemData) {
+        commit(TYPES.UPDATE_TASK_ITEM, taskItemData);
     }
 }
 

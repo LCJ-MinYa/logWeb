@@ -15,4 +15,6 @@ export default {
     ADD_TASK_LIST: '/task/addTaskList',
     CREAT_TASK_ITEM: '/task/creatTaskItem',
     TASk_ITEM: '/task/taskItem',
+    BEGIN_TASk: '/task/beginTask',
+    END_TASk: '/task/endTask',
 }

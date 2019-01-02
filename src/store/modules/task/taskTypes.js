@@ -12,3 +12,6 @@ export const UPDATE_ACTIVE_TASK_ITEM_TYPE = 'UPDATE_ACTIVE_TASK_ITEM_TYPE';
 
 //更改当前选中的任务项目名称和当前选中项目类型名称
 export const UPDATE_ALL_ACTIVE_TASK_TYPE = 'UPDATE_ALL_ACTIVE_TASK_TYPE';
+
+//更新当前传递的任务详情数据
+export const UPDATE_TASK_ITEM = 'UPDATE_TASK_ITEM';

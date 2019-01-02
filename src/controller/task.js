@@ -94,5 +94,37 @@ export default {
                 }
             }, _this);
         })
+    },
+    beginTask(_this, taskItemData) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.BEGIN_TASk,
+                data: {
+                    type: taskItemData.type,
+                    isComplete: taskItemData.isComplete,
+                    _id: taskItemData._id
+                },
+                success: (result) => {
+                    resolve(result.data);
+                }
+            }, _this);
+        })
+    },
+    endTask(_this, taskItemData) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.END_TASk,
+                data: {
+                    type: taskItemData.type,
+                    isComplete: taskItemData.isComplete,
+                    _id: taskItemData._id
+                },
+                success: (result) => {
+                    resolve(result.data);
+                }
+            }, _this);
+        })
     }
 }

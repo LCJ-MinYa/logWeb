@@ -108,6 +108,14 @@ const mutations = {
         } else {
             item.data.push(taskItemArrayData);
         }
+    },
+    [TYPES.UPDATE_TASK_ITEM](state, taskItemData) {
+        let item = state.taskItem[state.activeTaskListType][state.activeTaskItemType];
+        for (let i = 0; i < item.data.length; i++) {
+            if (item.data[i]._id == taskItemData._id) {
+                item.data.splice(i, 1, taskItemData);
+            }
+        }
     }
 }
 
