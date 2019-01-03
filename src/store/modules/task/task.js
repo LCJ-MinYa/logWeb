@@ -116,6 +116,20 @@ const mutations = {
                 item.data.splice(i, 1, taskItemData);
             }
         }
+    },
+    [TYPES.UPDATE_COMPLETE_TASK_ITEM](state, taskItemArrayData) {
+        let item = state.taskItem[state.activeTaskListType]['complete'];
+        item.data = item.data.concat(taskItemArrayData);
+    },
+    [TYPES.DELETE_TASK_ITEM](state, taskItemArrayData) {
+        let item = state.taskItem[state.activeTaskListType][state.activeTaskItemType];
+        for (let i = 0; i < item.data.length; i++) {
+            for (let j = 0; j < taskItemArrayData.length; j++) {
+                if (item.data[i]._id == taskItemArrayData[j]._id) {
+                    item.data.splice(i, 1);
+                }
+            }
+        }
     }
 }
 

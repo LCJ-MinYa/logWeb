@@ -140,5 +140,21 @@ export default {
                 }
             }, _this);
         })
+    },
+    deleteTask(_this, taskItemData) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.DELETE_TASk,
+                data: {
+                    type: taskItemData.type,
+                    isComplete: taskItemData.isComplete,
+                    _id: taskItemData._id
+                },
+                success: (result) => {
+                    resolve(result.data);
+                }
+            }, _this);
+        })
     }
 }

@@ -2,14 +2,16 @@
     <div class="password-list-box">
         <el-tabs :value="activeTaskItemType" type="card" @tab-click="handleClick">
             <el-tab-pane v-for="(item, index) in taskItemData" :label="item.label" :key="item.text" :name="item.name">
-                <base-task-item-table :tableData="taskItemData[item.name].data" @handleEdit="handleEdit"></base-task-item-table>
+                <un-complete-task-item-table v-if="activeTaskItemType == 'uncomplete'" :tableData="taskItemData[item.name].data" @handleEdit="handleEdit"></un-complete-task-item-table>
+                <complete-task-item-table v-else :tableData="taskItemData[item.name].data" @handleEdit="handleEdit"></complete-task-item-table>
             </el-tab-pane>
         </el-tabs>
     </div>
 </template>
 
 <script>
-import baseTaskItemTable from './baseTaskItemTable'
+import completeTaskItemTable from './completeTaskItemTable'
+import unCompleteTaskItemTable from './unCompleteTaskItemTable';
 import taskController from '../../controller/task'
 import { mapGetters } from 'vuex'
 
@@ -21,7 +23,8 @@ export default {
         }
     },
     components:{
-        'baseTaskItemTable': baseTaskItemTable,
+        'completeTaskItemTable': completeTaskItemTable,
+        'unCompleteTaskItemTable': unCompleteTaskItemTable,
     },
     computed: {
         ...mapGetters({

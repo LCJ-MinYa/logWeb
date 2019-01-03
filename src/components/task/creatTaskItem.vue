@@ -42,15 +42,18 @@
                 </el-col>
                 <el-col class="line" :span="2">-</el-col>
                 <el-col :span="11">
-                    <el-time-picker
-                        type="fixed-time"
-                        value-format="HH:mm:ss"
+                    <el-time-select
                         placeholder="选择时间"
                         id="taskFormTime"
                         v-model="taskForm.time"
                         style="width: 100%;"
+                        :picker-options="{
+                            start: '00:30',
+                            step: '00:30',
+                            end: '24:00'
+                        }"
                     >
-                    </el-time-picker>
+                    </el-time-select>
                 </el-col>
             </el-form-item>
 

@@ -15,3 +15,9 @@ export const UPDATE_ALL_ACTIVE_TASK_TYPE = 'UPDATE_ALL_ACTIVE_TASK_TYPE';
 
 //更新当前传递的任务详情数据
 export const UPDATE_TASK_ITEM = 'UPDATE_TASK_ITEM';
+
+//更新已完成多条任务详情数据
+export const UPDATE_COMPLETE_TASK_ITEM = 'UPDATE_COMPLETE_TASK_ITEM';
+
+//删除当前任务详情数据
+export const DELETE_TASK_ITEM = 'DELETE_TASK_ITEM';
