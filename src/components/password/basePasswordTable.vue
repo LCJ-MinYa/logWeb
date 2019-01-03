@@ -59,7 +59,7 @@ export default {
                 .then((result)=>{
                     this.$store.dispatch('DeleteToPassword', row);
                 })
-            })
+            }).catch(err=>{})
         }
   	}
 }

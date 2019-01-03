@@ -126,5 +126,19 @@ export default {
                 }
             }, _this);
         })
+    },
+    completeTask(_this, taskItemArrayData) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.COMPLETE_TASk,
+                data: {
+                    completeList: taskItemArrayData
+                },
+                success: (result) => {
+                    resolve(result.data);
+                }
+            }, _this);
+        })
     }
 }

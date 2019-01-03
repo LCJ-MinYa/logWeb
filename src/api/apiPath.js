@@ -17,4 +17,5 @@ export default {
     TASk_ITEM: '/task/taskItem',
     BEGIN_TASk: '/task/beginTask',
     END_TASk: '/task/endTask',
+    COMPLETE_TASk: '/task/completeTask',
 }

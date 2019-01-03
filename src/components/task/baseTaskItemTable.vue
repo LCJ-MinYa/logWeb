@@ -1,5 +1,13 @@
 <template>
-    <el-table ref="taskItemTable" :data="tableData" slot="empty" style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table
+        ref="taskItemTable"
+        :data="tableData"
+        slot="empty"
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+        @select="handleSelectionSelect"
+        @select-all="handleSelectionSelect"
+    >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column type="expand">
             <template slot-scope="props">
@@ -53,7 +61,7 @@
         </el-table-column>
         <el-table-column label="操作" width="220">
             <template slot-scope="scope">
-                <el-button size="mini" :type="taskTypeStatus(scope.row)" @click="handleBegin(scope.$index, scope.row)">{{ taskTextStatus(scope.row) }}</el-button>
+                <el-button size="mini" :type="taskTypeStatus(scope.row)" @click="handleBegin(scope.$index, scope.row)" v-if="!scope.row.isComplete">{{ taskTextStatus(scope.row) }}</el-button>
                 <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
                 <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
@@ -103,6 +111,27 @@ export default {
         },
         handleSelectionChange(val){
             this.multipleSelection = val;
+        },
+        handleSelectionSelect(val){
+            if(val.length > 1){
+                //确认提示
+                this.$confirm('此操作将完成当前所有勾选任务, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'success'
+                }).then(() => {
+                    this.dealCompleteTask(val);
+                }).catch(err=>{
+                    this.$refs.taskItemTable.clearSelection();
+                })
+            }else if(val.length === 1){
+                this.dealCompleteTask(val);
+            }
+        },
+        dealCompleteTask(taskItemArrayData){
+            taskController.completeTask(this, taskItemArrayData).then(result =>{
+                console.log(result);
+            })
         },
         filterImportance(value, row){
             return row.importance === value;
