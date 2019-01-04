@@ -1,7 +1,7 @@
 <template>
 	<div class="creat-password-wrap">
-		<strong class="online-player" v-text="isEditTask ? '编辑任务' : '新建任务'"></strong>
-		<el-form ref="taskForm" :rules="taskRules" :model="taskForm" label-width="100px" :class="isEditTask ? 'less-width' : 'more-width' ">
+		<strong class="online-player" v-text="isEdit ? '编辑任务' : '新建任务'"></strong>
+		<el-form ref="taskForm" :rules="taskRules" :model="taskForm" label-width="100px" :class="isEdit ? 'less-width' : 'more-width' ">
 			<!-- 任务名称 -->
             <el-form-item label="任务名称" label-width="100px" prop="title">
 				<el-input type="text" v-model="taskForm.title" auto-complete="off"></el-input>
@@ -76,26 +76,26 @@
 
             <!-- 操作按钮 -->
 			<el-form-item>
-				<el-button @click="closeRightDrawer" v-if="isEditTask">关闭</el-button>
+				<el-button @click="closeRightDrawer" v-if="isEdit">关闭</el-button>
 				<el-button @click="resetForm('taskForm')" v-else>重置</el-button>
-			    <el-button type="primary" @click="doCreatTaskItem(true)" v-if="isEditTask">修改任务</el-button>
-                <el-button type="primary" @click="doCreatTaskItem" v-else>立即创建</el-button>
+			    <el-button type="primary" @click="doClickTaskItemBtn(true)" v-if="isEdit">修改任务</el-button>
+                <el-button type="primary" @click="doClickTaskItemBtn" v-else>立即创建</el-button>
 			</el-form-item>
 		</el-form>
 	</div>
 </template>
 
 <script>
-import taskController from '../../controller/task'
-import { parseUrl, message } from '../../assets/utils/utils'
-import { mapGetters } from 'vuex'
+import taskController from '../../controller/task';
+import { message } from '../../assets/utils/utils';
+import { mapGetters } from 'vuex';
 import {
     importanceArray
 } from '../../config/taskConfig';
 
 export default {
-  	name: 'creatPassword',
-  	props: ['isEditTask'],
+  	name: 'creatTaskItem',
+  	props: ['isEdit'],
   	data() {
 	    return {
             importanceArray: importanceArray,
@@ -127,27 +127,90 @@ export default {
     computed: {
         ...mapGetters({
             taskListData: 'taskList',
-            tagArray: 'tagArray'
+            tagArray: 'tagArray',
+            editTaskItemData: 'editTaskItemData',
+            taskItemData: 'taskItemData',
         })
     },
+    watch:{
+        editTaskItemData: function(editData){
+            if(!this.isEdit){
+                return;
+            }
+            this.taskForm = JSON.parse(JSON.stringify(editData.data));
+        }
+    },
   	methods:{
-        doCreatTaskItem(isModify){
+        doClickTaskItemBtn(isModify){
             if(!taskController.doCheckOutTaskMsg(this)){
                 return;
             }
             if(isModify == true){
-
+                this.doCheckIsNeedChange();
             }else{
-                taskController.doCreatTaskItemData(this).then(taskItemData => {
-                    for (let i = 0; i < this.taskListData.length; i++) {
-                        if(this.taskListData[i]._id == taskItemData.type){
-                            this.$emit('menuIndex', this.taskListData[i].text, taskItemData);
-                            this.resetTaskForm();
-                            return;
+                this.doCreatTaskItem();
+            }
+        },
+        doCreatTaskItem(){
+            taskController.doCreatTaskItemData(this).then(taskItemData => {
+                for (let i = 0; i < this.taskListData.length; i++) {
+                    if(this.taskListData[i]._id == taskItemData.type){
+                        this.$emit('menuIndex', this.taskListData[i].text, taskItemData);
+                        this.resetTaskForm();
+                        return;
+                    }
+                }
+            })
+        },
+        doCheckIsNeedChange(){
+            let shouldUpdate = false;
+            for (let i in this.editTaskItemData.data) {
+                if(this.editTaskItemData.data[i] !== this.taskForm[i]){
+                    shouldUpdate = true;
+                }
+            }
+            if(shouldUpdate){
+                this.doChangeTaskItem();
+            }else{
+                message(this, '任务信息相同,不需要修改!', 'warning');
+            }
+        },
+        doChangeTaskItem(){
+            const {
+                data
+            } = this.editTaskItemData;
+            const taskItemData = JSON.parse(JSON.stringify(this.taskForm));
+            taskController.updateTask(this).then(result =>{
+                if(taskItemData.isComplete !== data.isComplete || taskItemData.type !== data.type){
+                    //类型有改变的处理方式
+                    let taskItemArrayData = [];
+                    taskItemArrayData.push(taskItemData);
+                    this.$store.dispatch("DeleteTaskItem", taskItemArrayData);
+                    if(taskItemData.isComplete !== data.isComplete && taskItemData.type === data.type){
+                        //只有tab改变的处理方式
+                        const type = taskItemData.isComplete ? 'complete' : 'uncomplete';
+                        this.$store.dispatch("UpdateActiveTaskItemType", type);
+                        if(this.taskItemData[type].isRequest){
+                            this.$store.dispatch('AddTaskItem', taskItemData);
+                        }else{
+                            this.$parent.$parent.getTaskItem();
+                        }
+                    }else{
+                        //凡是有taskListType改变的处理方式
+                        for (let i = 0; i < this.taskListData.length; i++) {
+                            if(this.taskListData[i]._id == taskItemData.type){
+                                this.$parent.$parent.$parent.$parent.$parent.menuIndex(this.taskListData[i].text, taskItemData);
+                                break;
+                            }
                         }
                     }
-                })
-            }
+                }else{
+                    //类型无改变的处理方式
+                    this.$store.dispatch("UpdateTaskItem", taskItemData);
+                }
+                this.closeRightDrawer();
+                this.resetTaskForm();
+            })
         },
   		resetTaskForm(){
             this.taskForm.date = '';
@@ -156,6 +219,7 @@ export default {
   			this.$refs['taskForm'].resetFields();
   		},
   		closeRightDrawer(){
+            console.log(this.$root);
   			this.$emit('closeRightDrawer');
   		}
   	}
@@ -178,7 +242,7 @@ export default {
 	width: 600px;
 }
 .less-width{
-	width: 400px;
+	width: 600px;
 }
 .el-select-width{
 	width: 100px;

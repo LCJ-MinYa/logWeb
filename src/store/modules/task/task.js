@@ -130,6 +130,9 @@ const mutations = {
                 }
             }
         }
+    },
+    [TYPES.EDIT_TASK_ITEM](state, taskItemData) {
+        state.editTaskItemData = taskItemData;
     }
 }
 

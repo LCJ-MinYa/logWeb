@@ -9,7 +9,7 @@
             <section class="panel-c-c">
                 <task-list v-show="activeMenu == '任务列表'" @menuIndex="menuIndex" :taskListData="taskListData"></task-list>
                 <creat-task-item @menuIndex="menuIndex" v-show="activeMenu == '新建任务'"></creat-task-item>
-                <task-item ref="taskItemRef" v-show="activeMenu != '任务列表' && activeMenu != '新建任务'" @menuIndex="menuIndex"></task-item>
+                <task-item ref="taskItemRef" v-show="activeMenu != '任务列表' && activeMenu != '新建任务'"></task-item>
             </section>
         </el-col>
 

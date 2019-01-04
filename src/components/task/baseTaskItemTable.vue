@@ -6,6 +6,7 @@ import {
 } from '../../config/taskConfig';
 import taskController from '../../controller/task';
 import { mapGetters } from 'vuex';
+import moment from 'moment';
 
 export default {
     name: 'baseTaskItemTable',
@@ -36,7 +37,12 @@ export default {
             }
         },
         handleEdit(index, row){
-            console.log(this);
+            let data = {
+                index: index,
+                data: row
+            }
+            this.$store.dispatch('EditTaskItem', data);
+            this.$emit('handleEdit');
         },
         handleDelete(index, row){
             //确认提示
@@ -98,6 +104,22 @@ export default {
         },
         taskTimeText(data){
             return data.date ? data.date + ' ' + data.time : '无';
+        },
+        taskIsTimeOut(data, isComplete){
+            let isOutTimeObj = {};
+            let outTime = 0;
+            if(isComplete){
+                outTime = moment(data.date + ' ' + data.time).diff(moment(data.completeDate), 'minutes');
+            }else{
+                outTime = moment(data.date + ' ' + data.time).diff(moment(), 'minutes');
+            }
+            const isTimeout = outTime < 0 ? true : false;
+            isOutTimeObj.timeout = isTimeout;
+            isOutTimeObj.text = isTimeout ? '＋' : '';
+            if(isTimeout){
+                isOutTimeObj.text += (- outTime / 60 / 24).toFixed(2) + '天';
+            }
+            return isOutTimeObj;
         },
         tagText(tagData){
             let tagText = '';

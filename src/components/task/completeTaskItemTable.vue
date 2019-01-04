@@ -39,8 +39,15 @@
             width="280"
         >
             <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px">{{scope.row.completeDate || '无'}}</span>
+                <div v-if="taskIsTimeOut(scope.row, true).timeout">
+                    <i class="el-icon-time danger-color"></i>
+                    <span style="margin-left: 10px" class="danger-color">{{scope.row.completeDate || '无'}}</span>
+                    <span style="margin-left: 10px" class="danger-color">{{taskIsTimeOut(scope.row, true).text}}</span>
+                </div>
+                <div v-else>
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{scope.row.completeDate || '无'}}</span>
+                </div>
             </template>
         </el-table-column>
         <el-table-column

@@ -21,3 +21,6 @@ export const UPDATE_COMPLETE_TASK_ITEM = 'UPDATE_COMPLETE_TASK_ITEM';
 
 //删除当前任务详情数据
 export const DELETE_TASK_ITEM = 'DELETE_TASK_ITEM';
+
+//编辑当前任务详情数据
+export const EDIT_TASK_ITEM = 'EDIT_TASK_ITEM';

@@ -19,4 +19,5 @@ export default {
     END_TASk: '/task/endTask',
     COMPLETE_TASk: '/task/completeTask',
     DELETE_TASk: '/task/deleteTask',
+    UPDATE_TASk: '/task/updateTask',
 }

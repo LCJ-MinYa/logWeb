@@ -40,6 +40,11 @@ const taskActions = {
         commit
     }, taskItemArrayData){
         commit(TYPES.DELETE_TASK_ITEM, taskItemArrayData);
+    },
+    EditTaskItem({
+        commit
+    }, taskItemData){
+        commit(TYPES.EDIT_TASK_ITEM, taskItemData)
     }
 }
 

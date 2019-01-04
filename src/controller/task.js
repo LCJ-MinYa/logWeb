@@ -156,5 +156,17 @@ export default {
                 }
             }, _this);
         })
+    },
+    updateTask(_this) {
+        return new Promise((resolve, reject) => {
+            httpRequest({
+                method: 'POST',
+                url: api.UPDATE_TASk,
+                data: _this.taskForm,
+                success: (result) => {
+                    resolve(result.data);
+                }
+            }, _this);
+        })
     }
 }

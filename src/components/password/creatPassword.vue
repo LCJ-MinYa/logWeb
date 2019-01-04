@@ -1,7 +1,7 @@
 <template>
 	<div class="creat-password-wrap">
-		<strong class="online-player" v-text="isEditPassword ? '编辑密码' : '新建密码'"></strong>
-		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEditPassword ? 'less-width' : 'more-width' ">
+		<strong class="online-player" v-text="isEdit ? '编辑密码' : '新建密码'"></strong>
+		<el-form ref="passwordForm" :model="passwordForm" label-width="100px" :class="isEdit ? 'less-width' : 'more-width' ">
 			<el-form-item label="密码名称" label-width="100px" prop="title">
 				<el-input type="text" v-model="passwordForm.title" auto-complete="off"></el-input>
 			</el-form-item>
@@ -55,9 +55,9 @@
 				<el-input type="textarea" v-model="passwordForm.notes" auto-complete="off"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button @click="closeRightDrawer" v-if="isEditPassword">关闭</el-button>
+				<el-button @click="closeRightDrawer" v-if="isEdit">关闭</el-button>
 				<el-button @click="resetForm('passwordForm')" v-else>重置</el-button>
-			    <el-button type="primary" @click="doCheckOutPasswordMsg(true)" v-if="isEditPassword">修改密码</el-button>
+			    <el-button type="primary" @click="doCheckOutPasswordMsg(true)" v-if="isEdit">修改密码</el-button>
                 <el-button type="primary" @click="doCheckOutPasswordMsg" v-else>立即创建</el-button>
 			</el-form-item>
 		</el-form>
@@ -71,7 +71,7 @@ import { mapGetters } from 'vuex'
 
 export default {
   	name: 'creatPassword',
-  	props: ['isEditPassword'],
+  	props: ['isEdit'],
   	data() {
 	    return {
 	    	urlProtocolOptions: [{
@@ -138,7 +138,7 @@ export default {
     },
     watch:{
         editPasswordData: function(editData){
-            if(!this.isEditPassword){
+            if(!this.isEdit){
                 return;
             }
             this.passwordForm._id = editData.data._id;

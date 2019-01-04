@@ -40,11 +40,18 @@
         </el-table-column>
         <el-table-column
             label="截止时间"
-            width="280"
+            width="300"
         >
             <template slot-scope="scope">
-                <i class="el-icon-time"></i>
-                <span style="margin-left: 10px">{{taskTimeText(scope.row)}}</span>
+                <div v-if="taskIsTimeOut(scope.row).timeout">
+                    <i class="el-icon-time danger-color"></i>
+                    <span style="margin-left: 10px" class="danger-color">{{taskTimeText(scope.row)}}</span>
+                    <span style="margin-left: 10px" class="danger-color">{{taskIsTimeOut(scope.row).text}}</span>
+                </div>
+                <div v-else>
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{taskTimeText(scope.row)}}</span>
+                </div>
             </template>
         </el-table-column>
         <el-table-column
