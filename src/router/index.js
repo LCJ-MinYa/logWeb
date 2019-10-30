@@ -30,6 +30,9 @@ let AppRouter = new Router({
 	}, {
 		path: '/search',
 		component: Search,
+    meta: {
+			auth: true
+		}
 	}, {
 		path: '/task',
 		component: Task,
