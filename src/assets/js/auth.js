@@ -6,7 +6,7 @@ import {
 export default {
 	setAuthUid(uid) {
 		setCookie('uid', uid, {
-			expires: 24
+			expires: 720
 		})
 	},
 	getAuthUid() {
