@@ -2,12 +2,13 @@
 	<div class="global-page" @keyup.enter="checkOutMsg">
 		<div class="login-box">
 			<div class="left-box">
-				<i class="iconfont icon-mimajiesuo01"></i>
-				<h1>密码管家</h1>
+				<i class="iconfont icon-zhandian"></i>
+				<h1>恣意游</h1>
 				<ul class="list">
-					<li><i class="iconfont icon-lingxing"></i>随时随地，随手可记录</li>
-					<li><i class="iconfont icon-lingxing"></i>生活小助手，不再遗忘密码</li>
-					<li><i class="iconfont icon-lingxing"></i>自定义编辑和推荐记录结合</li>
+					<li><i class="iconfont icon-lingxing"></i>常用搜索网址导航</li>
+					<li><i class="iconfont icon-lingxing"></i>不再遗忘非常用密码</li>
+					<li><i class="iconfont icon-lingxing"></i>自定义任务编辑和完成</li>
+                    <li><i class="iconfont icon-lingxing"></i>更多添加中...</li>
 				</ul>
 			</div>
 
@@ -30,7 +31,13 @@
 				</div>
 
 				<div class="input-box">
+                    <el-tooltip class="item" effect="dark" content="暂不开放注册，请使用一键登陆" placement="top">
+                        <div class="disabled-box">
+                            <el-button type="info" disabled>注册</el-button>
+                        </div>
+                    </el-tooltip>
 			  		<el-button type="primary" @click="checkOutMsg">登录</el-button>
+                    <el-button type="success" @click="oneKeyLogin">一键登录</el-button>
 			  	</div>
 			</div>
 		</div>
@@ -45,7 +52,7 @@ export default {
     data () {
         return {
         	email: '',
-        	password: '',
+            password: '',
         }
     },
     methods:{
@@ -53,7 +60,12 @@ export default {
     		if(LoginController.doCheckOutMsg(this)){
     			LoginController.doLogin(this);
     		}
-    	}
+        },
+        oneKeyLogin(){
+            this.email = 'ceshi@ziyiu.com';
+            this.password = '123456';
+            this.checkOutMsg();
+        }
     }
 }
 </script>
@@ -79,12 +91,12 @@ export default {
 	background: #eacb20;
 	float: left;
 }
-.icon-mimajiesuo01{
+.icon-zhandian{
 	display: block;
 	font-size: 60px;
 	color: #fff;
 	text-align: center;
-	padding: 50px 0 20px;
+	padding: 40px 0 20px;
 }
 .left-box h1{
 	text-align: center;
@@ -120,7 +132,12 @@ export default {
 	padding-left: 2px;
 }
 .input-box{
-	width: 60%;
+	width: 80%;
 	margin: 30px 0 0 10%;
+    text-align: right;
+}
+.disabled-box{
+    display: inline-block;
+    margin-right: 10px;
 }
 </style>

@@ -4,8 +4,9 @@ import {
     UPDATE_TO_PASSWORD_TYPE,
     EDIT_TO_PASSWORD,
     DELETE_OLD_PASSWORD,
-    DELETE_TO_PASSWORD
-} from './passwordTypes'
+    DELETE_TO_PASSWORD,
+    LOGOUT_PASSWORD
+} from './passwordTypes';
 
 const passwordActions = {
     AddToPasswordList({
@@ -42,6 +43,12 @@ const passwordActions = {
         commit
     }, passwordData) {
         commit(DELETE_OLD_PASSWORD, passwordData);
+    },
+
+    LogoutPassword({
+        commit
+    }) {
+        commit(LOGOUT_PASSWORD);
     }
 }
 

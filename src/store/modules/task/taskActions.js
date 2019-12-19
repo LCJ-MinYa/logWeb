@@ -45,6 +45,11 @@ const taskActions = {
         commit
     }, taskItemData){
         commit(TYPES.EDIT_TASK_ITEM, taskItemData)
+    },
+    LogoutTask({
+        commit
+    }) {
+        commit(TYPES.LOGOUT_TASK);
     }
 }
 

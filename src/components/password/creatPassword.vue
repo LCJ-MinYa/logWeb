@@ -138,6 +138,9 @@ export default {
     },
     watch:{
         editPasswordData: function(editData){
+            if(!editData.data.hasOwnProperty('_id')){
+                return;
+            }
             if(!this.isEdit){
                 return;
             }

@@ -43,6 +43,10 @@ export default {
         'creatTaskItem': creatTaskItem
     },
     mounted(){
+        // this.getTaskList();
+    },
+    activated(){
+        this.activeMenu = '任务列表';
         this.getTaskList();
     },
     computed: {

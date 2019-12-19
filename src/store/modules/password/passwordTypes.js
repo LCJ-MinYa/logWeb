@@ -15,3 +15,6 @@ export const DELETE_OLD_PASSWORD = 'DELETE_OLD_PASSWORD';
 
 //删除某一条密码信息
 export const DELETE_TO_PASSWORD = 'DELETE_TO_PASSWORD';
+
+//退出登陆
+export const LOGOUT_PASSWORD = 'LOGOUT_PASSWORD';

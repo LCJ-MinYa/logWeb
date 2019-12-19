@@ -24,3 +24,6 @@ export const DELETE_TASK_ITEM = 'DELETE_TASK_ITEM';
 
 //编辑当前任务详情数据
 export const EDIT_TASK_ITEM = 'EDIT_TASK_ITEM';
+
+//退出登陆
+export const LOGOUT_TASK = 'LOGOUT_TASK';

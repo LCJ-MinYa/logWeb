@@ -7,13 +7,20 @@
 		</el-col>
 		<el-col :span="4" v-if="titleActionIcon">
 			<div class="tip-logout">
-				<i class="iconfont title-action-icon" :class="titleActionIcon"></i>
+                <el-tooltip class="item" effect="light" content="返回主页" placement="bottom-end">
+                    <i class="iconfont icon-zhuye" :class="titleActionIcon" @click="goBack"></i>
+                </el-tooltip>
+                <el-tooltip class="item" effect="light" content="退出登陆" placement="bottom-end">
+                    <i class="iconfont icon-tuichudenglu" :class="titleActionIcon" @click="logout"></i>
+                </el-tooltip>
 			</div>
 		</el-col>
 	</el-col>
 </template>
 
 <script>
+import auth from '../../assets/js/auth';
+
 export default {
   	name: 'baseHeader',
   	props: ["titleIcon", "titleText", "titleActionIcon"],
@@ -21,7 +28,22 @@ export default {
     	return {
 
     	}
-  	}
+    },
+    methods:{
+    	goBack(){
+			this.$router.replace('/');
+        },
+        logout(){
+            //确认提示
+            this.$confirm('此操作将退出当前账号, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                auth.logout(this);
+            }).catch(err=>{})
+        }
+    }
 }
 </script>
 

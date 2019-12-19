@@ -4,7 +4,8 @@ import {
 	UPDATE_TO_PASSWORD_TYPE,
 	EDIT_TO_PASSWORD,
 	DELETE_OLD_PASSWORD,
-	DELETE_TO_PASSWORD
+    DELETE_TO_PASSWORD,
+    LOGOUT_PASSWORD
 } from './passwordTypes'
 
 import passwordActions from './passwordActions'
@@ -72,7 +73,40 @@ const mutations = {
 				break;
 			}
 		}
-	}
+    },
+    [LOGOUT_PASSWORD](state){
+        state.passwordList = {
+            social: {
+                isRequest: false,
+                data: []
+            },
+            shopping: {
+                isRequest: false,
+                data: []
+            },
+            life: {
+                isRequest: false,
+                data: []
+            },
+            work: {
+                isRequest: false,
+                data: []
+            },
+            other: {
+                isRequest: false,
+                data: []
+            }
+        };
+        state.activeType = "social";
+        state.editPasswordData = {
+            index: 0,
+            data: {}
+        };
+        //该重置方法不生效
+        // for (var i in initState) {
+        //     state[i] = initState[i] // 递归赋值
+        // }
+    }
 }
 
 /**

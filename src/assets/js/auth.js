@@ -1,6 +1,7 @@
 import {
 	setCookie,
-	getCookie
+	getCookie,
+    removeCookie
 } from '../utils/cookie'
 
 export default {
@@ -20,5 +21,12 @@ export default {
 		} else {
 			return false;
 		}
-	}
+    },
+    logout(_this){
+        removeCookie('uid');
+        _this.$store.dispatch("LogoutPassword");
+        _this.$store.dispatch("LogoutTask");
+        _this.$router.replace('/login');
+        // window.location.reload();
+    }
 }

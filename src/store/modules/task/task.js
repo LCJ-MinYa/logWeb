@@ -133,6 +133,39 @@ const mutations = {
     },
     [TYPES.EDIT_TASK_ITEM](state, taskItemData) {
         state.editTaskItemData = taskItemData;
+    },
+    [TYPES.LOGOUT_TASK](state){
+        state.taskList = [{
+            _id: 'default',
+            icon: 'icon-liebiao',
+            text: '任务列表'
+        }, {
+            _id: 'default',
+            icon: 'icon-plus-creat',
+            text: '新建任务'
+        }];
+        state.taskItem = {
+            default: {
+                uncomplete: {
+                    name: 'uncomplete',
+                    label: '未完成',
+                    isRequest: false,
+                    data: []
+                },
+                complete: {
+                    name: 'complete',
+                    label: '已完成',
+                    isRequest: false,
+                    data: []
+                }
+            }
+        };
+        state.activeTaskListType = 'default';
+        state.activeTaskItemType = "uncomplete";
+        state.editTaskItemData = {
+            index: 0,
+            data: {}
+        };
     }
 }
 

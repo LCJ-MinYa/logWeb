@@ -53,6 +53,9 @@ export default {
         })
     },
     mounted(){
+        // this.getPasswordList();
+    },
+    activated(){
         this.getPasswordList();
     },
   	methods:{
