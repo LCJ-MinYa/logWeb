@@ -7,7 +7,7 @@
 				<li>旅行</li>
 				<li @click="goPage('/password')">密码</li>
 				<li @click="goPage('/task')">任务</li>
-				<li>设置</li>
+				<li>设置1</li>
 			</ul>
 		</div>
 		<copyright></copyright>
