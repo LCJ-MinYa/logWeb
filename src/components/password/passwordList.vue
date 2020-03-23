@@ -61,14 +61,12 @@ export default {
   	methods:{
   		handleClick(tab){
             this.$store.dispatch('UpdateToPasswordType', tab.name);
-            this.isNeedToRequest(tab.name);
+            this.getPasswordList();
   		},
-        isNeedToRequest(name){
-            if(!this.tableData[name].isRequest){
-                this.getPasswordList();
-            }
-        },
         getPasswordList(){
+            if(this.tableData[this.activeType].isRequest){
+                return;
+            }
             passwordController.getPasswordListData(this)
             .then((result)=>{
                 this.$store.dispatch('AddToPasswordList', result);

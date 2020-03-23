@@ -21,6 +21,9 @@ const taskGetters = {
     },
     tagArray(state) {
         return state.tagArray;
+    },
+    isRequestTaskList(state){
+        return state.isRequestTaskList;
     }
 }
 

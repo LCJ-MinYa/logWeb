@@ -62,20 +62,16 @@ export default {
             this.multipleSelection = val;
         },
         handleSelectionSelect(val){
-            if(val.length > 1){
-                //确认提示
-                this.$confirm('此操作将完成当前所有勾选任务, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
-                    type: 'success'
-                }).then(() => {
-                    this.dealCompleteTask(val);
-                }).catch(err=>{
-                    this.$refs.taskItemTable.clearSelection();
-                })
-            }else if(val.length === 1){
+            //确认提示
+            this.$confirm('此操作将完成当前所有勾选任务, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'success'
+            }).then(() => {
                 this.dealCompleteTask(val);
-            }
+            }).catch(err=>{
+                this.$refs.taskItemTable.clearSelection();
+            })
         },
         dealCompleteTask(taskItemArrayData){
             taskController.completeTask(this, taskItemArrayData).then(result =>{
@@ -109,9 +105,13 @@ export default {
             let isOutTimeObj = {};
             let outTime = 0;
             if(isComplete){
-                outTime = moment(data.date + ' ' + data.time).diff(moment(data.completeDate), 'minutes');
+                if(data.date && data.time && data.completeDate){
+                    outTime = moment(data.date + ' ' + data.time).diff(moment(data.completeDate), 'minutes');
+                }
             }else{
-                outTime = moment(data.date + ' ' + data.time).diff(moment(), 'minutes');
+                if(data.date && data.time){
+                    outTime = moment(data.date + ' ' + data.time).diff(moment(), 'minutes');
+                }
             }
             const isTimeout = outTime < 0 ? true : false;
             isOutTimeObj.timeout = isTimeout;

@@ -3,10 +3,11 @@ import taskActions from './taskActions';
 import taskGetters from './taskGetters';
 
 const state = {
+    isRequestTaskList: false,
     taskList: [{
         _id: 'default',
         icon: 'icon-liebiao',
-        text: '任务列表'
+        text: '任务列表',
     }, {
         _id: 'default',
         icon: 'icon-plus-creat',
@@ -89,6 +90,7 @@ const mutations = {
         }
         state.taskItem = JSON.parse(JSON.stringify(state.taskItem));
         state.taskList = state.taskList.concat(taskListArrayData);
+        state.isRequestTaskList = true;
     },
     [TYPES.UPDATE_ACTIVE_TASK_LIST_TYPE](state, type) {
         state.activeTaskListType = type;
@@ -135,6 +137,7 @@ const mutations = {
         state.editTaskItemData = taskItemData;
     },
     [TYPES.LOGOUT_TASK](state){
+        state.isRequestTaskList = false;
         state.taskList = [{
             _id: 'default',
             icon: 'icon-liebiao',

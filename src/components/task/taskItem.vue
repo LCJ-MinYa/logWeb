@@ -39,17 +39,15 @@ export default {
     methods:{
         handleClick(tab){
             this.$store.dispatch('UpdateActiveTaskItemType', tab.name);
-            this.isNeedToRequest(tab.name);
-        },
-        isNeedToRequest(name){
-            if(!this.taskItemData[name].isRequest){
-                this.getTaskItem();
-            }
+            this.getTaskItem();
         },
         handleEdit(){
             this.showRightDrawer = true;
         },
         getTaskItem(){
+            if(this.taskItemData[this.activeTaskItemType].isRequest){
+                return;
+            }
             taskController.getTaskItemData(this)
             .then(result =>{
                 this.$store.dispatch('AddTaskItem', result);

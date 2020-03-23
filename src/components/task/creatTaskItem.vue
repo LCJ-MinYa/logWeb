@@ -1,7 +1,7 @@
 <template>
 	<div class="creat-password-wrap">
 		<strong class="online-player" v-text="isEdit ? '编辑任务' : '新建任务'"></strong>
-		<el-form ref="taskForm" :rules="taskRules" :model="taskForm" label-width="100px" :class="isEdit ? 'less-width' : 'more-width' ">
+		<el-form ref="taskForm" :rules="taskRules" :model="taskForm" label-width="100px" :class="isEdit ? 'less-width' : 'more-width'">
 			<!-- 任务名称 -->
             <el-form-item label="任务名称" label-width="100px" prop="title">
 				<el-input type="text" v-model="taskForm.title" auto-complete="off"></el-input>
@@ -34,7 +34,7 @@
                         type="date"
                         value-format="yyyy-MM-dd"
                         placeholder="选择日期"
-                        id="taskFormDate"
+                        :id="dateId"
                         v-model="taskForm.date"
                         style="width: 100%;"
                     >
@@ -44,7 +44,7 @@
                 <el-col :span="11">
                     <el-time-select
                         placeholder="选择时间"
-                        id="taskFormTime"
+                        :id="timeId"
                         v-model="taskForm.time"
                         style="width: 100%;"
                         :picker-options="{
@@ -58,9 +58,9 @@
             </el-form-item>
 
             <!-- 是否完成 -->
-            <el-form-item label="是否完成" label-width="100px" prop="isComplete">
+            <!-- <el-form-item label="是否完成" label-width="100px" prop="isComplete">
                 <el-switch v-model="taskForm.isComplete"></el-switch>
-            </el-form-item>
+            </el-form-item> -->
 
             <!-- 优先级 -->
 			<el-form-item label="优先级" prop="importance">
@@ -93,11 +93,14 @@ import {
     importanceArray
 } from '../../config/taskConfig';
 
+let idNumber = 0;
 export default {
   	name: 'creatTaskItem',
   	props: ['isEdit'],
   	data() {
 	    return {
+            dateId: 'taskFormDate' + (idNumber++).toString(),
+            timeId: 'taskFormTime' + (idNumber++).toString(),
             importanceArray: importanceArray,
 	    	taskForm:{
 				title: '',
@@ -219,7 +222,6 @@ export default {
   			this.$refs['taskForm'].resetFields();
   		},
   		closeRightDrawer(){
-            console.log(this.$root);
   			this.$emit('closeRightDrawer');
   		}
   	}

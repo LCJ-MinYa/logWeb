@@ -43,6 +43,7 @@ export default {
         'creatTaskItem': creatTaskItem
     },
     mounted(){
+        // this.activeMenu = '任务列表';
         // this.getTaskList();
     },
     activated(){
@@ -54,6 +55,7 @@ export default {
             taskListData: 'taskList',
             activeTaskItemType: 'activeTaskItemType',
             activeTaskListType: 'activeTaskListType',
+            isRequestTaskList: 'isRequestTaskList',
         })
     },
     methods:{
@@ -83,6 +85,9 @@ export default {
             }
         },
         getTaskList(){
+            if(this.isRequestTaskList){
+                return;
+            }
             taskController.getTaskListData(this).then(result=>{
                 this.$store.dispatch('AddTaskList', result);
             })
