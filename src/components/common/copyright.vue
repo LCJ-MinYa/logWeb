@@ -1,6 +1,6 @@
 <template>
     <div class="copyright-box">
-        <span class="copyright">©2019 <a href="https://www.ziyiu.com/">恣意游</a></span>
+        <span class="copyright">©2020 <a href="https://www.ziyiu.com/">恣意游</a></span>
         <span class="beian">蜀ICP备15022337号</span>
     </div>
 </template>
